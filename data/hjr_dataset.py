@@ -1,0 +1,129 @@
+"""
+Creates a Pytorch dataset to load the carbon dataset
+"""
+
+import torch
+import os
+import pandas as pd
+from PIL import Image
+import numpy as np
+import sys, os
+import tifffile as tiff
+
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+# from config_mf import CARBON_CLIPPING, SGRST_CLIPPING, label_mapping, DATA_PATH
+# import cv2
+
+DATA_PATH =""
+
+class HJRDataset(torch.utils.data.Dataset):
+    def __init__(
+        self, csv_file, imgtype #transform=None,
+    ): 
+        self.annotations = pd.read_csv(csv_file)
+        self.imgtype = imgtype
+        # self.img_dir = img_dir
+        # self.label_dir = label_dir
+        # self.transform = transform
+        
+
+    def __len__(self):
+        return len(self.annotations)
+
+    def __getitem__(self, index):
+        out = dict()
+        path_img = os.path.join(DATA_PATH, self.annotations.iloc[index, 0])
+        path_label = os.path.join(DATA_PATH, self.annotations.iloc[index, 1])
+        # label_CRBN_QNTT_path = os.path.join(DATA_PATH, self.annotations.iloc[index, 2])
+        # label_tif_path = os.path.join(DATA_PATH, self.annotations.iloc[index, 3])
+
+        image = self.multiple_image_open(path_img, self.imgtype)        
+        label = self.label_open(path_label)
+        # l_c = Image.open(label_CRBN_QNTT_path)
+        # l_t = Image.open(label_tif_path)
+        
+        out["image"] = image
+        out["label"] = label
+
+        return out
+
+    def multiple_image_open(path_img, imgtype):
+        file_dir, file_name = os.path.split(path_img)
+        base_name, file_extension = os.path.splitext(file_name)
+        
+        first_image_path = os.path.join(file_dir, f"{base_name}_{imgtype}01{file_extension}")
+        first_image = tiff.imread(first_image_path)
+        num_channels = first_image.shape[-1]
+        image_shape = first_image.shape[:-1]
+        concatenated_image = np.zeros(image_shape + (num_channels * 20,), dtype=first_image.dtype)
+        
+        
+        for i in range(1, 21):
+            tif_file_path = os.path.join(file_dir, f"{base_name}_{imgtype}{i:02d}{file_extension}")
+            if os.path.exists(tif_file_path):
+                tif_data = tiff.imread(tif_file_path)
+                concatenated_image[..., (i - 1) * num_channels:i * num_channels] = tif_data
+        
+        return concatenated_image
+    
+    def label_open(path_label):
+        label_img = tiff.imread(path_label)
+        class_mapping = {i: i * 8 for i in range(1,31)}
+        
+        for k, v in class_mapping.items():
+            label_img[label_img == k] = v
+            
+        return label_img
+    
+    # # def normalize_concat(self, i_i, i_s, l_c, l_t):
+    # @classmethod
+    # def normalize_concat(cls, i_i, i_s, l_c, l_t):
+        
+    #     i_i = np.array(i_i).astype(np.float32)/255.0
+    #     ########if i_i == (512,512,4) in data50
+    #     # i_i = i_i[...,0:3]
+    #     #######################################
+        
+    #     i_s = np.array(i_s)
+    #     i_s[np.isnan(i_s)] = 0
+    #     # i_s = np.clip(np.array(i_s).astype(np.float32)/SGRST_CLIPPING, 0.0, 1.0) #임분고 영상 30이상은 클리핑
+    #     i_s = np.clip(i_s.astype(np.float32)/SGRST_CLIPPING, 0.0, 1.0) #임분고 영상 30이상은 클리핑
+    #     img = np.dstack((i_i,i_s))
+    #     img = torch.from_numpy(img.transpose(2, 0, 1)).float()  # From HWC to CHW
+
+        
+    #     l_c = np.array(l_c)
+    #     l_c[np.isnan(l_c)] = 0
+        
+    #     ####l_c 소수점버림##############################
+    #     # l_c = np.trunc(l_c)
+        
+        
+    #     # l_c = np.clip(np.array(l_c).astype(np.float32)/CARBON_CLIPPING, 0.0, 1.0)        
+    #     # l_c = np.clip(l_c.astype(np.float32)/CARBON_CLIPPING, 0.0, 1.0)         
+    #     l_c = np.clip((l_c.astype(np.float32)-CARBON_CLIPPING[0])/CARBON_CLIPPING[2], 0.0, 1.0).astype(np.float32)
+    #     l_c = np.expand_dims(l_c, axis=-1)
+    #     label_reg = torch.from_numpy(l_c.transpose(2, 0, 1))# From HWC to CHW
+
+    #     l_t = np.array(l_t)
+        
+    #     ########if l_t == (512,512,2) in data50
+    #     # l_t = l_t[...,0]
+    #     # temp = np.full((512,512),255)
+    #     # for k, v in label_mapping.items():
+    #     #         temp[l_t == k] = v
+    #     # l_t=temp                
+    #     #######################################
+        
+    #     for k, v in label_mapping.items():
+    #             l_t[l_t == k] = v
+       
+    #     l_t = np.expand_dims(l_t, axis=-1)
+    #     label_cls = torch.from_numpy(l_t.transpose(2, 0, 1))# From HWC to CHW
+
+    #     return img, label_cls, label_reg
+
+    # # @classmethod
+    # # def decode_target(cls, mask):
+    # #     """decode semantic mask to RGB image"""
+    # #     return cls.cmap[mask]
