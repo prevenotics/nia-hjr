@@ -19,7 +19,9 @@ import numpy as np
 import time
 import os
 
-os.chdir("/root/work/prevenotics/src/IEEE_TGRS_SpectralFormer")
+os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
+
+pixel_batch = 512
 
 parser = argparse.ArgumentParser("HSI")
 parser.add_argument('--dataset', choices=['Indian', 'Pavia', 'Houston'], default='Indian', help='dataset to use')
@@ -28,7 +30,7 @@ parser.add_argument('--mode', choices=['ViT', 'CAF'], default='ViT', help='mode 
 parser.add_argument('--gpu_id', default='0', help='gpu id')
 parser.add_argument('--seed', type=int, default=0, help='number of seed')
 # parser.add_argument('--batch_size', type=int, default=64, help='number of batch size')
-parser.add_argument('--batch_size', type=int, default=64, help='number of batch size')
+parser.add_argument('--batch_size', type=int, default=2, help='number of batch size')
 parser.add_argument('--test_freq', type=int, default=5, help='number of evaluation')
 parser.add_argument('--patches', type=int, default=1, help='number of patches')
 parser.add_argument('--band_patches', type=int, default=1, help='number of related band')
@@ -60,25 +62,64 @@ def train_epoch(model, train_loader, criterion, optimizer):
     objs = AvgrageMeter()
     top1 = AvgrageMeter()
     tar = np.array([])
-    pre = np.array([])
-    for batch_idx, (batch_data, batch_target) in enumerate(train_loader):
-        batch_data = batch_data.cuda()
-        batch_target = batch_target.cuda()   
+    pre = np.array([])    
+    
+    for idx, batch in enumerate(train_loader):
+        image = batch["image"].cuda(non_blocking=True)
+        target = batch["label"].cuda(non_blocking=True)
+        reshaped_image = image.permute(0, 2, 3, 1).contiguous().view(-1, 200, 1)
+        reshaped_target = target.view(-1)
+        num_pixels = reshaped_image.size(0)
+        random_order = torch.randperm(num_pixels)
+        shuffled_image = reshaped_image[random_order]
+        shuffled_target = reshaped_target[random_order]
+        
+        for i in range(0, shuffled_image.size(0), pixel_batch):
+            pixel_batch_image = shuffled_image[i:i+pixel_batch]
+            pixel_batch_target = shuffled_target[i:i+pixel_batch]
+            optimizer.zero_grad()
+            batch_pred = model(pixel_batch_image)
+            loss = criterion(batch_pred, pixel_batch_target)
+            loss_val = loss.item()
+            print(f"{loss_val}")
+            loss.backward()
+            optimizer.step()       
 
-        optimizer.zero_grad()
-        batch_pred = model(batch_data)
-        loss = criterion(batch_pred, batch_target)
-        loss.backward()
-        optimizer.step()       
-
-        prec1, t, p = accuracy(batch_pred, batch_target, topk=(1,))
-        n = batch_data.shape[0]
-        objs.update(loss.data, n)
-        top1.update(prec1[0].data, n)
-        tar = np.append(tar, t.data.cpu().numpy())
-        pre = np.append(pre, p.data.cpu().numpy())
+            prec1, t, p = accuracy(batch_pred, pixel_batch_target, topk=(1,))
+            n = pixel_batch_image.shape[0]
+            objs.update(loss.data, n)
+            top1.update(prec1[0].data, n)
+            tar = np.append(tar, t.data.cpu().numpy())
+            pre = np.append(pre, p.data.cpu().numpy())
+        
     return top1.avg, objs.avg, tar, pre
+        
+    
 #-------------------------------------------------------------------------------
+# def train_epoch(model, train_loader, criterion, optimizer):
+#     objs = AvgrageMeter()
+#     top1 = AvgrageMeter()
+#     tar = np.array([])
+#     pre = np.array([])
+#     for batch_idx, (batch_data, batch_target) in enumerate(train_loader):
+#         batch_data = batch_data.cuda()
+#         batch_target = batch_target.cuda()   
+
+#         optimizer.zero_grad()
+#         batch_pred = model(batch_data)
+#         loss = criterion(batch_pred, batch_target)
+#         loss.backward()
+#         optimizer.step()       
+
+#         prec1, t, p = accuracy(batch_pred, batch_target, topk=(1,))
+#         n = batch_data.shape[0]
+#         objs.update(loss.data, n)
+#         top1.update(prec1[0].data, n)
+#         tar = np.append(tar, t.data.cpu().numpy())
+#         pre = np.append(pre, p.data.cpu().numpy())
+#     return top1.avg, objs.avg, tar, pre
+
+
 # validate model
 def valid_epoch(model, valid_loader, criterion, optimizer):
     objs = AvgrageMeter()
@@ -128,10 +169,66 @@ cudnn.benchmark = False
 
 
 imgtype ='RA'
-csv_path= ''
-dataset = HJRDataset(csv_path, imgtype)
+csv_path= '/root/work/hjr/dataset/train.csv'
+dataset = HJRDataset(csv_file=csv_path, imgtype=imgtype)
+data_loader=Data.DataLoader(dataset,batch_size=args.batch_size,shuffle=True)
+
+band =200
+num_classes = 31
+#-------------------------------------------------------------------------------
+# create model
+model = ViT(
+    image_size = args.patches,
+    near_band = args.band_patches,
+    num_patches = band,
+    num_classes = num_classes,
+    dim = 64,
+    depth = 5,
+    heads = 4,
+    mlp_dim = 8,
+    dropout = 0.1,
+    emb_dropout = 0.1,
+    mode = args.mode
+)
+model = model.cuda()
+# criterion
+criterion = nn.CrossEntropyLoss(ignore_index=30).cuda()
+# optimizer
+optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.epoches//10, gamma=args.gamma)
+#-------------------------------------------------------------------------------
+
+for epoch in range(args.epoches): 
+    scheduler.step()
+
+    # train model
+    model.train()
+    train_acc, train_obj, tar_t, pre_t = train_epoch(model, data_loader, criterion, optimizer)
+    OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
+    print("Epoch: {:03d} train_loss: {:.4f} train_acc: {:.4f}"
+                    .format(epoch+1, train_obj, train_acc))
+    
+
+    # if (epoch % args.test_freq == 0) | (epoch == args.epoches - 1):         
+    #     model.eval()
+    #     tar_v, pre_v = valid_epoch(model, label_test_loader, criterion, optimizer)
+    #     OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
+    #     print("Epoch: {:03d} val_OA: {:.4f}val_Kappa: {:.4f}".format(epoch+1, OA2, Kappa2))
+
+toc = time.time()
+print("Running Time: {:.2f}".format(toc-tic))
+print("**************************************************")
 
 
+
+
+
+
+
+
+
+
+    
 # prepare data
 if args.dataset == 'Indian':
     data = loadmat('./data/IndianPine.mat')
@@ -181,28 +278,7 @@ label_train_loader=Data.DataLoader(Label_train,batch_size=args.batch_size,shuffl
 label_test_loader=Data.DataLoader(Label_test,batch_size=args.batch_size,shuffle=True)
 label_true_loader=Data.DataLoader(Label_true,batch_size=100,shuffle=False)
 
-#-------------------------------------------------------------------------------
-# create model
-model = ViT(
-    image_size = args.patches,
-    near_band = args.band_patches,
-    num_patches = band,
-    num_classes = num_classes,
-    dim = 64,
-    depth = 5,
-    heads = 4,
-    mlp_dim = 8,
-    dropout = 0.1,
-    emb_dropout = 0.1,
-    mode = args.mode
-)
-model = model.cuda()
-# criterion
-criterion = nn.CrossEntropyLoss().cuda()
-# optimizer
-optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.epoches//10, gamma=args.gamma)
-#-------------------------------------------------------------------------------
+
 if args.flag_test == 'test':
     if args.mode == 'ViT':
         model.load_state_dict(torch.load('./ViT.pt'))      

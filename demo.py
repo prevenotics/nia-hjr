@@ -16,7 +16,7 @@ import numpy as np
 import time
 import os
 
-os.chdir("/root/work/prevenotics/src/IEEE_TGRS_SpectralFormer")
+os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
 parser = argparse.ArgumentParser("HSI")
 parser.add_argument('--dataset', choices=['Indian', 'Pavia', 'Houston'], default='Indian', help='dataset to use')

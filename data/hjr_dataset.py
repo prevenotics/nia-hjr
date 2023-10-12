@@ -1,5 +1,5 @@
 """
-Creates a Pytorch dataset to load the carbon dataset
+Creates a Pytorch dataset to load the hjr dataset
 """
 
 import torch
@@ -9,18 +9,20 @@ from PIL import Image
 import numpy as np
 import sys, os
 import tifffile as tiff
+from scipy.io import loadmat
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 # from config_mf import CARBON_CLIPPING, SGRST_CLIPPING, label_mapping, DATA_PATH
 # import cv2
 
 DATA_PATH =""
+CLIPPING = 40000
 
 class HJRDataset(torch.utils.data.Dataset):
     def __init__(
-        self, csv_file, imgtype #transform=None,
+        self, csv_file, imgtype
     ): 
-        self.annotations = pd.read_csv(csv_file)
+        self.annotations = pd.read_csv(csv_file, encoding='cp949')
         self.imgtype = imgtype
         # self.img_dir = img_dir
         # self.label_dir = label_dir
@@ -38,7 +40,7 @@ class HJRDataset(torch.utils.data.Dataset):
         # label_tif_path = os.path.join(DATA_PATH, self.annotations.iloc[index, 3])
 
         image = self.multiple_image_open(path_img, self.imgtype)        
-        label = self.label_open(path_label)
+        label = self.label_open(path_label, self.imgtype)
         # l_c = Image.open(label_CRBN_QNTT_path)
         # l_t = Image.open(label_tif_path)
         
@@ -47,7 +49,7 @@ class HJRDataset(torch.utils.data.Dataset):
 
         return out
 
-    def multiple_image_open(path_img, imgtype):
+    def multiple_image_open(self, path_img, imgtype):
         file_dir, file_name = os.path.split(path_img)
         base_name, file_extension = os.path.splitext(file_name)
         
@@ -55,25 +57,46 @@ class HJRDataset(torch.utils.data.Dataset):
         first_image = tiff.imread(first_image_path)
         num_channels = first_image.shape[-1]
         image_shape = first_image.shape[:-1]
-        concatenated_image = np.zeros(image_shape + (num_channels * 20,), dtype=first_image.dtype)
+        concatenated_image = np.zeros(image_shape + (num_channels * 20,), dtype=np.float32)
         
         
         for i in range(1, 21):
             tif_file_path = os.path.join(file_dir, f"{base_name}_{imgtype}{i:02d}{file_extension}")
             if os.path.exists(tif_file_path):
-                tif_data = tiff.imread(tif_file_path)
-                concatenated_image[..., (i - 1) * num_channels:i * num_channels] = tif_data
+                img = tiff.imread(tif_file_path)
+                img = np.clip(img.astype(np.float32)/CLIPPING, 0.0, 1.0) 
+                concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img
         
+        concatenated_image = torch.from_numpy(concatenated_image.transpose(2, 0, 1)).float()  # From HWC to CHW
         return concatenated_image
     
-    def label_open(path_label):
-        label_img = tiff.imread(path_label)
-        class_mapping = {i: i * 8 for i in range(1,31)}
+    def label_open(self, path_label, imgtype):
+        file_dir, file_name = os.path.split(path_label)
+        base_name, file_extension = os.path.splitext(file_name)
         
-        for k, v in class_mapping.items():
-            label_img[label_img == k] = v
+        first_label_path = os.path.join(file_dir, f"{base_name}_{imgtype}01{file_extension}")
+        
+        label_mat = loadmat(first_label_path)
+        your_variable_name = 'label'  # your variable name in the .mat file
+
+        # 만약 label_mat의 크기가 512x512가 아니면 512x512로 만들어줍니다.
+        desired_shape = (512, 512)
+
+        if your_variable_name in label_mat:
+            label_mat = label_mat[your_variable_name]
+
+            if label_mat.shape != desired_shape:
+                new_label_mat = np.zeros(desired_shape, dtype=label_mat.dtype)
+                new_label_mat[:min(label_mat.shape[0], desired_shape[0]), :min(label_mat.shape[1], desired_shape[1])] = label_mat
+                label_mat = new_label_mat
             
-        return label_img
+        return label_mat
+    
+    
+    
+    
+    
+    
     
     # # def normalize_concat(self, i_i, i_s, l_c, l_t):
     # @classmethod
