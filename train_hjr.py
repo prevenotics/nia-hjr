@@ -60,7 +60,7 @@ def main(args):
         writer_tb = SummaryWriter(log_dir=tensorb_dir)
 
     band =200
-    num_classes = 30
+    num_classes = 31
     #-------------------------------------------------------------------------------
     # create model
     model = ViT(
