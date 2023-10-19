@@ -227,13 +227,19 @@ def output_metric(tar, pre):
     return OA, AA_mean, Kappa, AA
 #-------------------------------------------------------------------------------
 def cal_results(matrix):
+    epsilon = 1e-15
     shape = np.shape(matrix)
     number = 0
     sum = 0
     AA = np.zeros([shape[0]], dtype=np.float)
     for i in range(shape[0]):
         number += matrix[i, i]
-        AA[i] = matrix[i, i] / np.sum(matrix[i, :])
+        try:
+            # AA[i] = matrix[i, i] / (np.sum(matrix[i, :]) + epsilon)
+            AA[i] = matrix[i, i] / np.sum(matrix[i, :])
+        except ZeroDivisionError:
+            AA[i] = 0
+            print("!!!!!!!!!!!!!!!!!!!!zero division!!!!!!!!!!!!!!!!!!!!")
         sum += np.sum(matrix[i, :]) * np.sum(matrix[:, i])
     OA = number / np.sum(matrix)
     AA_mean = np.mean(AA)

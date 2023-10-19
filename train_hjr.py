@@ -28,7 +28,7 @@ import os
 # import sys
 # sys.argv=['']
 # del sys
-
+#CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 train_hjr.py --eval-freq 1
 os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
 def main(args):
@@ -42,7 +42,7 @@ def main(args):
     start_epoch=0
     num_epochs=args.epoches
     best_loss = 9999
-    bast_acc = -9999
+    best_acc = -9999
     
     log_dir, pth_dir, tensorb_dir = make_output_directory(args)
     logger = create_logger(log_dir, dist_rank=0, name='')
@@ -53,6 +53,7 @@ def main(args):
     test_csv_path= '/root/work/hjr/dataset/test.csv'
     # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
     train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype,args.train_batch_size, args.num_workers, args.local_rank)
+    val_data_loader = build_data_loader(args.dataset, val_csv_path, imgtype,args.val_batch_size, args.num_workers, args.local_rank)
     # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
     
     #create tensorboard
@@ -80,7 +81,7 @@ def main(args):
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.local_rank],
                                                               find_unused_parameters=True, broadcast_buffers=False)
     # criterion
-    criterion = nn.CrossEntropyLoss(ignore_index=255).cuda()
+    criterion = nn.CrossEntropyLoss(ignore_index=255).cuda() 
     # optimizer
     logger.info(f"optimizer = {args.opt} ......")
     if args.opt == "nadam":
@@ -118,11 +119,65 @@ def main(args):
 
         # train model
         model.train()
-        train_acc, train_obj, tar_t, pre_t = train_epoch(model, train_data_loader, criterion, optimizer)
-        OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
-        print("Epoch: {:03d} train_loss: {:.4f} train_acc: {:.4f}"
-                        .format(epoch+1, train_obj, train_acc))
+        # train_acc, train_obj, tar_t, pre_t = train_epoch(model, train_data_loader, criterion, optimizer)
+              # def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
+        train_res = train_epoch(model, train_data_loader, criterion, optimizer, scheduler, epoch, args.epoches, logger)
+        # OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
+        print("Epoch: {:03d} train_acc: {:.4f} train_loss: {:.4f} train_OA: {:.4f} train_Kappa: {:.4f}".
+              format(epoch+1, train_res[0].avg, train_res[1].avg, train_res[2].avg, train_res[3].avg))
         
+        if dist.get_rank() == 0:
+            save_checkpoint(model, optimizer, scheduler, epoch, ckpt_file_path, best_loss, best_acc)
+            logger.info(f">>>>> {ckpt_file_path}saved......")
+            if epoch % args.save_freq==0 or epoch==num_epochs-1:
+                save_path = os.path.join(pth_dir, f"checkpoint_%06d.pth"%epoch)
+                save_checkpoint(model, optimizer, scheduler, epoch, save_path, best_loss, best_acc)
+                logger.info(f">>>>> {save_path}saved......")
+
+        if args.tensorboard:
+            current_log = {'TRAIN_0_acc': train_res[0].avg,
+                           'TRAIN_1_loss': train_res[1].avg,
+                           'TRAIN_2_OA': train_res[2].avg,
+                           'TRAIN_3_Kappa': train_res[3].avg,
+                        #    'TRAIN_AA': train_res[4].avg,                           
+                           'TRAIN_4_lr_avg': train_res[4].avg}
+            log_tensorboard(writer_tb, current_log, epoch)
+            
+            
+        # # evaluation
+        # if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):
+        #     val_res = valid_epoch(model, val_data_loader, criterion, epoch, logger, print_freq=100)
+
+        #     if args.tensorboard:
+        #         current_log = {'validation_0_total_loss': val_res[0].avg,
+        #                     #    'validation_1_cls_loss': val_res[1].avg,
+        #                     #    'validation_2_reg_loss': val_res[2].avg,
+        #                     #    'validation_3_acc_corr': val_res[3].avg,
+        #                     #    'validation_4_acc_r': val_res[4].avg
+        #                        }
+        #         log_tensorboard(writer_tb, current_log, epoch)
+
+        #     val_loss = val_res[0].avg
+        #     # val_acc_c = val_res[3].avg
+        #     # val_acc_r = val_res[4].avg
+        #     if dist.get_rank() == 0:
+        #         if val_loss < best_loss:
+        #             best_loss = val_loss
+        #             # save ckpt
+        #             save_checkpoint(model, optimizer, scheduler, epoch, best_loss_ckpt_file_path, best_loss=best_loss, best_acc=val_acc_c)                    
+        #             logger.info(f">>>>> best loss {best_loss_ckpt_file_path}_{epoch}_{best_loss} saved......")
+
+        #         # if val_acc_c > best_acc:
+        #         #     best_acc = val_acc_c
+        #         #     # save ckpt
+        #         #     save_checkpoint(model, optimizer, lr_scheduler, epoch, best_acc_c_ckpt_file_path, best_loss=val_loss, best_acc=best_acc)
+        #         #     logger.info(f">>>>> best acc {best_acc_c_ckpt_file_path}_{epoch}_{best_acc} saved......")    
+            
+            
+            
+            
+            
+            
 
         # if (epoch % args.test_freq == 0) | (epoch == args.epoches - 1):         
         #     model.eval()
@@ -130,17 +185,9 @@ def main(args):
         #     OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
         #     print("Epoch: {:03d} val_OA: {:.4f}val_Kappa: {:.4f}".format(epoch+1, OA2, Kappa2))
 
-    toc = time.time()
-    print("Running Time: {:.2f}".format(toc-tic))
-    print("**************************************************")
-
-
-
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
     logger.info('ALL Training time {}'.format(total_time_str))
-
-
 
 
 
