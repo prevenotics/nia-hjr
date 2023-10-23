@@ -10,6 +10,7 @@ import numpy as np
 import sys, os
 import tifffile as tiff
 from scipy.io import loadmat
+from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 # from config_mf import CARBON_CLIPPING, SGRST_CLIPPING, label_mapping, DATA_PATH
@@ -20,10 +21,15 @@ CLIPPING = 40000
 
 class HJRDataset(torch.utils.data.Dataset):
     def __init__(
-        self, csv_file, imgtype
+        self, csv_file, imgtype, sample_point, patch, band_patch, band
     ): 
         self.annotations = pd.read_csv(csv_file, encoding='cp949')
         self.imgtype = imgtype
+        self.sample_point = sample_point
+        # self.args = args
+        self.patch = patch
+        self.band_patch= band_patch
+        self.band = band
         # self.img_dir = img_dir
         # self.label_dir = label_dir
         # self.transform = transform
@@ -39,8 +45,8 @@ class HJRDataset(torch.utils.data.Dataset):
         # label_CRBN_QNTT_path = os.path.join(DATA_PATH, self.annotations.iloc[index, 2])
         # label_tif_path = os.path.join(DATA_PATH, self.annotations.iloc[index, 3])
 
-        image = self.multiple_image_open(path_img, self.imgtype)        
-        label = self.label_open(path_label, self.imgtype)
+        image = self.multiple_image_open(path_img, self.imgtype, self.sample_point, self.patch, self.band_patch, self.band)        
+        label = self.label_open(path_label, self.imgtype, self.sample_point)
         # l_c = Image.open(label_CRBN_QNTT_path)
         # l_t = Image.open(label_tif_path)
         
@@ -49,7 +55,7 @@ class HJRDataset(torch.utils.data.Dataset):
 
         return out
 
-    def multiple_image_open(self, path_img, imgtype):
+    def multiple_image_open(self, path_img, imgtype, sample_point, patch, band_patch, band):
         file_dir, file_name = os.path.split(path_img)
         base_name, file_extension = os.path.splitext(file_name)
         
@@ -67,10 +73,16 @@ class HJRDataset(torch.utils.data.Dataset):
                 img = np.clip(img.astype(np.float32)/CLIPPING, 0.0, 1.0) 
                 concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img
         
-        concatenated_image = torch.from_numpy(concatenated_image.transpose(2, 0, 1)).float()  # From HWC to CHW
-        return concatenated_image
+        data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
+        for i in range(sample_point.shape[0]):
+            data[i,:,:,:] = gain_neighborhood_pixel(concatenated_image, sample_point, i, patch)
+        data = gain_neighborhood_band(data, band, band_patch, patch)
+        
+        data = torch.from_numpy(data.transpose(0, 2, 1)).type(torch.FloatTensor)
+        # concatenated_image = torch.from_numpy(concatenated_image.transpose(2, 0, 1)).float()  # From HWC to CHW
+        return data
     
-    def label_open(self, path_label, imgtype):
+    def label_open(self, path_label, imgtype, sample_point):
         file_dir, file_name = os.path.split(path_label)
         base_name, file_extension = os.path.splitext(file_name)
         
@@ -89,7 +101,10 @@ class HJRDataset(torch.utils.data.Dataset):
                 new_label_mat = np.zeros(desired_shape, dtype=label_mat.dtype)
                 new_label_mat[:min(label_mat.shape[0], desired_shape[0]), :min(label_mat.shape[1], desired_shape[1])] = label_mat
                 label_mat = new_label_mat
-            
+        
+        label_mat = label_mat[sample_point[:,0],sample_point[:,1]]
+        label_mat = torch.from_numpy(label_mat).type(torch.LongTensor)
+        
         return label_mat
     
     

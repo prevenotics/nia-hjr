@@ -130,6 +130,8 @@ def gain_neighborhood_pixel(mirror_image, point, i, patch=5):
     x = point[i,0]
     y = point[i,1]
     temp_image = mirror_image[x:(x+patch),y:(y+patch),:]
+    # half_patch = patch //2
+    # temp_image = mirror_image[:,:, x-half_patch:(x+half_patch+1),y-half_patch:(y+half_patch+1)]
     return temp_image
 
 def gain_neighborhood_band(x_train, band, band_patch, patch=5):
@@ -204,7 +206,25 @@ def train_and_test_label(number_train, number_test, number_true, num_classes):
     print("**************************************************")
     return y_train, y_test, y_true
 #-------------------------------------------------------------------------------
+def get_point(img_size, num):
+    image_width = img_size
+    image_height = img_size
 
+    center_x = image_width // 2
+    center_y = image_height // 2
+
+    if num == 1:
+        sampling_coords = np.array([[center_x, center_y]])
+    else:
+        sub_divisions = num+ 2
+        x_coords = np.linspace(0, image_width, sub_divisions)
+        y_coords = np.linspace(0, image_height, sub_divisions)
+
+        x_mesh, y_mesh = np.meshgrid(x_coords[1:-1], y_coords[1:-1])
+        sampling_coords = np.column_stack((x_mesh.ravel(), y_mesh.ravel())).astype(int)
+    
+    return sampling_coords
+#-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 def accuracy(output, target, topk=(1,)):
   maxk = max(topk)
@@ -223,27 +243,30 @@ def accuracy(output, target, topk=(1,)):
 #-------------------------------------------------------------------------------
 def output_metric(tar, pre):
     matrix = confusion_matrix(tar, pre)
-    OA, AA_mean, Kappa, AA = cal_results(matrix)
-    return OA, AA_mean, Kappa, AA
+    # OA, AA_mean, Kappa, AA = cal_results(matrix)
+    OA, Kappa = cal_results(matrix)
+    # return OA, AA_mean, Kappa, AA
+    return OA, Kappa
 #-------------------------------------------------------------------------------
 def cal_results(matrix):
     epsilon = 1e-15
     shape = np.shape(matrix)
     number = 0
     sum = 0
-    AA = np.zeros([shape[0]], dtype=np.float)
+    # AA = np.zeros([shape[0]], dtype=np.float)
     for i in range(shape[0]):
         number += matrix[i, i]
-        try:
-            # AA[i] = matrix[i, i] / (np.sum(matrix[i, :]) + epsilon)
-            AA[i] = matrix[i, i] / np.sum(matrix[i, :])
-        except ZeroDivisionError:
-            AA[i] = 0
-            print("!!!!!!!!!!!!!!!!!!!!zero division!!!!!!!!!!!!!!!!!!!!")
+        # try:
+        #     # AA[i] = matrix[i, i] / (np.sum(matrix[i, :]) + epsilon)
+        #     AA[i] = matrix[i, i] / np.sum(matrix[i, :])
+        # except ZeroDivisionError:
+        #     AA[i] = 0
+        #     print("!!!!!!!!!!!!!!!!!!!!zero division!!!!!!!!!!!!!!!!!!!!")
         sum += np.sum(matrix[i, :]) * np.sum(matrix[:, i])
     OA = number / np.sum(matrix)
-    AA_mean = np.mean(AA)
+    # AA_mean = np.mean(AA)
     pe = sum / (np.sum(matrix) ** 2)
     Kappa = (OA - pe) / (1 - pe)
-    return OA, AA_mean, Kappa, AA
+    # return OA, AA_mean, Kappa, AA
+    return OA, Kappa
 #-------------------------------------------------------------------------------

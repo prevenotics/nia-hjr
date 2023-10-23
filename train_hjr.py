@@ -11,7 +11,7 @@ from torch import optim
 from torch.autograd import Variable
 from vit_pytorch import ViT
 from param_parser import TrainParser
-from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results
+from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point
 from utils.logger import create_logger
 from core import train_epoch, valid_epoch, test_epoch
 from tensorboardX import SummaryWriter
@@ -28,7 +28,7 @@ import os
 # import sys
 # sys.argv=['']
 # del sys
-#CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 train_hjr.py --eval-freq 1
+#CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 --save_freq 10 train_hjr.py --eval_freq 1
 os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
 def main(args):
@@ -44,17 +44,21 @@ def main(args):
     best_loss = 9999
     best_acc = -9999
     
-    log_dir, pth_dir, tensorb_dir = make_output_directory(args)
-    logger = create_logger(log_dir, dist_rank=0, name='')
-
     imgtype ='RA'
+    sampling_point = get_point(args.img_size, args.sampling_num)
     train_csv_path= '/root/work/hjr/dataset/train.csv'
     val_csv_path= '/root/work/hjr/dataset/val.csv'
     test_csv_path= '/root/work/hjr/dataset/test.csv'
     # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
-    train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype,args.train_batch_size, args.num_workers, args.local_rank)
-    val_data_loader = build_data_loader(args.dataset, val_csv_path, imgtype,args.val_batch_size, args.num_workers, args.local_rank)
+    train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sampling_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
+    val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sampling_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
     # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
+    
+    
+    log_dir, pth_dir, tensorb_dir = make_output_directory(args)
+    logger = create_logger(log_dir, dist_rank=0, name='')
+
+    
     
     #create tensorboard
     if args.tensorboard:
@@ -65,8 +69,8 @@ def main(args):
     #-------------------------------------------------------------------------------
     # create model
     model = ViT(
-        image_size = args.patches,
-        near_band = args.band_patches,
+        image_size = args.patch,
+        near_band = args.band_patch,
         num_patches = band,
         num_classes = num_classes,
         dim = 64,
@@ -111,7 +115,7 @@ def main(args):
     best_acc_c_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_corr.pth")
     best_acc_r_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_r.pth")
 
-    
+    # sampling_point = get_point(args.img_size, args.sampling_num)
     logger.info(">>>>>>>>>> Start training")
     start_time = time.time()
     for epoch in range(args.epoches): 
@@ -129,7 +133,7 @@ def main(args):
         if dist.get_rank() == 0:
             save_checkpoint(model, optimizer, scheduler, epoch, ckpt_file_path, best_loss, best_acc)
             logger.info(f">>>>> {ckpt_file_path}saved......")
-            if epoch % args.save_freq==0 or epoch==num_epochs-1:
+            if epoch % (args.save_freq)==0 or epoch==num_epochs-1:
                 save_path = os.path.join(pth_dir, f"checkpoint_%06d.pth"%epoch)
                 save_checkpoint(model, optimizer, scheduler, epoch, save_path, best_loss, best_acc)
                 logger.info(f">>>>> {save_path}saved......")
@@ -138,40 +142,39 @@ def main(args):
             current_log = {'TRAIN_0_acc': train_res[0].avg,
                            'TRAIN_1_loss': train_res[1].avg,
                            'TRAIN_2_OA': train_res[2].avg,
-                           'TRAIN_3_Kappa': train_res[3].avg,
-                        #    'TRAIN_AA': train_res[4].avg,                           
+                           'TRAIN_3_Kappa': train_res[3].avg,                                              
                            'TRAIN_4_lr_avg': train_res[4].avg}
             log_tensorboard(writer_tb, current_log, epoch)
             
             
-        # # evaluation
-        # if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):
-        #     val_res = valid_epoch(model, val_data_loader, criterion, epoch, logger, print_freq=100)
+        # evaluation
+        if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):
+            val_res = valid_epoch(model, val_data_loader, criterion, epoch, args.epoches, logger)            
 
-        #     if args.tensorboard:
-        #         current_log = {'validation_0_total_loss': val_res[0].avg,
-        #                     #    'validation_1_cls_loss': val_res[1].avg,
-        #                     #    'validation_2_reg_loss': val_res[2].avg,
-        #                     #    'validation_3_acc_corr': val_res[3].avg,
-        #                     #    'validation_4_acc_r': val_res[4].avg
-        #                        }
-        #         log_tensorboard(writer_tb, current_log, epoch)
+            if args.tensorboard:
+                current_log = {'VAL_0_acc': val_res[0].avg,
+                            'VAL_1_loss': val_res[1].avg,
+                            'VAL_2_OA': val_res[2].avg,
+                            'VAL_3_Kappa': val_res[3].avg}
+                log_tensorboard(writer_tb, current_log, epoch)
+            
 
-        #     val_loss = val_res[0].avg
-        #     # val_acc_c = val_res[3].avg
-        #     # val_acc_r = val_res[4].avg
-        #     if dist.get_rank() == 0:
-        #         if val_loss < best_loss:
-        #             best_loss = val_loss
-        #             # save ckpt
-        #             save_checkpoint(model, optimizer, scheduler, epoch, best_loss_ckpt_file_path, best_loss=best_loss, best_acc=val_acc_c)                    
-        #             logger.info(f">>>>> best loss {best_loss_ckpt_file_path}_{epoch}_{best_loss} saved......")
+            val_acc = val_res[2].avg
+            val_loss = val_res[1].avg
+            
+            # val_acc_r = val_res[4].avg
+            if dist.get_rank() == 0:
+                if val_loss < best_loss:
+                    best_loss = val_loss
+                    # save ckpt
+                    save_checkpoint(model, optimizer, scheduler, epoch, best_loss_ckpt_file_path, best_loss=best_loss, best_acc=val_acc)                    
+                    logger.info(f">>>>> best loss {best_loss_ckpt_file_path}_{epoch}_{best_loss} saved......")
 
-        #         # if val_acc_c > best_acc:
-        #         #     best_acc = val_acc_c
-        #         #     # save ckpt
-        #         #     save_checkpoint(model, optimizer, lr_scheduler, epoch, best_acc_c_ckpt_file_path, best_loss=val_loss, best_acc=best_acc)
-        #         #     logger.info(f">>>>> best acc {best_acc_c_ckpt_file_path}_{epoch}_{best_acc} saved......")    
+                if val_acc > best_acc:
+                    best_acc = val_acc
+                    # save ckpt
+                    save_checkpoint(model, optimizer, scheduler, epoch, best_acc_c_ckpt_file_path, best_loss=val_loss, best_acc=best_acc)
+                    logger.info(f">>>>> best acc {best_acc_c_ckpt_file_path}_{epoch}_{best_acc} saved......")    
             
             
             
@@ -193,103 +196,103 @@ def main(args):
 
 
         
-    # prepare data
-    if args.dataset == 'Indian':
-        data = loadmat('./data/IndianPine.mat')
-    elif args.dataset == 'Pavia':
-        data = loadmat('./data/Pavia.mat')
-    elif args.dataset == 'Houston':
-        data = loadmat('./data/Houston.mat')
-    else:
-        raise ValueError("Unkknow dataset")
-    color_mat = loadmat('./data/AVIRIS_colormap.mat')
-    TR = data['TR']
-    TE = data['TE']
-    input = data['input'] #(145,145,200)
-    label = TR + TE
-    num_classes = np.max(TR)
+    # # prepare data
+    # if args.dataset == 'Indian':
+    #     data = loadmat('./data/IndianPine.mat')
+    # elif args.dataset == 'Pavia':
+    #     data = loadmat('./data/Pavia.mat')
+    # elif args.dataset == 'Houston':
+    #     data = loadmat('./data/Houston.mat')
+    # else:
+    #     raise ValueError("Unkknow dataset")
+    # color_mat = loadmat('./data/AVIRIS_colormap.mat')
+    # TR = data['TR']
+    # TE = data['TE']
+    # input = data['input'] #(145,145,200)
+    # label = TR + TE
+    # num_classes = np.max(TR)
 
-    color_mat_list = list(color_mat)
-    color_matrix = color_mat[color_mat_list[3]] #(17,3)
-    # normalize data by band norm
-    input_normalize = np.zeros(input.shape)
-    for i in range(input.shape[2]):
-        input_max = np.max(input[:,:,i])
-        input_min = np.min(input[:,:,i])
-        input_normalize[:,:,i] = (input[:,:,i]-input_min)/(input_max-input_min)
-    # data size
-    height, width, band = input.shape
-    print("height={0},width={1},band={2}".format(height, width, band))
-    #-------------------------------------------------------------------------------
-    # obtain train and test data
-    total_pos_train, total_pos_test, total_pos_true, number_train, number_test, number_true = chooose_train_and_test_point(TR, TE, label, num_classes)
-    mirror_image = mirror_hsi(height, width, band, input_normalize, patch=args.patches)
-    x_train_band, x_test_band, x_true_band = train_and_test_data(mirror_image, band, total_pos_train, total_pos_test, total_pos_true, patch=args.patches, band_patch=args.band_patches)
-    y_train, y_test, y_true = train_and_test_label(number_train, number_test, number_true, num_classes)
-    #-------------------------------------------------------------------------------
-    # load data
-    x_train=torch.from_numpy(x_train_band.transpose(0,2,1)).type(torch.FloatTensor) #[695, 200, 7, 7]
-    y_train=torch.from_numpy(y_train).type(torch.LongTensor) #[695]
-    Label_train=Data.TensorDataset(x_train,y_train)
-    x_test=torch.from_numpy(x_test_band.transpose(0,2,1)).type(torch.FloatTensor) # [9671, 200, 7, 7]
-    y_test=torch.from_numpy(y_test).type(torch.LongTensor) # [9671]
-    Label_test=Data.TensorDataset(x_test,y_test)
-    x_true=torch.from_numpy(x_true_band.transpose(0,2,1)).type(torch.FloatTensor)
-    y_true=torch.from_numpy(y_true).type(torch.LongTensor)
-    Label_true=Data.TensorDataset(x_true,y_true)
+    # color_mat_list = list(color_mat)
+    # color_matrix = color_mat[color_mat_list[3]] #(17,3)
+    # # normalize data by band norm
+    # input_normalize = np.zeros(input.shape)
+    # for i in range(input.shape[2]):
+    #     input_max = np.max(input[:,:,i])
+    #     input_min = np.min(input[:,:,i])
+    #     input_normalize[:,:,i] = (input[:,:,i]-input_min)/(input_max-input_min)
+    # # data size
+    # height, width, band = input.shape
+    # print("height={0},width={1},band={2}".format(height, width, band))
+    # #-------------------------------------------------------------------------------
+    # # obtain train and test data
+    # total_pos_train, total_pos_test, total_pos_true, number_train, number_test, number_true = chooose_train_and_test_point(TR, TE, label, num_classes)
+    # mirror_image = mirror_hsi(height, width, band, input_normalize, patch=args.patches)
+    # x_train_band, x_test_band, x_true_band = train_and_test_data(mirror_image, band, total_pos_train, total_pos_test, total_pos_true, patch=args.patches, band_patch=args.band_patches)
+    # y_train, y_test, y_true = train_and_test_label(number_train, number_test, number_true, num_classes)
+    # #-------------------------------------------------------------------------------
+    # # load data
+    # x_train=torch.from_numpy(x_train_band.transpose(0,2,1)).type(torch.FloatTensor) #[695, 200, 7, 7]
+    # y_train=torch.from_numpy(y_train).type(torch.LongTensor) #[695]
+    # Label_train=Data.TensorDataset(x_train,y_train)
+    # x_test=torch.from_numpy(x_test_band.transpose(0,2,1)).type(torch.FloatTensor) # [9671, 200, 7, 7]
+    # y_test=torch.from_numpy(y_test).type(torch.LongTensor) # [9671]
+    # Label_test=Data.TensorDataset(x_test,y_test)
+    # x_true=torch.from_numpy(x_true_band.transpose(0,2,1)).type(torch.FloatTensor)
+    # y_true=torch.from_numpy(y_true).type(torch.LongTensor)
+    # Label_true=Data.TensorDataset(x_true,y_true)
 
-    label_train_loader=Data.DataLoader(Label_train,batch_size=args.batch_size,shuffle=True)
-    label_test_loader=Data.DataLoader(Label_test,batch_size=args.batch_size,shuffle=True)
-    label_true_loader=Data.DataLoader(Label_true,batch_size=100,shuffle=False)
+    # label_train_loader=Data.DataLoader(Label_train,batch_size=args.batch_size,shuffle=True)
+    # label_test_loader=Data.DataLoader(Label_test,batch_size=args.batch_size,shuffle=True)
+    # label_true_loader=Data.DataLoader(Label_true,batch_size=100,shuffle=False)
 
 
-    if args.flag_test == 'test':
-        if args.mode == 'ViT':
-            model.load_state_dict(torch.load('./ViT.pt'))      
-        elif (args.mode == 'CAF') & (args.patches == 1):
-            model.load_state_dict(torch.load('./SpectralFormer_pixel.pt'))
-        elif (args.mode == 'CAF') & (args.patches == 7):
-            model.load_state_dict(torch.load('./SpectralFormer_patch.pt'))
-        else:
-            raise ValueError("Wrong Parameters") 
-        model.eval()
-        tar_v, pre_v = valid_epoch(model, label_test_loader, criterion, optimizer)
-        OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
+    # if args.flag_test == 'test':
+    #     if args.mode == 'ViT':
+    #         model.load_state_dict(torch.load('./ViT.pt'))      
+    #     elif (args.mode == 'CAF') & (args.patches == 1):
+    #         model.load_state_dict(torch.load('./SpectralFormer_pixel.pt'))
+    #     elif (args.mode == 'CAF') & (args.patches == 7):
+    #         model.load_state_dict(torch.load('./SpectralFormer_patch.pt'))
+    #     else:
+    #         raise ValueError("Wrong Parameters") 
+    #     model.eval()
+    #     tar_v, pre_v = valid_epoch(model, label_test_loader, criterion, optimizer)
+    #     OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
 
-        # output classification maps
-        pre_u = test_epoch(model, label_true_loader, criterion, optimizer)
-        prediction_matrix = np.zeros((height, width), dtype=float)
-        for i in range(total_pos_true.shape[0]):
-            prediction_matrix[total_pos_true[i,0], total_pos_true[i,1]] = pre_u[i] + 1
-        plt.subplot(1,1,1)
-        plt.imshow(prediction_matrix, colors.ListedColormap(color_matrix))
-        plt.xticks([])
-        plt.yticks([])
-        plt.show()
-        savemat('matrix.mat',{'P':prediction_matrix, 'label':label})
-    elif args.flag_test == 'train':
-        print("start training")
-        tic = time.time()
-        for epoch in range(args.epoches): 
-            scheduler.step()
+    #     # output classification maps
+    #     pre_u = test_epoch(model, label_true_loader, criterion, optimizer)
+    #     prediction_matrix = np.zeros((height, width), dtype=float)
+    #     for i in range(total_pos_true.shape[0]):
+    #         prediction_matrix[total_pos_true[i,0], total_pos_true[i,1]] = pre_u[i] + 1
+    #     plt.subplot(1,1,1)
+    #     plt.imshow(prediction_matrix, colors.ListedColormap(color_matrix))
+    #     plt.xticks([])
+    #     plt.yticks([])
+    #     plt.show()
+    #     savemat('matrix.mat',{'P':prediction_matrix, 'label':label})
+    # elif args.flag_test == 'train':
+    #     print("start training")
+    #     tic = time.time()
+    #     for epoch in range(args.epoches): 
+    #         scheduler.step()
 
-            # train model
-            model.train()
-            train_acc, train_obj, tar_t, pre_t = train_epoch(model, label_train_loader, criterion, optimizer)
-            OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
-            print("Epoch: {:03d} train_loss: {:.4f} train_acc: {:.4f}"
-                            .format(epoch+1, train_obj, train_acc))
+    #         # train model
+    #         model.train()
+    #         train_acc, train_obj, tar_t, pre_t = train_epoch(model, label_train_loader, criterion, optimizer)
+    #         OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
+    #         print("Epoch: {:03d} train_loss: {:.4f} train_acc: {:.4f}"
+    #                         .format(epoch+1, train_obj, train_acc))
             
 
-            if (epoch % args.test_freq == 0) | (epoch == args.epoches - 1):         
-                model.eval()
-                tar_v, pre_v = valid_epoch(model, label_test_loader, criterion, optimizer)
-                OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
-                print("Epoch: {:03d} val_OA: {:.4f}val_Kappa: {:.4f}".format(epoch+1, OA2, Kappa2))
+    #         if (epoch % args.test_freq == 0) | (epoch == args.epoches - 1):         
+    #             model.eval()
+    #             tar_v, pre_v = valid_epoch(model, label_test_loader, criterion, optimizer)
+    #             OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
+    #             print("Epoch: {:03d} val_OA: {:.4f}val_Kappa: {:.4f}".format(epoch+1, OA2, Kappa2))
 
-        toc = time.time()
-        print("Running Time: {:.2f}".format(toc-tic))
-        print("**************************************************")
+    #     toc = time.time()
+    #     print("Running Time: {:.2f}".format(toc-tic))
+    #     print("**************************************************")
 
     print("Final result:")
     print("OA: {:.4f} | AA: {:.4f} | Kappa: {:.4f}".format(OA2, AA_mean2, Kappa2))

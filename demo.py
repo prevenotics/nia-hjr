@@ -26,8 +26,8 @@ parser.add_argument('--gpu_id', default='0', help='gpu id')
 parser.add_argument('--seed', type=int, default=0, help='number of seed')
 parser.add_argument('--batch_size', type=int, default=512, help='number of batch size')
 parser.add_argument('--test_freq', type=int, default=5, help='number of evaluation')
-parser.add_argument('--patches', type=int, default=1, help='number of patches')
-parser.add_argument('--band_patches', type=int, default=1, help='number of related band')
+parser.add_argument('--patches', type=int, default=3, help='number of patches')
+parser.add_argument('--band_patches', type=int, default=3, help='number of related band')
 parser.add_argument('--epoches', type=int, default=300, help='epoch number')
 parser.add_argument('--learning_rate', type=float, default=5e-4, help='learning rate')
 parser.add_argument('--gamma', type=float, default=0.9, help='gamma')
@@ -162,6 +162,33 @@ def train_and_test_data(mirror_image, band, train_point, test_point, true_point,
     print("**************************************************")
     return x_train_band, x_test_band, x_true_band
 #-------------------------------------------------------------------------------
+
+# 汇总训练数据和测试数据
+def train_and_test_data(mirror_image, band, train_point, test_point, true_point, patch=5, band_patch=3):
+    x_train = np.zeros((train_point.shape[0], patch, patch, band), dtype=float)
+    x_test = np.zeros((test_point.shape[0], patch, patch, band), dtype=float)
+    x_true = np.zeros((true_point.shape[0], patch, patch, band), dtype=float)
+    for i in range(train_point.shape[0]):
+        x_train[i,:,:,:] = gain_neighborhood_pixel(mirror_image, train_point, i, patch)
+    for j in range(test_point.shape[0]):
+        x_test[j,:,:,:] = gain_neighborhood_pixel(mirror_image, test_point, j, patch)
+    for k in range(true_point.shape[0]):
+        x_true[k,:,:,:] = gain_neighborhood_pixel(mirror_image, true_point, k, patch)
+    print("x_train shape = {}, type = {}".format(x_train.shape,x_train.dtype))
+    print("x_test  shape = {}, type = {}".format(x_test.shape,x_test.dtype))
+    print("x_true  shape = {}, type = {}".format(x_true.shape,x_test.dtype))
+    print("**************************************************")
+    
+    x_train_band = gain_neighborhood_band(x_train, band, band_patch, patch)
+    x_test_band = gain_neighborhood_band(x_test, band, band_patch, patch)
+    x_true_band = gain_neighborhood_band(x_true, band, band_patch, patch)
+    print("x_train_band shape = {}, type = {}".format(x_train_band.shape,x_train_band.dtype))
+    print("x_test_band  shape = {}, type = {}".format(x_test_band.shape,x_test_band.dtype))
+    print("x_true_band  shape = {}, type = {}".format(x_true_band.shape,x_true_band.dtype))
+    print("**************************************************")
+    return x_train_band, x_test_band, x_true_band
+#-------------------------------------------------------------------------------
+
 # 标签y_train, y_test
 def train_and_test_label(number_train, number_test, number_true, num_classes):
     y_train = []
