@@ -1,0 +1,9 @@
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/SpectralFormer_patch_houston.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/SpectralFormer_pixel_pavia.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/ViT_houston.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/SpectralFormer_pixel_houston.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/SpectralFormer_patch_indian.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/SpectralFormer_pixel_indian.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/ViT_indian.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/SpectralFormer_patch_pavia.pt
+/home/mindforge/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer/log/ViT_pavia.pt

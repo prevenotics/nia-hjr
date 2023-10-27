@@ -29,7 +29,8 @@ import os
 # sys.argv=['']
 # del sys
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 --save_freq 10 train_hjr.py --eval_freq 1
-os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
+#CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
+os.chdir("/root/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer")
 
 def main(args):
 
@@ -46,9 +47,9 @@ def main(args):
     
     imgtype ='RA'
     sampling_point = get_point(args.img_size, args.sampling_num)
-    train_csv_path= '/root/work/hjr/dataset/train.csv'
-    val_csv_path= '/root/work/hjr/dataset/val.csv'
-    test_csv_path= '/root/work/hjr/dataset/test.csv'
+    train_csv_path= '/root/work/prevenotics/hjr/dataset/train.csv'
+    val_csv_path= '/root/work/prevenotics/hjr/dataset/val.csv'
+    test_csv_path= '/root/work/prevenotics/hjr/dataset/test.csv'
     # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
     train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sampling_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
     val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sampling_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
@@ -148,7 +149,8 @@ def main(args):
             
             
         # evaluation
-        if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):
+        # if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):        
+        if args.eval_freq == 1:        
             val_res = valid_epoch(model, val_data_loader, criterion, epoch, args.epoches, logger)            
 
             if args.tensorboard:

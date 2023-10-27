@@ -23,7 +23,7 @@ class HJRDataset(torch.utils.data.Dataset):
     def __init__(
         self, csv_file, imgtype, sample_point, patch, band_patch, band
     ): 
-        self.annotations = pd.read_csv(csv_file, encoding='cp949')
+        self.annotations = pd.read_csv(csv_file, encoding='cp949')        
         self.imgtype = imgtype
         self.sample_point = sample_point
         # self.args = args
