@@ -110,6 +110,8 @@ def main(args):
     ckpt_file_path = os.path.join(pth_dir, "checkpoints.pth")
     if args.resume and os.path.isfile(ckpt_file_path):
         start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
+    # if os.path.isfile(ckpt_file_path):
+    #     start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
     
     
     best_loss_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_loss.pth")
@@ -119,14 +121,19 @@ def main(args):
     # sampling_point = get_point(args.img_size, args.sampling_num)
     logger.info(">>>>>>>>>> Start training")
     start_time = time.time()
+    
+    tar = np.array([])
+    pre = np.array([])
+        
     for epoch in range(args.epoches): 
+        
         scheduler.step()
 
         # train model
         model.train()
         # train_acc, train_obj, tar_t, pre_t = train_epoch(model, train_data_loader, criterion, optimizer)
               # def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
-        train_res = train_epoch(model, train_data_loader, criterion, optimizer, scheduler, epoch, args.epoches, logger)
+        train_res = train_epoch(model, tar, pre, train_data_loader, criterion, optimizer, scheduler, epoch, args.epoches, logger)
         # OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
         print("Epoch: {:03d} train_acc: {:.4f} train_loss: {:.4f} train_OA: {:.4f} train_Kappa: {:.4f}".
               format(epoch+1, train_res[0].avg, train_res[1].avg, train_res[2].avg, train_res[3].avg))

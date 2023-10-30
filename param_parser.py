@@ -89,7 +89,7 @@ class TrainParser(BaseParams):
         self.add_argument("--epoches", type=int, default=3000, help="epoch number")
         self.add_argument("--save_freq", default=5, type=int, help="save freq")        
         self.add_argument("--eval_freq", default=1, type=int, help="eval freq")                
-        self.add_argument("--learning_rate", type=float, default=5e-4, help="learning rate")
+        self.add_argument("--learning_rate", type=float, default=5e-4, help="learning rate") #0.0005
         self.add_argument("--gamma", type=float, default=0.9, help="gamma")
         self.add_argument("--weight_decay", type=float, default=0, help="weight_decay")
         self.add_argument("--resume", action="store_true", help="resume from checkpoint")
