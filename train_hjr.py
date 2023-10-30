@@ -30,7 +30,7 @@ import os
 # del sys
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 --save_freq 10 train_hjr.py --eval_freq 1
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
-os.chdir("/root/work/prevenotics/hjr/IEEE_TGRS_SpectralFormer")
+os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
 def main(args):
 

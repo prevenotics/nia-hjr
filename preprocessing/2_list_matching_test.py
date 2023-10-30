@@ -1,5 +1,5 @@
 import os
-
+os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer/preprocessing")
 # 
 
 # 두 개의 파일에서 파일 경로를 포함한 목록을 읽어옴
