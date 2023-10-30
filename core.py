@@ -22,7 +22,7 @@ from utils.utils import make_output_directory, load_checkpoint_files, save_check
 #     self.avg = self.sum / self.cnt
 
 # train model
-def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
+def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
     # objs = AverageMeter() #loss
     loss_meter = AverageMeter() #loss
     top1 = AverageMeter()
@@ -32,8 +32,8 @@ def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, 
     OA_meter = AverageMeter()
     Kappa_meter = AverageMeter()
     AA_meter = AverageMeter()
-    tar = np.array([])
-    pre = np.array([])    
+    # tar = np.array([])
+    # pre = np.array([])    
     pixel_batch = 1024
     sampling_num = 2 
     
@@ -95,11 +95,11 @@ def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, 
             pixel_batch_time.update(time.time() - pixel_batch_end)
             pixel_batch_end = time.time()
              
-        # OA, AA_mean, Kappa, AA = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
-        OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
-        OA_meter.update(OA,1)
-        Kappa_meter.update(Kappa,1)
-        # AA_meter.update(AA,1)
+                
+        # OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
+        # OA_meter.update(OA,1)
+        # Kappa_meter.update(Kappa,1)
+        
         
         batch_time.update(time.time() - batch_end)
         batch_end = time.time()
@@ -123,6 +123,9 @@ def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, 
             f'grad_norm(lr) {lr_meter.val:.8f} ({lr_meter.avg:.8f})\t'
             f'mem {memory_used:.0f}MB')
     
+    OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함    
+    OA_meter.update(OA,1)
+    Kappa_meter.update(Kappa,1)
     
     epoch_time = time.time() - batch_start
     
