@@ -22,7 +22,7 @@ from utils.utils import make_output_directory, load_checkpoint_files, save_check
 #     self.avg = self.sum / self.cnt
 
 # train model
-def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
+def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_scheduler, epoch, cfg, logger, print_freq=1000):
     # objs = AverageMeter() #loss
     loss_meter = AverageMeter() #loss
     top1 = AverageMeter()
@@ -34,9 +34,9 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
     AA_meter = AverageMeter()
     # tar = np.array([])
     # pre = np.array([])    
-    pixel_batch = 1024
+    pixel_batch = cfg['train_param']['pixel_batch']
     sampling_num = 2 
-    
+    num_epochs = cfg['train_param']['epoch']
     num_steps = len(train_loader)
     
     
@@ -133,7 +133,7 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
         
 
 
-def valid_epoch(model, train_loader, criterion, epoch, num_epochs, logger, print_freq=1000):
+def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1000):
     # objs = AverageMeter() #loss
     loss_meter = AverageMeter() #loss
     top1 = AverageMeter()
@@ -145,9 +145,9 @@ def valid_epoch(model, train_loader, criterion, epoch, num_epochs, logger, print
     AA_meter = AverageMeter()
     tar = np.array([])
     pre = np.array([])    
-    pixel_batch = 1024
+    pixel_batch = cfg['train_param']['pixel_batch']
     sampling_num = 2 
-    
+    num_epochs = cfg['train_param']['epoch']
     num_steps = len(train_loader)
     
     
@@ -197,24 +197,6 @@ def valid_epoch(model, train_loader, criterion, epoch, num_epochs, logger, print
             Kappa_meter.update(Kappa,1)
             # AA_meter.update(AA,1)
             
-<<<<<<< HEAD
-        if idx % print_freq == 0:
-            memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
-            etas = batch_time.avg * (num_steps - idx)
-            logger.info(
-            f'Valid: [{epoch}/{num_epochs}][{idx}/{num_steps}]\t'
-            f'eta {datetime.timedelta(seconds=int(etas))}\t'
-            f'PixelBatchTime {pixel_batch_time.val:.2f} ({pixel_batch_time.avg:.2f})\t'
-            f'BatchTime {batch_time.val:.2f} ({batch_time.avg:.2f})\t'
-            f'loss {loss_meter.val:.2f} ({loss_meter.avg:.2f})\t'  
-            # f'cls_loss {cls_loss_meter.val:.8f} ({cls_loss_meter.avg:.8f})\t' 
-            # f'dice_loss {dice_loss_meter.val:.8f} ({dice_loss_meter.avg:.8f})\t' 
-            # f'dice_coef {dice_coef_meter.val:.8f} ({dice_coef_meter.avg:.8f})\t' 
-            # f'train_acc_corr {acc_c_meter.val:.8f} ({acc_c_meter.avg:.8f})\t' 
-            # f'train_acc_r {acc_r_meter.val:.8f} ({acc_r_meter.avg:.8f})\t' 
-            # f'grad_norm(lr) {lr_meter.val:.8f} ({lr_meter.avg:.8f})\t'
-            f'mem {memory_used:.0f}MB')
-=======
             batch_time.update(time.time() - batch_end)
             batch_end = time.time()
         
@@ -236,7 +218,6 @@ def valid_epoch(model, train_loader, criterion, epoch, num_epochs, logger, print
                 # f'train_acc_r {acc_r_meter.val:.8f} ({acc_r_meter.avg:.8f})\t' 
                 # f'grad_norm(lr) {lr_meter.val:.8f} ({lr_meter.avg:.8f})\t'
                 f'mem {memory_used:.0f}MB')
->>>>>>> c3494fb96669f0002df8011cec3cfcdef1c954f9
     
     
     epoch_time = time.time() - batch_start

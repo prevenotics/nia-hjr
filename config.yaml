@@ -1,0 +1,51 @@
+system:
+  num_workers : 8
+  seed : 0
+  tensorboard : True
+
+path:
+  train_csv: '/root/work/hjr/dataset/train.csv'
+  val_csv: '/root/work/hjr/dataset/val.csv'
+  test_csv: '/root/work/hjr/dataset/test.csv'
+  output_dir : 'output_231102'
+  model_path : 'output_231102/pths/best_checkpoint.pth'
+
+dataset: 'hjr'
+num_class : 31
+
+image_param:
+  size: 512
+  band : 120
+  type : 'RE' #choice ['RE', 'RA']
+
+network:
+  arch : 'SF' #choice ['SF', 'DL'] SF:SpectralFormer / DL : DeepLab V3+
+  spectralformer:
+    patch : 3
+    band_patch : 3
+    sampling_num : 64
+    mode : 'CAF' #choice ['ViT', 'CAF']
+  DeepLab:
+    output_stride : 16 #choice [8,16]
+    separable_conv : False
+    model : 'deeplabv3plus_mobilenet' #choice ['deeplabv3plus_mobilenet', 'deeplabv3plus_xception', ...]
+
+
+
+train_param:
+  epoch : 3000
+  train_batch: 16
+  val_batch : 4
+  pixel_batch : 1024
+  eval_freq : 2
+  test_freq : 2
+  save_freq : 30
+  learning_rate : 5e-4
+  gamma : 0.9
+  weight_decay : 0
+  opt : 'adam' #choide ['adam','nadam']
+  lrs : 'steplr' #choice ['steplr', 'cosinealr']
+  resume : True
+
+
+  

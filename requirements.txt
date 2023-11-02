@@ -3,3 +3,12 @@ timm
 tifffile
 einops
 tensorboardX
+
+torch
+torchvision
+numpy
+pillow
+scikit-learn
+tqdm
+matplotlib
+visdom

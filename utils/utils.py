@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import itertools
+from torchvision.transforms.functional import normalize
 # from sklearn.metrics import plot_confusion_matrix
 
 def load_checkpoint_files(ckpt_path, model, lr_scheduler, logger):
@@ -38,21 +39,21 @@ def save_checkpoint(model, optimizer, lr_scheduler, epoch, save_path,  best_loss
 def make_directory(path):
     os.makedirs(path, exist_ok=True)
 
-def make_output_directory(args):
-    make_directory(args.output_dir)
+def make_output_directory(config):
+    make_directory(config['path']['output_dir'])
 
     # create log file
-    log_dir = os.path.join(args.output_dir, "logs")
+    log_dir = os.path.join(config['path']['output_dir'], "logs")
     make_directory(log_dir)
 
     # create tensorboard
     tensorb_dir = None
-    if args.tensorboard:
-        tensorb_dir = os.path.join(args.output_dir, "tensorb")
+    if config['system']['tensorboard']:
+        tensorb_dir = os.path.join(config['path']['output_dir'], "tensorb")
         make_directory(tensorb_dir)
 
     #ckpt
-    pth_dir = os.path.join(args.output_dir, "pths")
+    pth_dir = os.path.join(config['path']['output_dir'], "pths")
     make_directory(pth_dir)
 
     return log_dir, pth_dir, tensorb_dir
@@ -303,3 +304,40 @@ def plot_confusion_matrix(con_mat, labels, title='Confusion Matrix', cmap=plt.cm
     plt.xlabel('Predicted label')
     plt.savefig('cm.png')
     plt.clf()
+    
+
+
+#DeepLabV3plus utils    
+def denormalize(tensor, mean, std):
+    mean = np.array(mean)
+    std = np.array(std)
+
+    _mean = -mean/std
+    _std = 1/std
+    return normalize(tensor, _mean, _std)
+
+class Denormalize(object):
+    def __init__(self, mean, std):
+        mean = np.array(mean)
+        std = np.array(std)
+        self._mean = -mean/std
+        self._std = 1/std
+
+    def __call__(self, tensor):
+        if isinstance(tensor, np.ndarray):
+            return (tensor - self._mean.reshape(-1,1,1)) / self._std.reshape(-1,1,1)
+        return normalize(tensor, self._mean, self._std)
+
+def set_bn_momentum(model, momentum=0.1):
+    for m in model.modules():
+        if isinstance(m, nn.BatchNorm2d):
+            m.momentum = momentum
+
+def fix_bn(model):
+    for m in model.modules():
+        if isinstance(m, nn.BatchNorm2d):
+            m.eval()
+
+def mkdir(path):
+    if not os.path.exists(path):
+        os.mkdir(path)

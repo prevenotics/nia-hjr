@@ -9,7 +9,8 @@ from scipy.io import loadmat
 from scipy.io import savemat
 from torch import optim
 from torch.autograd import Variable
-from vit_pytorch import ViT
+# from model.vit_pytorch import ViT # For SpectralFormer
+import network
 from param_parser import TrainParser
 from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point
 from utils.logger import create_logger
@@ -25,6 +26,8 @@ import numpy as np
 import time
 import datetime
 import os
+import yaml
+
 # import sys
 # sys.argv=['']
 # del sys
@@ -32,7 +35,7 @@ import os
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
 os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
-def main(args):
+def main(cfg):
 
     # # Parameter Setting
     # np.random.seed(args.seed)
@@ -41,108 +44,105 @@ def main(args):
     # cudnn.deterministic = True
     # cudnn.benchmark = False
     start_epoch=0
-    num_epochs=args.epoches
+    # num_epochs=args.epoches
+    num_epochs=cfg['train_param']['epoch']
     best_loss = 9999
     best_acc = -9999
     
-<<<<<<< HEAD
-=======
-    imgtype ='RA'
-    sampling_point = get_point(args.img_size, args.sampling_num)
-    train_csv_path= '/root/work/prevenotics/hjr/dataset/train.csv'
-    val_csv_path= '/root/work/prevenotics/hjr/dataset/val.csv'
-    test_csv_path= '/root/work/prevenotics/hjr/dataset/test.csv'
-    # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
-    train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sampling_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
-    val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sampling_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
-    # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
     
->>>>>>> c3494fb96669f0002df8011cec3cfcdef1c954f9
-    
-    log_dir, pth_dir, tensorb_dir = make_output_directory(args)
+    log_dir, pth_dir, tensorb_dir = make_output_directory(cfg)
     logger = create_logger(log_dir, dist_rank=0, name='')
     
     
     
     #create tensorboard
-    if args.tensorboard:
+    if cfg['system']['tensorboard']:
         writer_tb = SummaryWriter(log_dir=tensorb_dir)
 
     band =200
-    num_classes = 31
+    num_class = cfg['num_class']
     #-------------------------------------------------------------------------------
     # create model
-    model = ViT(
-        image_size = args.patch,
-        near_band = args.band_patch,
-        num_patches = band,
-        num_classes = num_classes,
-        dim = 64,
-        depth = 5,
-        heads = 4,
-        mlp_dim = 8,
-        dropout = 0.1,
-        emb_dropout = 0.1,
-        mode = args.mode
-    )
-    imgtype ='RA'
-    sample_point = get_point(args.img_size, args.sampling_num)
-    train_csv_path= '/root/work/hjr/dataset/train.csv'
-    val_csv_path= '/root/work/hjr/dataset/val.csv'
-    test_csv_path= '/root/work/hjr/dataset/test.csv'
-    # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
-    local_rank = int(os.environ["LOCAL_RANK"])                                            
-    train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sample_point, args.train_batch_size, args.num_workers, local_rank, args.patch, args.band_patch, args.band)     
-    val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sample_point, args.val_batch_size,   args.num_workers, local_rank, args.patch, args.band_patch, args.band)
+    if cfg['network']['arch'] == 'SF':
+        model = network.ViT(
+            image_size = cfg['network']['spectralformer']['patch'],
+            near_band = cfg['network']['spectralformer']['band_patch'],
+            num_patches = band,
+            num_classes = num_classes,
+            dim = 64,
+            depth = 5,
+            heads = 4,
+            mlp_dim = 8,
+            dropout = 0.1,
+            emb_dropout = 0.1,
+            mode = cfg['network']['spectralformer']['mode']
+        )
+        # criterion
+        criterion = nn.CrossEntropyLoss(ignore_index=255).cuda() 
+        # optimizer
+        opt = cfg['train_param']['opt']
+        logger.info(f"optimizer = {opt} ......")
+        if opt == "nadam":
+            optimizer = torch.optim.NAdam(model.parameters(), lr=cfg['train_param']['learning_rate'], weight_decay=cfg['train_param']['weight_decay'])
+        elif opt == "adam":
+            optimizer = torch.optim.Adam(model.parameters(), lr=cfg['train_param']['learning_rate'], weight_decay=cfg['train_param']['weight_decay')
+        
+        
+        lrs = cfg['train_param']['lrs']
+        logger.info(f"lr_scheduler = {lrs} ......")
+        if lrs == "cosinealr":
+            #create scheduler stochastic gradient descent with warm restarts(SGDR)
+            tmax = np.ceil(cfg['train_param']['epoch']/cfg['train_param']['train_batch']) * 5
+            scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max= tmax, eta_min=1e-6)
+        elif lrs == "steplr":
+            # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
+            scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=cfg['train_param']['epoch']//10, gamma=cfg['train_param']['gamma'])
+        sample_point = get_point(cfg['image_param']['size'], cfg['network']['spectralformer']['sampling_num'])   
+    
+        local_rank = int(os.environ["LOCAL_RANK"])                                            
+        train_data_loader = build_data_loader(cfg['dataset'], cfg['path']['train_csv'], cfg['image_param']['type'], sample_point, cfg['train_param']['train_batch'], cfg['system']['num_workers'], local_rank, cfg['spectralformer']['patch'], cfg['spectralformer']['band_patch'], cfg['image_parap']['band'])     
+        val_data_loader   = build_data_loader(cfg['dataset'], cfg['path']['val_csv'],   cfg['image_param']['type'], sample_point, cfg['train_param']['val_batch'],   cfg['system']['num_workers'], local_rank, cfg['spectralformer']['patch'], cfg['spectralformer']['band_patch'], cfg['image_parap']['band'])
+    
+    
+    elif cfg['network']['arch'] == 'DL':
+        model = network.modeling.__dict__[cfg['network']['arch']['model']](num_classes=num_class, output_stride=cfg['network']['DeepLab']['output_stride'])
+        if opts.separable_conv and 'plus' in cfg['network']['arch']['model']:
+            network.convert_to_separable_conv(model.classifier)
+        utils.set_bn_momentum(model.backbone, momentum=0.01)
+    
+        
+    
+    
+    
     # train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sample_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
     # val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sample_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
     # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
+    
+
+
     
     local_rank = int(os.environ["LOCAL_RANK"])
     model = model.cuda()
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[local_rank],
                                                               find_unused_parameters=True, broadcast_buffers=False)
-    # criterion
-    criterion = nn.CrossEntropyLoss(ignore_index=255).cuda() 
-    # optimizer
-    logger.info(f"optimizer = {args.opt} ......")
-    if args.opt == "nadam":
-        optimizer = torch.optim.NAdam(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
-    elif args.opt == "adam":
-        optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
-    
-    
-    
-    logger.info(f"lr_scheduler = {args.lrs} ......")
-    if args.lrs == "cosinealr":
-        #create scheduler stochastic gradient descent with warm restarts(SGDR)
-        tmax = np.ceil(args.total_epoch/args.train_batch_size) * 5
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max= tmax, eta_min=1e-6)
-    elif args.lrs == "steplr":
-        # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
-        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.epoches//10, gamma=args.gamma)
-    
-    
     #resume
     ckpt_file_path = os.path.join(pth_dir, "checkpoints.pth")
-    if args.resume and os.path.isfile(ckpt_file_path):
+    if cfg['train_param']['resume'] and os.path.isfile(ckpt_file_path):
         start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
-    # if os.path.isfile(ckpt_file_path):
-    #     start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
-    
+        
     
     best_loss_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_loss.pth")
     best_acc_c_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_corr.pth")
     best_acc_r_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_r.pth")
 
-    # sampling_point = get_point(args.img_size, args.sampling_num)
+    
     logger.info(">>>>>>>>>> Start training")
     start_time = time.time()
     
     tar = np.array([])
     pre = np.array([])
         
-    for epoch in range(args.epoches): 
+    for epoch in range(cfg['train_param']['epoch']): 
         
         scheduler.step()
 
@@ -150,7 +150,7 @@ def main(args):
         model.train()
         # train_acc, train_obj, tar_t, pre_t = train_epoch(model, train_data_loader, criterion, optimizer)
               # def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
-        train_res = train_epoch(model, tar, pre, train_data_loader, criterion, optimizer, scheduler, epoch, args.epoches, logger)
+        train_res = train_epoch(model, tar, pre, train_data_loader, criterion, optimizer, scheduler, epoch, cfg, logger)
         # OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
         print("Epoch: {:03d} train_acc: {:.4f} train_loss: {:.4f} train_OA: {:.4f} train_Kappa: {:.4f}".
               format(epoch+1, train_res[0].avg, train_res[1].avg, train_res[2].avg, train_res[3].avg))
@@ -158,12 +158,12 @@ def main(args):
         if dist.get_rank() == 0:
             save_checkpoint(model, optimizer, scheduler, epoch, ckpt_file_path, best_loss, best_acc)
             logger.info(f">>>>> {ckpt_file_path}saved......")
-            if epoch % (args.save_freq)==0 or epoch==num_epochs-1:
+            if epoch % (cfg['train_param']['save_freq'])==0 or epoch==num_epochs-1:
                 save_path = os.path.join(pth_dir, f"checkpoint_%06d.pth"%epoch)
                 save_checkpoint(model, optimizer, scheduler, epoch, save_path, best_loss, best_acc)
                 logger.info(f">>>>> {save_path}saved......")
 
-        if args.tensorboard:
+        if cfg['system']['tensorboard']:
             current_log = {'TRAIN_0_acc': train_res[0].avg,
                            'TRAIN_1_loss': train_res[1].avg,
                            'TRAIN_2_OA': train_res[2].avg,
@@ -174,10 +174,10 @@ def main(args):
             
         # evaluation
         # if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):        
-        if args.eval_freq == 1:        
-            val_res = valid_epoch(model, val_data_loader, criterion, epoch, args.epoches, logger)            
+        if cfg['train_param']['eval_freq'] == 1:        
+            val_res = valid_epoch(model, val_data_loader, criterion, epoch, cfg, logger)            
 
-            if args.tensorboard:
+            if cfg['system']['tensorboard']:
                 current_log = {'VAL_0_acc': val_res[0].avg,
                             'VAL_1_loss': val_res[1].avg,
                             'VAL_2_OA': val_res[2].avg,
@@ -347,8 +347,12 @@ if __name__ == '__main__':
     # parser.add_argument('--dataset', choices=['Indian', 'Pavia', 'Houston'], default='Indian', help='dataset to use')
     # parser.add_argument('--flag_test', choices=['test', 'train'], default='train', help='testing mark')
     
-    parser = TrainParser()
-    args = parser.parse_args(args=[])
+    # parser = TrainParser()
+    # args = parser.parse_args(args=[])
+    
+    with open('./config.yaml') as f:
+        cfg = yaml.safe_load(f)
+        
 
     # os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu_id)
     
@@ -365,12 +369,12 @@ if __name__ == '__main__':
     torch.distributed.init_process_group(backend='nccl', init_method='env://', world_size=world_size, rank=rank)
     torch.distributed.barrier()
 
-    seed = args.seed + dist.get_rank()
+    seed = cfg['system']['seed'] + dist.get_rank()
     torch.manual_seed(seed)
     np.random.seed(seed)
     cudnn.benchmark = True
     
-    main(args)
+    main(cfg)
 
 
 
