@@ -1,3 +1,4 @@
+import os
 import torch.distributed as dist
 import torch
 from data.hjr_dataset import HJRDataset
@@ -7,7 +8,7 @@ def build_data_loader(dataset_name, train_csv_path, imgtype, sample_point, batch
     
     if dataset_name =='hjr':
         dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype, sample_point=sample_point, patch=patch, band_patch=band_patch, band = band)
-
+    # local_rank = os.environ['LOCAL_RANK']
     print(f"local rank {local_rank} / global rank {dist.get_rank()} successfully build dataset")
 
     num_tasks = dist.get_world_size()

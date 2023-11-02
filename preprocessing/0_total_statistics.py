@@ -5,6 +5,7 @@ import tifffile
 import numpy as np
 
 #전체 tif 파일의 히스토그램 통계
+os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer/preprocessing")
 
 total_hist = []
 # TIFF 이미지 파일을 열고 numpy 배열로 변환하는 함수
