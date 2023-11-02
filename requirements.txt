@@ -1,0 +1,5 @@
+termcolor
+timm
+tifffile
+einops
+tensorboardX

@@ -76,7 +76,7 @@ class BaseParams(argparse.ArgumentParser):
 class TrainParser(BaseParams):
     def __init__(self):
         super(TrainParser, self).__init__()
-        self.add_argument("--output-dir", default="output", type=str, help="output directory")
+        self.add_argument("--output-dir", default="output_231031", type=str, help="output directory")
         self.add_argument("--img_size", default=512, type=int, help="image_size")
         self.add_argument("--sampling_num", default=64, type=int, help="sampling_point(n x n) for train")
         self.add_argument("--batch_size", type=int, default=32, help="number of batch size")
