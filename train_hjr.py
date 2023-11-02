@@ -29,6 +29,7 @@ import os
 # sys.argv=['']
 # del sys
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 --save_freq 10 train_hjr.py --eval_freq 1
+#CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
 os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
 def main(args):
@@ -44,6 +45,19 @@ def main(args):
     best_loss = 9999
     best_acc = -9999
     
+<<<<<<< HEAD
+=======
+    imgtype ='RA'
+    sampling_point = get_point(args.img_size, args.sampling_num)
+    train_csv_path= '/root/work/prevenotics/hjr/dataset/train.csv'
+    val_csv_path= '/root/work/prevenotics/hjr/dataset/val.csv'
+    test_csv_path= '/root/work/prevenotics/hjr/dataset/test.csv'
+    # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
+    train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sampling_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
+    val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sampling_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
+    # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
+    
+>>>>>>> c3494fb96669f0002df8011cec3cfcdef1c954f9
     
     log_dir, pth_dir, tensorb_dir = make_output_directory(args)
     logger = create_logger(log_dir, dist_rank=0, name='')
@@ -113,6 +127,8 @@ def main(args):
     ckpt_file_path = os.path.join(pth_dir, "checkpoints.pth")
     if args.resume and os.path.isfile(ckpt_file_path):
         start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
+    # if os.path.isfile(ckpt_file_path):
+    #     start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
     
     
     best_loss_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_loss.pth")
@@ -122,14 +138,19 @@ def main(args):
     # sampling_point = get_point(args.img_size, args.sampling_num)
     logger.info(">>>>>>>>>> Start training")
     start_time = time.time()
+    
+    tar = np.array([])
+    pre = np.array([])
+        
     for epoch in range(args.epoches): 
+        
         scheduler.step()
 
         # train model
         model.train()
         # train_acc, train_obj, tar_t, pre_t = train_epoch(model, train_data_loader, criterion, optimizer)
               # def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
-        train_res = train_epoch(model, train_data_loader, criterion, optimizer, scheduler, epoch, args.epoches, logger)
+        train_res = train_epoch(model, tar, pre, train_data_loader, criterion, optimizer, scheduler, epoch, args.epoches, logger)
         # OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
         print("Epoch: {:03d} train_acc: {:.4f} train_loss: {:.4f} train_OA: {:.4f} train_Kappa: {:.4f}".
               format(epoch+1, train_res[0].avg, train_res[1].avg, train_res[2].avg, train_res[3].avg))
@@ -152,7 +173,8 @@ def main(args):
             
             
         # evaluation
-        if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):
+        # if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):        
+        if args.eval_freq == 1:        
             val_res = valid_epoch(model, val_data_loader, criterion, epoch, args.epoches, logger)            
 
             if args.tensorboard:
