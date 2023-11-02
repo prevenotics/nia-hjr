@@ -112,15 +112,15 @@ def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, 
             logger.info(
             f'Train: [{epoch}/{num_epochs}][{idx}/{num_steps}]\t'
             f'eta {datetime.timedelta(seconds=int(etas))}\t'
-            f'PixelBatchTime {pixel_batch_time.val:.8f} ({pixel_batch_time.avg:.8f})\t'
-            f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'
-            f'loss {loss_meter.val:.8f} ({loss_meter.avg:.8f})\t'  
+            f'PixelBatchTime {pixel_batch_time.val:.2f} ({pixel_batch_time.avg:.2f})\t'
+            f'BatchTime {batch_time.val:.2f} ({batch_time.avg:.2f})\t'
+            f'loss {loss_meter.val:.2f} ({loss_meter.avg:.2f})\t'  
             # f'cls_loss {cls_loss_meter.val:.8f} ({cls_loss_meter.avg:.8f})\t' 
             # f'dice_loss {dice_loss_meter.val:.8f} ({dice_loss_meter.avg:.8f})\t' 
             # f'dice_coef {dice_coef_meter.val:.8f} ({dice_coef_meter.avg:.8f})\t' 
             # f'train_acc_corr {acc_c_meter.val:.8f} ({acc_c_meter.avg:.8f})\t' 
             # f'train_acc_r {acc_r_meter.val:.8f} ({acc_r_meter.avg:.8f})\t' 
-            f'grad_norm(lr) {lr_meter.val:.8f} ({lr_meter.avg:.8f})\t'
+            f'grad_norm(lr) {lr_meter.val:.2f} ({lr_meter.avg:.2f})\t'
             f'mem {memory_used:.0f}MB')
     
     
@@ -201,9 +201,9 @@ def valid_epoch(model, train_loader, criterion, epoch, num_epochs, logger, print
             logger.info(
             f'Valid: [{epoch}/{num_epochs}][{idx}/{num_steps}]\t'
             f'eta {datetime.timedelta(seconds=int(etas))}\t'
-            f'PixelBatchTime {pixel_batch_time.val:.8f} ({pixel_batch_time.avg:.8f})\t'
-            f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'
-            f'loss {loss_meter.val:.8f} ({loss_meter.avg:.8f})\t'  
+            f'PixelBatchTime {pixel_batch_time.val:.2f} ({pixel_batch_time.avg:.2f})\t'
+            f'BatchTime {batch_time.val:.2f} ({batch_time.avg:.2f})\t'
+            f'loss {loss_meter.val:.2f} ({loss_meter.avg:.2f})\t'  
             # f'cls_loss {cls_loss_meter.val:.8f} ({cls_loss_meter.avg:.8f})\t' 
             # f'dice_loss {dice_loss_meter.val:.8f} ({dice_loss_meter.avg:.8f})\t' 
             # f'dice_coef {dice_coef_meter.val:.8f} ({dice_coef_meter.avg:.8f})\t' 

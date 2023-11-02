@@ -44,20 +44,10 @@ def main(args):
     best_loss = 9999
     best_acc = -9999
     
-    imgtype ='RA'
-    sampling_point = get_point(args.img_size, args.sampling_num)
-    train_csv_path= '/root/work/hjr/dataset/train.csv'
-    val_csv_path= '/root/work/hjr/dataset/val.csv'
-    test_csv_path= '/root/work/hjr/dataset/test.csv'
-    # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
-    train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sampling_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
-    val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sampling_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
-    # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
-    
     
     log_dir, pth_dir, tensorb_dir = make_output_directory(args)
     logger = create_logger(log_dir, dist_rank=0, name='')
-
+    
     
     
     #create tensorboard
@@ -81,8 +71,22 @@ def main(args):
         emb_dropout = 0.1,
         mode = args.mode
     )
+    imgtype ='RA'
+    sample_point = get_point(args.img_size, args.sampling_num)
+    train_csv_path= '/root/work/hjr/dataset/train.csv'
+    val_csv_path= '/root/work/hjr/dataset/val.csv'
+    test_csv_path= '/root/work/hjr/dataset/test.csv'
+    # train_dataset = HJRDataset(csv_file=train_csv_path, imgtype=imgtype)
+    local_rank = int(os.environ["LOCAL_RANK"])                                            
+    train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sample_point, args.train_batch_size, args.num_workers, local_rank, args.patch, args.band_patch, args.band)     
+    val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sample_point, args.val_batch_size,   args.num_workers, local_rank, args.patch, args.band_patch, args.band)
+    # train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sample_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
+    # val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sample_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
+    # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
+    
+    local_rank = int(os.environ["LOCAL_RANK"])
     model = model.cuda()
-    model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.local_rank],
+    model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[local_rank],
                                                               find_unused_parameters=True, broadcast_buffers=False)
     # criterion
     criterion = nn.CrossEntropyLoss(ignore_index=255).cuda() 
@@ -294,11 +298,11 @@ def main(args):
     #     print("Running Time: {:.2f}".format(toc-tic))
     #     print("**************************************************")
 
-    print("Final result:")
-    print("OA: {:.4f} | AA: {:.4f} | Kappa: {:.4f}".format(OA2, AA_mean2, Kappa2))
-    print(AA2)
-    print("**************************************************")
-    print("Parameter:")
+    # print("Final result:")
+    # print("OA: {:.4f} | AA: {:.4f} | Kappa: {:.4f}".format(OA2, AA_mean2, Kappa2))
+    # print(AA2)
+    # print("**************************************************")
+    # print("Parameter:")
     # print_args(vars(args))
 
 # def print_args(args):

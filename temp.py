@@ -34,7 +34,7 @@ image_width = 512
 image_height = 512
 
 # y 변수 설정
-y = 15  # y 값을 변경하여 원하는 등분 수를 얻을 수 있습니다.
+y = 32  # y 값을 변경하여 원하는 등분 수를 얻을 수 있습니다.
 
 # 중심 좌표 계산
 center_x = image_width // 2
@@ -56,5 +56,5 @@ plt.scatter(sampling_coords[:, 0], sampling_coords[:, 1], c='r', marker='o', s=0
 plt.xlim(0, image_width)
 plt.ylim(0, image_height)
 plt.gca().invert_yaxis()  # 좌측 상단을 원점으로 설정
-plt.grid(True)
-plt.savefig("sampling_coords.png", dpi=300, bbox_inches='tight')
+# plt.grid(True)
+plt.savefig(f"sampling_coords_{y}.png", dpi=300, bbox_inches='tight')
