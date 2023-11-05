@@ -10,7 +10,7 @@ import datetime
 import pymysql
 
 
-image_folder = r'D:\\DATA\\hjr\\dataset_231101\\1.원천데이터\\'
+image_folder = r'/root/work/hjr/dataset//1.원천데이터/'
 # json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 # output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
 # output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'
@@ -241,6 +241,9 @@ def main():
                             mat_image_RE = D_file(image_path, imgtype[1])                        
                             label_path = label_path.replace(".tif", "_RE36.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords)
+                        
+                        io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
+                        io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
                     except FileNotFoundError as e:
                         error_cnt +=1
                         current_time = datetime.datetime.now()
@@ -250,8 +253,8 @@ def main():
                             
                         continue
                                         
-                    io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
-                    io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
+                    # io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
+                    # io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
                     # tifffile.imsave(tif_path_RA, np.array(mat_image_RA))
                     # tifffile.imsave(tif_path_RE, np.array(mat_image_RE))
 

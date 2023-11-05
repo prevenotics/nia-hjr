@@ -8,7 +8,7 @@ from scipy import io
 
 # json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 # output_parent_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터_mat/'
-json_folder = r'D:/DATA/hjr/dataset/temp/'
+json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 output_parent_folder = r'D:/DATA/hjr/dataset/temp/'
 # Create the TIFF folder if it doesn't exist
 # if not os.path.exists(tiff_folder):
