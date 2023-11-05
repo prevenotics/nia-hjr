@@ -3,10 +3,10 @@ os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer/preprocessing")
 # 
 
 # 두 개의 파일에서 파일 경로를 포함한 목록을 읽어옴
-with open('output_image.txt', 'r') as file1:
+with open('231028_mnt_image_output.txt', 'r') as file1:
     file_list1 = file1.read().splitlines()
 
-with open('output_label.txt', 'r') as file2:
+with open('231028_mnt_label_output.txt', 'r') as file2:
     file_list2 = file2.read().splitlines()
 
 # 파일명만 추출하여 집합(set)에 저장

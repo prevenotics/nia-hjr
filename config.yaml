@@ -4,18 +4,20 @@ system:
   tensorboard : True
 
 path:
+  dataset_path : '/root/work/hjr/dataset/3.mat'
   train_csv: '/root/work/hjr/dataset/train.csv'
   val_csv: '/root/work/hjr/dataset/val.csv'
   test_csv: '/root/work/hjr/dataset/test.csv'
   output_dir : 'output_231102'
   model_path : 'output_231102/pths/best_checkpoint.pth'
+  
 
 dataset: 'hjr'
 num_class : 31
 
 image_param:
   size: 512
-  band : 120
+  band : 200
   type : 'RE' #choice ['RE', 'RA']
 
 network:
@@ -40,7 +42,7 @@ train_param:
   eval_freq : 2
   test_freq : 2
   save_freq : 30
-  learning_rate : 5e-4
+  learning_rate : 0.0005
   gamma : 0.9
   weight_decay : 0
   opt : 'adam' #choide ['adam','nadam']

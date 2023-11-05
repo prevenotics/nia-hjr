@@ -37,6 +37,7 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
     pixel_batch = cfg['train_param']['pixel_batch']
     sampling_num = 2 
     num_epochs = cfg['train_param']['epoch']
+    band =cfg['image_param']['band']
     num_steps = len(train_loader)
     
     
@@ -54,7 +55,7 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
         # for i in range(sample_point.shape[0]):
         #     data[i,:,:,:] = gain_neighborhood_pixel(image, sample_point, i, args.patch)
         # data = gain_neighborhood_band(data, args.band, args.band_patch, args.patch)
-        reshaped_image = image.contiguous().view(-1,200,image.shape[3])
+        reshaped_image = image.contiguous().view(-1,band,image.shape[3])
         reshaped_target = target.contiguous().view(-1)
         
         # reshaped_image = image[:,:,sample_point[:,0],sample_point[:,1]].permute(0,2,1).contiguous().view(-1, 200, 1)
@@ -148,6 +149,7 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
     pixel_batch = cfg['train_param']['pixel_batch']
     sampling_num = 2 
     num_epochs = cfg['train_param']['epoch']
+    band =cfg['image_param']['band']
     num_steps = len(train_loader)
     
     
@@ -161,7 +163,7 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
             image = batch["image"].cuda(non_blocking=True)
             target = batch["label"].cuda(non_blocking=True)
             
-            reshaped_image = image.contiguous().view(-1,200,image.shape[3])
+            reshaped_image = image.contiguous().view(-1,band,image.shape[3])
             reshaped_target = target.contiguous().view(-1)
             
             

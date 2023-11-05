@@ -41,41 +41,19 @@ class HJRDataset(torch.utils.data.Dataset):
     def __getitem__(self, index):
         out = dict()
         path_img = os.path.join(DATA_PATH, self.annotations.iloc[index, 0])
-        _, ext = os.path.splitext(path_img)
-        
-        if ext =='.mat':
-            image, label = self.mat_open(path_img, self.imgtype, self.sample_point, self.patch, self.band_patch, self.band)
-        
-        else:                    
-            path_label = os.path.join(DATA_PATH, self.annotations.iloc[index, 1])       
-            image = self.multiple_image_open(path_img, self.imgtype, self.sample_point, self.patch, self.band_patch, self.band)        
-            label = self.label_open(path_label, self.imgtype, self.sample_point)
-        
+        path_label = os.path.join(DATA_PATH, self.annotations.iloc[index, 1])
+        # label_CRBN_QNTT_path = os.path.join(DATA_PATH, self.annotations.iloc[index, 2])
+        # label_tif_path = os.path.join(DATA_PATH, self.annotations.iloc[index, 3])
+
+        image = self.multiple_image_open(path_img, self.imgtype, self.sample_point, self.patch, self.band_patch, self.band)        
+        label = self.label_open(path_label, self.imgtype, self.sample_point)
+        # l_c = Image.open(label_CRBN_QNTT_path)
+        # l_t = Image.open(label_tif_path)
         
         out["image"] = image
         out["label"] = label
 
         return out
-
-    def mat_open(self, path_img, imgtype, sample_point, patch, band_patch, band):
-         
-        mat_data = loadmat(path_img)
-        
-        image_mat = mat_data['image']                       
-        data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
-        for i in range(sample_point.shape[0]):
-            data[i,:,:,:] = gain_neighborhood_pixel(image_mat, sample_point, i, patch)
-        data = gain_neighborhood_band(data, band, band_patch, patch)
-        image = torch.from_numpy(data.transpose(0, 2, 1)).type(torch.FloatTensor)
-        
-        label_mat = mat_data['label']
-        label_mat = label_mat[sample_point[:,0],sample_point[:,1]]
-        label = torch.from_numpy(label_mat).type(torch.LongTensor)
-        
-        
-                
-        
-        return image, label
 
     def multiple_image_open(self, path_img, imgtype, sample_point, patch, band_patch, band):
         file_dir, file_name = os.path.split(path_img)

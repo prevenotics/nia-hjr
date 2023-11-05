@@ -5,7 +5,7 @@ from xml.sax.handler import DTDHandler
 
 
 # 이미지와 label이 매치되는 데이터들 기준으로 학습을 위한 csv 파일 생성
-
+os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer/preprocessing")
 # os.chdir("/root/work/prevenotics/src/IEEE_TGRS_SpectralFormer")
 # RA_or_RE = "RA"
 

@@ -59,7 +59,7 @@ def main(cfg):
     if cfg['system']['tensorboard']:
         writer_tb = SummaryWriter(log_dir=tensorb_dir)
 
-    band =200
+    band =cfg['image_param']['band']
     num_class = cfg['num_class']
     #-------------------------------------------------------------------------------
     # create model
@@ -68,7 +68,7 @@ def main(cfg):
             image_size = cfg['network']['spectralformer']['patch'],
             near_band = cfg['network']['spectralformer']['band_patch'],
             num_patches = band,
-            num_classes = num_classes,
+            num_classes = num_class,
             dim = 64,
             depth = 5,
             heads = 4,
@@ -85,7 +85,7 @@ def main(cfg):
         if opt == "nadam":
             optimizer = torch.optim.NAdam(model.parameters(), lr=cfg['train_param']['learning_rate'], weight_decay=cfg['train_param']['weight_decay'])
         elif opt == "adam":
-            optimizer = torch.optim.Adam(model.parameters(), lr=cfg['train_param']['learning_rate'], weight_decay=cfg['train_param']['weight_decay')
+            optimizer = torch.optim.Adam(model.parameters(), lr=cfg['train_param']['learning_rate'], weight_decay=cfg['train_param']['weight_decay'])
         
         
         lrs = cfg['train_param']['lrs']
@@ -100,8 +100,8 @@ def main(cfg):
         sample_point = get_point(cfg['image_param']['size'], cfg['network']['spectralformer']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
-        train_data_loader = build_data_loader(cfg['dataset'], cfg['path']['train_csv'], cfg['image_param']['type'], sample_point, cfg['train_param']['train_batch'], cfg['system']['num_workers'], local_rank, cfg['spectralformer']['patch'], cfg['spectralformer']['band_patch'], cfg['image_parap']['band'])     
-        val_data_loader   = build_data_loader(cfg['dataset'], cfg['path']['val_csv'],   cfg['image_param']['type'], sample_point, cfg['train_param']['val_batch'],   cfg['system']['num_workers'], local_rank, cfg['spectralformer']['patch'], cfg['spectralformer']['band_patch'], cfg['image_parap']['band'])
+        train_data_loader = build_data_loader(cfg['dataset'], cfg['path']['train_csv'], cfg['image_param']['type'], sample_point, cfg['train_param']['train_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
+        val_data_loader   = build_data_loader(cfg['dataset'], cfg['path']['val_csv'],   cfg['image_param']['type'], sample_point, cfg['train_param']['val_batch'],   cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])
     
     
     elif cfg['network']['arch'] == 'DL':
