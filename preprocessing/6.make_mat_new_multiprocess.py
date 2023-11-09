@@ -20,9 +20,9 @@ image_folder = r'/root/work/hjr/dataset//1.원천데이터/'
 # input_path= input("input path : ")
 # image_folder = input_path
 
-output_mat_folder = image_folder.replace("1.원천데이터","3.mat_mult")
+output_mat_folder = image_folder.replace("1.원천데이터","3.mat_mult_OutSize256_error_cnt")
 
-def process_image(cnt, root, image_folder, output_mat_folder, prefix, file_extension, imgtype, sampling_coords):    
+def process_image(root, image_folder, output_mat_folder, prefix, file_extension, imgtype, output_size, sampling_coords):    
     
     image_path = os.path.join(root, f"{prefix}{file_extension}")    
     label_path = image_path.replace("1.원천데이터","2.라벨링데이터")
@@ -33,39 +33,54 @@ def process_image(cnt, root, image_folder, output_mat_folder, prefix, file_exten
     mat_path_RA = os.path.join(out_mat_folder, f"{prefix}_RA.mat")
     mat_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.mat")
     
-    # try:
+# try:
     if prefix[2] == 'L':        
-        mat_image_RA = L_file(image_path, imgtype[0])
-        mat_image_RE = L_file(image_path, imgtype[1])
+        mat_image_RA = L_file(image_path, imgtype[0], sampling_coords[0], output_size)
+        mat_image_RE = L_file(image_path, imgtype[1], sampling_coords[0], output_size)
         label_path = label_path.replace(".tif", "_RE01.json")
-        mat_label = create_label_mat(label_path, prefix[2], sampling_coords)
+        mat_label = create_label_mat(label_path, prefix[2], sampling_coords[0], output_size)
     elif prefix[2] == 'U':        
-        mat_image_RA = U_file(image_path, imgtype[0], sampling_coords)
-        mat_image_RE = U_file(image_path, imgtype[1], sampling_coords)
+        mat_image_RA = U_file(image_path, imgtype[0], sampling_coords[1], output_size)
+        mat_image_RE = U_file(image_path, imgtype[1], sampling_coords[1], output_size)
         label_path = label_path.replace(".tif", "_RE21.json")
-        mat_label = create_label_mat(label_path, prefix[2], sampling_coords)
+        mat_label = create_label_mat(label_path, prefix[2], sampling_coords[1], output_size)
     elif prefix[2] == 'D':
         mat_image_RA = D_file(image_path, imgtype[0])
         mat_image_RE = D_file(image_path, imgtype[1])
         label_path = label_path.replace(".tif", "_RE36.json")
         mat_label = create_label_mat(label_path, prefix[2], sampling_coords)
+    
+    if mat_label is not None:        
+        io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
+        io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
+        return 1
+# except FileNotFoundError as e:
+    # error_cnt += 1    
+    else:        
+        # error_cnt.value += 1
+        current_time = datetime.datetime.now()
+        formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")        
+        pid = os.getpid()
+        with open(f"tmp_{pid}.txt", "a") as log:
+            log.write(f"{formatted_time} : [FileNotFoundError]\t{image_path}\n")
+        return 0
+        
+            
+    
 
-    io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
-    io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
+
+def create_label_mat(label_path, loc, sampling_coords, output_size):
+    # try:    
+    #     with open(label_path, "r") as json_file:
+    #         data = json.load(json_file)
     # except FileNotFoundError as e:
-    #     error_cnt += 1
-    #     current_time = datetime.datetime.now()
-    #     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    #     with open("log.txt", "a") as log:
-    #         log.write(f"{formatted_time} : [FileNotFoundError]\t{image_path}\n")
-
-
-def create_label_mat(label_path, loc, sampling_coords):
-    try:    
+    #     raise e
+    if os.path.exists(label_path):
         with open(label_path, "r") as json_file:
             data = json.load(json_file)
-    except FileNotFoundError as e:
-        raise e
+    else:
+        return None
+        
     
     image_id = data["image"][0]["id"]
     image_width = data["image"][0]["width"]
@@ -115,19 +130,20 @@ def create_label_mat(label_path, loc, sampling_coords):
             class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
             draw.polygon(polygon, outline=class_value, fill=class_value)
                 
-    if loc == "U":
-        label = np.array(label)[sampling_coords[:,1], sampling_coords[:,0]].reshape(512,512)
-        # selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(512,512,120)
+    # if loc == "U":
+    label = np.array(label)[sampling_coords[:,1], sampling_coords[:,0]].reshape(output_size,output_size)        
+    
     return label
 
 
 CLIPPING = 40000
-def L_file(image_path, imgtype): # land
+def L_file(image_path, imgtype, sampling_coords, output_size): # land
     # imgtype = ["RA", "RE"]
     image_shape = (512,512)
     num_channels = 10
     # total_channel = 120
     total_channel = 100
+    band = 100
     
     file_dir, file_name = os.path.split(image_path)
     base_name, file_extension = os.path.splitext(file_name)
@@ -151,16 +167,17 @@ def L_file(image_path, imgtype): # land
                 concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img
             except FileNotFoundError as e:
                 raise e
-    
+    concatenated_image = concatenated_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(output_size,output_size,band)
     return concatenated_image
 
-def U_file(image_path, imgtype, sampling_coords): #under water
-    #120 band
-    selected_band_list = [10,12,13,15,17,19,20,22,24,25,27,29,31,32,34,36,37,39,41,42,44,46,48,49,51,53,54,56,58,59,61,63,65,66,68,70,71,73,75,76,78,80,81,83,85,87,88,90,92,93,95,97,98,100,102,104,105,107,108,110,112,114,115,117,118,120,122,124,125,127,129,130,132,134,135,137,139,140,142,144,145,147,149,150,152,154,155,157,158,160,162,164,165,167,169,170,172,174,175,177,179,180,182,183,185,187,188,190,192,193,195,197,198,200,202,203,205,207,208,209,]
-    band = 120
-    #100 band
-    # selected_band_list = [27,29,31,32,34,36,37,39,41,42,44,46,48,49,51,53,54,56,58,59,61,63,65,66,68,70,71,73,75,76,78,80,81,83,85,87,88,90,92,93,95,97,98,100,102,104,105,107,108,110,112,114,115,117,118,120,122,124,125,127,129,130,132,134,135,137,139,140,142,144,145,147,149,150,152,154,155,157,158,160,162,164,165,167,169,170,172,174,175,177,179,180,182,183,185,187,188,190,192,193,]
-    # band = 100
+def U_file(image_path, imgtype, sampling_coords, output_size): #under water
+    # ######120 band
+    # selected_band_list = [10,12,13,15,17,19,20,22,24,25,27,29,31,32,34,36,37,39,41,42,44,46,48,49,51,53,54,56,58,59,61,63,65,66,68,70,71,73,75,76,78,80,81,83,85,87,88,90,92,93,95,97,98,100,102,104,105,107,108,110,112,114,115,117,118,120,122,124,125,127,129,130,132,134,135,137,139,140,142,144,145,147,149,150,152,154,155,157,158,160,162,164,165,167,169,170,172,174,175,177,179,180,182,183,185,187,188,190,192,193,195,197,198,200,202,203,205,207,208,209,]
+    # band = 120
+    
+    ###### 100 band
+    selected_band_list = [27,29,31,32,34,36,37,39,41,42,44,46,48,49,51,53,54,56,58,59,61,63,65,66,68,70,71,73,75,76,78,80,81,83,85,87,88,90,92,93,95,97,98,100,102,104,105,107,108,110,112,114,115,117,118,120,122,124,125,127,129,130,132,134,135,137,139,140,142,144,145,147,149,150,152,154,155,157,158,160,162,164,165,167,169,170,172,174,175,177,179,180,182,183,185,187,188,190,192,193,]
+    band = 100
     image_shape = (1024,1024)
     num_channels = 14
     total_channel = 210
@@ -182,7 +199,7 @@ def U_file(image_path, imgtype, sampling_coords): #under water
 
     selected_band_image = concatenated_image[:,:,selected_band_list]
     ##############(1024->512)##########################################
-    selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(512,512,band)
+    selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(output_size,output_size,band)
     ##############(1024->512)##########################################
     
     
@@ -193,18 +210,12 @@ def D_file(image_path): #drone
     return 0
 
 def sampling_point(image_size, y):
-    # 이미지 크기
     image_width = image_size
-    image_height = image_size
+    image_height = image_size    
 
-    # y 변수 설정
-    y = 512  # y 값을 변경하여 원하는 등분 수를 얻을 수 있습니다.
-
-    # 중심 좌표 계산
     center_x = image_width // 2
     center_y = image_height // 2
 
-    # y에 따른 샘플링 좌표 계산
     if y == 1:
         sampling_coords = np.array([[center_x, center_y]])
     else:
@@ -223,8 +234,8 @@ def main():
     imgtype = ["RA", "RE"]
     band = 100
     # band = 120
-    
-    sampling_coords = sampling_point(1024, 512)
+    output_size = 256
+    sampling_coords = [sampling_point(512, output_size), sampling_point(1024, output_size)]
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
@@ -240,13 +251,21 @@ def main():
     total_cnt = cnt
     cnt= 0
     error_cnt=0
+    # error_cnt = multiprocessing.Value('i', 0)
+    
+    
     
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count())
+    # pool = multiprocessing.Pool(processes=1)
+    
+    # lock = multiprocessing.Lock()
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")    
     print(f"Start Time [{formatted_time}]\n")
     
+    results = []
+    # with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
     for root, dirs, files in os.walk(image_folder):
         # if "02.수중 및 지상 초분광" in root:
             for image_filename in files:
@@ -260,14 +279,31 @@ def main():
                     else:
                         continue 
                     ####################################################################################  
-                    pool.apply_async(process_image, (cnt, root, image_folder, output_mat_folder, prefix, file_extension, imgtype, sampling_coords))
+                    # process_image(root, image_folder, output_mat_folder, prefix, file_extension, imgtype, output_size, sampling_coords)                    
+                    # pool.apply_async(process_image, (lock, error_cnt, root, image_folder, output_mat_folder, prefix, file_extension, imgtype, output_size, sampling_coords,))
+                    pool.apply_async(process_image, (root, image_folder, output_mat_folder, prefix, file_extension, imgtype, output_size, sampling_coords,))                    
+                    
                     cnt +=1
-                    # print(f'cnt={cnt}')
+                    print(f'cnt={cnt}')
+    
+    
+    
     
     pool.close()
     pool.join()
     
     
+    error_files = [file for file in os.listdir() if file.startswith("tmp_")]
+    error_cnt = len(error_files)
+    merged_error_file = "log.txt"
+    with open(merged_error_file, "a") as merged_file:
+        for error_file in error_files:
+            with open(error_file, "r") as error:
+                merged_file.write(error.read())
+    
+    for error_file in error_files:
+        os.remove(error_file)
+        
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")    
     print(f"End Time [{formatted_time}]\n")

@@ -17,8 +17,8 @@ num_class : 31
 
 image_param:
   size: 512
-  band : 200
-  type : 'RE' #choice ['RE', 'RA']
+  band : 100
+  type : 'RA' #choice ['RE', 'RA']
 
 network:
   arch : 'SF' #choice ['SF', 'DL'] SF:SpectralFormer / DL : DeepLab V3+
