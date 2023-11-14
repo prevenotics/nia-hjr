@@ -143,7 +143,7 @@ def main(cfg):
     tar = np.array([])
     pre = np.array([])
         
-    for epoch in range(cfg['train_param']['epoch']): 
+    for epoch in range(start_epoch, cfg['train_param']['epoch']): 
         
         scheduler.step()
 

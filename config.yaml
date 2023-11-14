@@ -1,5 +1,5 @@
 system:
-  num_workers : 8
+  num_workers : 4
   seed : 0
   tensorboard : True
 
@@ -14,8 +14,8 @@ path:
   train_csv: '/root/work/hjr/dataset/train_RA.csv'
   val_csv: '/root/work/hjr/dataset/val_RA.csv'
   test_csv: '/root/work/hjr/dataset/test_RA.csv'
-  output_dir : 'output/output_231114_RA_norm_clipping40000'
-  model_path : 'output/output_231114_RA_norm_clipping40000/pths/best_checkpoint_OA.pth'
+  output_dir : 'output/output_231114_RA_norm_clipping40000_'
+  model_path : 'output/output_231114_RA_norm_clipping40000_/pths/best_checkpoint_OA.pth'
   
 
 dataset: 'hjr'
@@ -39,9 +39,9 @@ network:
 
 train_param:
   epoch : 3000
-  train_batch: 16
-  val_batch : 16
-  pixel_batch : 1024
+  train_batch: 32
+  val_batch : 2
+  pixel_batch : 4096 #1024
   eval_freq : 2
   test_freq : 2
   save_freq : 30

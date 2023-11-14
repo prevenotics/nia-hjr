@@ -33,7 +33,8 @@ sorted_key_counter = dict(sorted(key_counter.items()))
 list_mat_selected = []
 for key, count in key_counter.items():
     # matching_paths = [file_path for file_path in list_mat if f'/{key}/' in file_path]
-    matching_paths = [file_path for file_path in list_mat if f'class_{key}' in file_path]
+    # matching_paths = [file_path for file_path in list_mat if f'class_{key}_' in file_path]
+    matching_paths = [file_path for file_path in list_mat if f'class_{int(key):02d}_' in file_path]
 
     if count <= min_file_num:
         list_mat_selected.extend(matching_paths)

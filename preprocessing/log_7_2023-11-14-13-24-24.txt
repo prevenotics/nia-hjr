@@ -1,0 +1,35 @@
+Start Time [2023-11-14 13:24:24]
+Class 00: * RA = 24, RE = 23  
+Class 01: * RA = 3, RE = 2  
+Class 02: * RA = 1, RE = 0  
+Class 03: * RA = 3, RE = 2  
+Class 04: * RA = 8, RE = 7  
+Class 05:   RA = 0, RE = 0  
+Class 06:   RA = 6, RE = 6  
+Class 07:   RA = 0, RE = 0  
+Class 08:   RA = 0, RE = 0  
+Class 09: * RA = 7, RE = 6  
+Class 10: * RA = 10, RE = 9  
+Class 11:   RA = 7, RE = 7  
+Class 12: * RA = 1, RE = 0  
+Class 13:   RA = 0, RE = 0  
+Class 14:   RA = 669, RE = 669  
+Class 15:   RA = 411, RE = 411  
+Class 16:   RA = 0, RE = 0  
+Class 17:   RA = 0, RE = 0  
+Class 18:   RA = 0, RE = 0  
+Class 19: * RA = 34, RE = 33  
+Class 20:   RA = 0, RE = 0  
+Class 21:   RA = 0, RE = 0  
+Class 22: * RA = 3, RE = 2  
+Class 23:   RA = 0, RE = 0  
+Class 24: * RA = 9, RE = 8  
+Class 25:   RA = 0, RE = 0  
+Class 26: * RA = 1, RE = 0  
+Class 27:   RA = 0, RE = 0  
+Class 28:   RA = 3, RE = 3  
+Class 29:   RA = 0, RE = 0  
+Class 30: * RA = 307, RE = 306  
+Total count = 3010
+Saved count = 3010
+End Time [2023-11-14 13:52:45]
