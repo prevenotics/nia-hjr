@@ -12,7 +12,8 @@ from torch.autograd import Variable
 # from model.vit_pytorch import ViT # For SpectralFormer
 import network
 from param_parser import TrainParser
-from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point
+# import utils
+from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point, set_bn_momentum
 from utils.logger import create_logger
 from core import train_epoch, valid_epoch, test_epoch
 from tensorboardX import SummaryWriter
@@ -78,7 +79,7 @@ def main(cfg):
             mode = cfg['network']['spectralformer']['mode']
         )
         # criterion
-        criterion = nn.CrossEntropyLoss(ignore_index=255).cuda() 
+        criterion = nn.CrossEntropyLoss(ignore_index=30).cuda() 
         # optimizer
         opt = cfg['train_param']['opt']
         logger.info(f"optimizer = {opt} ......")
@@ -106,9 +107,9 @@ def main(cfg):
     
     elif cfg['network']['arch'] == 'DL':
         model = network.modeling.__dict__[cfg['network']['arch']['model']](num_classes=num_class, output_stride=cfg['network']['DeepLab']['output_stride'])
-        if opts.separable_conv and 'plus' in cfg['network']['arch']['model']:
+        if cfg['network']['DeepLab']['separable_conv'] and 'plus' in cfg['network']['arch']['model']:
             network.convert_to_separable_conv(model.classifier)
-        utils.set_bn_momentum(model.backbone, momentum=0.01)
+        set_bn_momentum(model.backbone, momentum=0.01)
     
         
     
@@ -126,14 +127,14 @@ def main(cfg):
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[local_rank],
                                                               find_unused_parameters=True, broadcast_buffers=False)
     #resume
-    ckpt_file_path = os.path.join(pth_dir, "checkpoints.pth")
+    ckpt_file_path = os.path.join(pth_dir, "checkpoint.pth")
     if cfg['train_param']['resume'] and os.path.isfile(ckpt_file_path):
         start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
         
     
-    best_loss_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_loss.pth")
-    best_acc_c_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_corr.pth")
-    best_acc_r_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_r.pth")
+    best_loss_ckpt_file_path = os.path.join(pth_dir, "best_checkpoint_loss.pth")
+    best_OA_ckpt_file_path = os.path.join(pth_dir, "best_checkpoint_OA.pth")
+    
 
     
     logger.info(">>>>>>>>>> Start training")
@@ -152,9 +153,9 @@ def main(cfg):
               # def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
         train_res = train_epoch(model, tar, pre, train_data_loader, criterion, optimizer, scheduler, epoch, cfg, logger)
         # OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
-        print("Epoch: {:03d} train_acc: {:.4f} train_loss: {:.4f} train_OA: {:.4f} train_Kappa: {:.4f}".
+        print("Train Epoch: {:03d} train_acc: {:.2f} train_loss: {:.4f} train_OA: {:.4f} train_Kappa: {:.4f}".
               format(epoch+1, train_res[0].avg, train_res[1].avg, train_res[2].avg, train_res[3].avg))
-        
+            
         if dist.get_rank() == 0:
             save_checkpoint(model, optimizer, scheduler, epoch, ckpt_file_path, best_loss, best_acc)
             logger.info(f">>>>> {ckpt_file_path}saved......")
@@ -173,10 +174,15 @@ def main(cfg):
             
             
         # evaluation
-        # if (epoch % args.eval_freq == 0) or (epoch == num_epochs - 1):        
-        if cfg['train_param']['eval_freq'] == 1:        
+        if (epoch % cfg['train_param']['eval_freq'] == 0) or (epoch == num_epochs - 1):        
+        # if cfg['train_param']['eval_freq'] == 1:
             val_res = valid_epoch(model, val_data_loader, criterion, epoch, cfg, logger)            
-
+    
+            
+            
+            print("Validation Epoch: {:03d} val_acc: {:.2f} val_loss: {:.4f} val_OA: {:.4f} val_Kappa: {:.4f}".
+              format(epoch+1, val_res[0].avg, val_res[1].avg, val_res[2].avg, val_res[3].avg))
+            
             if cfg['system']['tensorboard']:
                 current_log = {'VAL_0_acc': val_res[0].avg,
                             'VAL_1_loss': val_res[1].avg,
@@ -199,8 +205,8 @@ def main(cfg):
                 if val_acc > best_acc:
                     best_acc = val_acc
                     # save ckpt
-                    save_checkpoint(model, optimizer, scheduler, epoch, best_acc_c_ckpt_file_path, best_loss=val_loss, best_acc=best_acc)
-                    logger.info(f">>>>> best acc {best_acc_c_ckpt_file_path}_{epoch}_{best_acc} saved......")    
+                    save_checkpoint(model, optimizer, scheduler, epoch, best_OA_ckpt_file_path, best_loss=val_loss, best_acc=best_acc)
+                    logger.info(f">>>>> best acc {best_OA_ckpt_file_path}_{epoch}_{best_acc} saved......")    
             
             
             

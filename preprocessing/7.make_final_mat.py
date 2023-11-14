@@ -9,14 +9,16 @@ import tifffile
 import datetime
 import pymysql
 import yaml
+import pandas as pd
 # from pytz import timezone, utc
 # KST = timezone('Asia/Seoul')
 # now = datetime.datetime.utcnow()
 # KST.localize(now)
 
 
-image_folder = r'/root/work/hjr/dataset/3.mat_mult_OutSize256_error_cnt/'
-output_folder = image_folder.replace("3.mat_mult_OutSize256_error_cnt/","4.mat_mult_OutSize256_error_cnt/")
+
+image_folder = r'/root/work/hjr/dataset/3.mat'
+output_folder = image_folder.replace("3.mat","4.mat")
 
 # image_folder = r'/root/work/hjr/dataset/3.mat_test/'
 # output_folder = image_folder.replace("3.mat_test/","4.mat_test/")
@@ -53,7 +55,8 @@ def main():
     
     imgtype = cfg['image_param']['type']    
     band = cfg['image_param']['band']
-    
+    # csv_file = 
+    #  = pd.read_csv(csv_file, encoding='UTF-8')        
         
     # sampling_coords = sampling_point(1024, 512)
     
@@ -76,7 +79,8 @@ def main():
     print(f"Start Time [{formatted_time}]\n")
     
     
-    num_classes = cfg['num_class']
+    # num_classes = cfg['num_class']
+    num_classes = 31
     class_images = [[] for _ in range(num_classes)]
     size = 256
     images_per_file = size*size
@@ -85,7 +89,7 @@ def main():
     for root, dirs, files in os.walk(image_folder):
         # if "02.수중 및 지상 초분광" in root:
             for image_filename in files:
-                if image_filename.endswith(f'{imgtype}.mat'):
+                if image_filename.endswith(f'RE.mat'):
                     print(cnt)
                     cnt +=1
                     image_path = os.path.join(root, image_filename)                    
@@ -109,12 +113,43 @@ def main():
                                 'label': np.full((size, size), class_num)
                             }
 
-                            output_filename = os.path.join(output_folder, f'{imgtype}_class_{class_num}_{file_counter[class_num]}.mat')
+                            output_filename = os.path.join(output_folder, f'RE_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
                             io.savemat(output_filename, new_mat_file)
                             print(f'{cnt}/{total_cnt} : save: {output_filename}')
                             file_counter[class_num] += 1
-                    
 
+    for root, dirs, files in os.walk(image_folder):
+        # if "02.수중 및 지상 초분광" in root:
+            for image_filename in files:
+                if image_filename.endswith(f'RA.mat'):
+                    print(cnt)
+                    cnt +=1
+                    image_path = os.path.join(root, image_filename)                    
+                    os.makedirs(output_folder, exist_ok=True)
+                    
+                    mat_file = io.loadmat(image_path)
+                    image = mat_file['image']
+                    label = mat_file['label']
+                    
+                    for class_num in range(num_classes):
+                        class_indices = np.where(label == class_num)
+                        class_images[class_num].extend(image[class_indices])
+                        
+                        while len(class_images[class_num]) >= images_per_file:
+                             # 클래스별 이미지 데이터를 images_per_file 개수에 딱 맞춰서 저장
+                            class_images_array = np.array(class_images[class_num][:images_per_file]).reshape(size, size, band)
+                            class_images[class_num] = class_images[class_num][images_per_file:]
+
+                            new_mat_file = {
+                                'image': class_images_array,
+                                'label': np.full((size, size), class_num)
+                            }
+
+                            output_filename = os.path.join(output_folder, f'RA_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
+                            io.savemat(output_filename, new_mat_file)
+                            print(f'{cnt}/{total_cnt} : save: {output_filename}')
+                            file_counter[class_num] += 1                    
+    #######################################################################################################################
     # size x size 미만으로 남은 것들 저장하기
     # for class_num in range(num_classes):
     #     if class_images[class_num]:
@@ -138,23 +173,68 @@ def main():
     #         output_filename = os.path.join(output_folder, f'{imgtype}_class_{class_num}_{file_counter[class_num]}.mat')
     #         io.savemat(output_filename, new_mat_file)
     #         print(f'save_{output_filename}')             
+    #######################################################################################################################
     
-    
-    class_counts = {str(i): 0 for i in range(31)}
+    RA_class_counts = {f'{i:02d}': 0 for i in range(num_classes)}
+    RE_class_counts = {f'{i:02d}': 0 for i in range(num_classes)}
+
+    # RA_class_xx_xx.mat 파일용
     for root, dirs, files in os.walk(output_folder):
         for file_name in files:
             if file_name.endswith('.mat'):
-                # 파일 경로에서 클래스 번호 추출
                 file_name_only, _ = os.path.splitext(file_name)
                 parts = file_name_only.split('_')
-                class_num = parts[2]  # 클래스 번호는 파일 이름에서 두 번째 부분
-                class_counts[class_num] += 1
-                
-                
-    for class_num, count in class_counts.items():
-        print(f'Class {class_num}: {count} files')
+                class_prefix = parts[0]
+                class_num = parts[2]                
+                if class_prefix == 'RA':
+                    RA_class_counts[class_num] += 1
+                elif class_prefix == 'RE':
+                    RE_class_counts[class_num] += 1
+    
+
+    all_class_nums = list(RA_class_counts.keys() | RE_class_counts.keys())
+
+    for class_num in sorted(all_class_nums):
+        count_RA = RA_class_counts.get(class_num, 0)
+        count_RE = RE_class_counts.get(class_num, 0)
+        
+        special_mark = '*' if count_RA != count_RE else '' 
+        
+        print(f'Class {class_num}:  RA = {count_RA:06d}, RE = {count_RE:06d}  {special_mark}')
+
+
+
+    # RE.mat, RA.mat 파일용
+    # for root, dirs, files in os.walk(image_folder):
+    #     for file_name in files:
+    #         if file_name.endswith('RE.mat'):
+    #             file_name_only, _ = os.path.splitext(file_name)
+    #             parts = root.split('/')
+    #             # class_prefix = parts[0]
+    #             class_num = parts[6]
+    #             class_num = int(class_num.split('.')[0]) -1
+    #             RE_class_counts[f'{class_num:02d}'] +=1
+    #         if file_name.endswith('RA.mat'):
+    #             file_name_only, _ = os.path.splitext(file_name)
+    #             parts = root.split('/')                
+    #             # class_prefix = parts[0]
+    #             class_num = parts[6]
+    #             class_num = int(class_num.split('.')[0]) -1
+    #             RA_class_counts[f'{class_num:02d}'] +=1
                 
     
+
+    # all_class_nums = list(RA_class_counts.keys() | RE_class_counts.keys())
+
+    # for class_num in sorted(all_class_nums):
+    #     count_RA = RA_class_counts.get(class_num, 0)
+    #     count_RE = RE_class_counts.get(class_num, 0)
+        
+    #     special_mark = '*' if count_RA != count_RE else '' 
+        
+    #     print(f'Class {class_num}:  RA = {count_RA:06d}, RE = {count_RE:06d}  {special_mark}')
+
+
                   
     print(f"Total count =  {cnt}\n")
     current_time = datetime.datetime.now()
@@ -162,8 +242,13 @@ def main():
     print(f"End Time [{formatted_time}]\n")
             
     with open(f"log_7_{formatted_time_for_filename}.txt", "a") as log:
-        for class_num, count in class_counts.items():
-            log.write(f'Class {class_num}: {count}\n')
+        for class_num in sorted(all_class_nums):
+            count_RA = RA_class_counts.get(class_num, 0)
+            count_RE = RE_class_counts.get(class_num, 0)            
+            special_mark = '*' if count_RA != count_RE else ' '             
+            # log.write(f'Class {class_num}:  RA = {count_RA:06d}, RE = {count_RE:06d}  {special_mark}\n')
+            log.write(f'Class {class_num}: {special_mark} RA = {count_RA}, RE = {count_RE}  \n')
+        
         log.write(f"Total count = {total_cnt}\n")        
         log.write(f"Saved count = {cnt}\n")        
         log.write(f"End Time [{formatted_time}]\n")        

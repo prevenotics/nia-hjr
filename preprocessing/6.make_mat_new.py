@@ -79,6 +79,11 @@ def create_label_mat(label_path, loc, sampling_coords):
     if loc == "U":
         label = np.array(label)[sampling_coords[:,1], sampling_coords[:,0]].reshape(512,512)
         # selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(512,512,120)
+    
+    label = np.array(label)    
+    # label[label==30] = 255
+    label[label==255] = 30
+    
     return label
 
 
@@ -246,8 +251,8 @@ def main():
                             label_path = label_path.replace(".tif", "_RE36.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords)
                         
-                        io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
-                        io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
+                        io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
+                        io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : mat_label})
                     except FileNotFoundError as e:
                         error_cnt +=1
                         current_time = datetime.datetime.now()

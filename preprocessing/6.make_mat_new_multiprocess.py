@@ -20,7 +20,7 @@ image_folder = r'/root/work/hjr/dataset//1.원천데이터/'
 # input_path= input("input path : ")
 # image_folder = input_path
 
-output_mat_folder = image_folder.replace("1.원천데이터","3.mat_mult_OutSize256_error_cnt")
+output_mat_folder = image_folder.replace("1.원천데이터","3.mat")
 
 def process_image(root, image_folder, output_mat_folder, prefix, file_extension, imgtype, output_size, sampling_coords):    
     
@@ -51,8 +51,8 @@ def process_image(root, image_folder, output_mat_folder, prefix, file_extension,
         mat_label = create_label_mat(label_path, prefix[2], sampling_coords)
     
     if mat_label is not None:        
-        io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
-        io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
+        io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
+        io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : mat_label})
         return 1
 # except FileNotFoundError as e:
     # error_cnt += 1    
@@ -132,6 +132,9 @@ def create_label_mat(label_path, loc, sampling_coords, output_size):
                 
     # if loc == "U":
     label = np.array(label)[sampling_coords[:,1], sampling_coords[:,0]].reshape(output_size,output_size)        
+    
+    # label[label==30] = 255
+    label[label==255] = 30
     
     return label
 

@@ -23,7 +23,8 @@ class HJRDataset(torch.utils.data.Dataset):
     def __init__(
         self, csv_file, imgtype, sample_point, patch, band_patch, band
     ): 
-        self.annotations = pd.read_csv(csv_file, encoding='cp949')        
+        # self.annotations = pd.read_csv(csv_file, encoding='cp949')        
+        self.annotations = pd.read_csv(csv_file, encoding='UTF-8')        
         self.imgtype = imgtype
         self.sample_point = sample_point
         # self.args = args
@@ -61,7 +62,8 @@ class HJRDataset(torch.utils.data.Dataset):
          
         mat_data = loadmat(path_img)
         
-        image_mat = mat_data['image']                       
+        image_mat = mat_data['image']       
+        image_mat = np.clip(image_mat.astype(np.float32)/CLIPPING, 0.0, 1.0)                 
         data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
         for i in range(sample_point.shape[0]):
             data[i,:,:,:] = gain_neighborhood_pixel(image_mat, sample_point, i, patch)

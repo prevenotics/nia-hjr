@@ -3,27 +3,30 @@ system:
   seed : 0
   tensorboard : True
 
+
+image_param:
+  size: 256
+  band : 100
+  type : 'RA' #choice ['RE', 'RA']
+
 path:
-  dataset_path : '/root/work/hjr/dataset/3.mat'
-  train_csv: '/root/work/hjr/dataset/train.csv'
-  val_csv: '/root/work/hjr/dataset/val.csv'
-  test_csv: '/root/work/hjr/dataset/test.csv'
-  output_dir : 'output_231102'
-  model_path : 'output_231102/pths/best_checkpoint.pth'
+  dataset_path : '/root/work/hjr/dataset/4.mat_old'
+  train_csv: '/root/work/hjr/dataset/train_RA.csv'
+  val_csv: '/root/work/hjr/dataset/val_RA.csv'
+  test_csv: '/root/work/hjr/dataset/test_RA.csv'
+  output_dir : 'output/output_231114_RA_norm_clipping40000'
+  model_path : 'output/output_231114_RA_norm_clipping40000/pths/best_checkpoint_OA.pth'
   
 
 dataset: 'hjr'
-num_class : 31
+num_class : 30
 
-image_param:
-  size: 512
-  band : 100
-  type : 'RA' #choice ['RE', 'RA']
+
 
 network:
   arch : 'SF' #choice ['SF', 'DL'] SF:SpectralFormer / DL : DeepLab V3+
   spectralformer:
-    patch : 3
+    patch : 1
     band_patch : 3
     sampling_num : 64
     mode : 'CAF' #choice ['ViT', 'CAF']
@@ -37,7 +40,7 @@ network:
 train_param:
   epoch : 3000
   train_batch: 16
-  val_batch : 4
+  val_batch : 16
   pixel_batch : 1024
   eval_freq : 2
   test_freq : 2
@@ -49,5 +52,7 @@ train_param:
   lrs : 'steplr' #choice ['steplr', 'cosinealr']
   resume : True
 
+test_param:
+  test_batch : 1
 
   

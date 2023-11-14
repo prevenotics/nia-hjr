@@ -105,24 +105,20 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
         batch_time.update(time.time() - batch_end)
         batch_end = time.time()
       
-      
+        OA, Kappa = output_metric(tar, pre)     
             
         if idx % print_freq == 0:
             memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
             etas = batch_time.avg * (num_steps - idx)
             logger.info(
-            f'Train: [{epoch}/{num_epochs}][{idx}/{num_steps}]\t'
+            f'Train: [{epoch}/{num_epochs}][{idx}/{num_steps}]\t'                        
             f'eta {datetime.timedelta(seconds=int(etas))}\t'
-            f'PixelBatchTime {pixel_batch_time.val:.2f} ({pixel_batch_time.avg:.2f})\t'
-            f'BatchTime {batch_time.val:.2f} ({batch_time.avg:.2f})\t'
-            f'loss {loss_meter.val:.2f} ({loss_meter.avg:.2f})\t'  
-            # f'cls_loss {cls_loss_meter.val:.8f} ({cls_loss_meter.avg:.8f})\t' 
-            # f'dice_loss {dice_loss_meter.val:.8f} ({dice_loss_meter.avg:.8f})\t' 
-            # f'dice_coef {dice_coef_meter.val:.8f} ({dice_coef_meter.avg:.8f})\t' 
-            # f'train_acc_corr {acc_c_meter.val:.8f} ({acc_c_meter.avg:.8f})\t' 
-            # f'train_acc_r {acc_r_meter.val:.8f} ({acc_r_meter.avg:.8f})\t' 
-            f'grad_norm(lr) {lr_meter.val:.2f} ({lr_meter.avg:.2f})\t'
-            f'mem {memory_used:.0f}MB')
+            # f'PixelBatchTime {pixel_batch_time.val:.2f} ({pixel_batch_time.avg:.2f})\t'
+            # f'BatchTime {batch_time.val:.2f} ({batch_time.avg:.2f})\t'
+            f'OA, kappa: {OA:.4f}, {Kappa:.4f}\t'
+            f'loss {loss_meter.val:.2f} ({loss_meter.avg:.2f})\t'              
+            f'grad_norm(lr) {lr_meter.val:.2f} ({lr_meter.avg:.2f})\t')
+            # f'mem {memory_used:.0f}MB')
     
     OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함    
     OA_meter.update(OA,1)
@@ -131,7 +127,6 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
     epoch_time = time.time() - batch_start
     
     return [top1, loss_meter, OA_meter, Kappa_meter, lr_meter]
-        
 
 
 def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1000):
@@ -210,15 +205,10 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
                 logger.info(
                 f'Valid: [{epoch}/{num_epochs}][{idx}/{num_steps}]\t'
                 f'eta {datetime.timedelta(seconds=int(etas))}\t'
-                f'PixelBatchTime {pixel_batch_time.val:.8f} ({pixel_batch_time.avg:.8f})\t'
-                f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'
-                f'loss {loss_meter.val:.8f} ({loss_meter.avg:.8f})\t'  
-                # f'cls_loss {cls_loss_meter.val:.8f} ({cls_loss_meter.avg:.8f})\t' 
-                # f'dice_loss {dice_loss_meter.val:.8f} ({dice_loss_meter.avg:.8f})\t' 
-                # f'dice_coef {dice_coef_meter.val:.8f} ({dice_coef_meter.avg:.8f})\t' 
-                # f'train_acc_corr {acc_c_meter.val:.8f} ({acc_c_meter.avg:.8f})\t' 
-                # f'train_acc_r {acc_r_meter.val:.8f} ({acc_r_meter.avg:.8f})\t' 
-                # f'grad_norm(lr) {lr_meter.val:.8f} ({lr_meter.avg:.8f})\t'
+                # f'PixelBatchTime {pixel_batch_time.val:.8f} ({pixel_batch_time.avg:.8f})\t'
+                # f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'
+                f'OA, kappa: {OA:.4f}, {Kappa:.4f}\t'
+                f'loss {loss_meter.val:.8f} ({loss_meter.avg:.8f})\t'                  
                 f'mem {memory_used:.0f}MB')
     
     
@@ -274,18 +264,89 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
         
 #     return tar, pre
 
-def test_epoch(model, test_loader, criterion, optimizer):
-    objs = AvgrageMeter()
-    top1 = AvgrageMeter()
+def test_epoch(model, test_loader, cfg, logger):
+    # objs = AverageMeter() #loss
+    # loss_meter = AverageMeter() #loss
+    top1 = AverageMeter()
+    pixel_batch_time=AverageMeter()
+    batch_time = AverageMeter()
+    lr_meter = AverageMeter()
+    OA_meter = AverageMeter()
+    Kappa_meter = AverageMeter()
+    AA_meter = AverageMeter()
     tar = np.array([])
-    pre = np.array([])
-    for batch_idx, (batch_data, batch_target) in enumerate(test_loader):
-        batch_data = batch_data.cuda()
-        batch_target = batch_target.cuda()   
+    pre = np.array([])    
+    pixel_batch = cfg['train_param']['pixel_batch']
+    sampling_num = 2 
+    num_epochs = cfg['train_param']['epoch']
+    band =cfg['image_param']['band']
+    num_steps = len(test_loader)
+    
+    
+    batch_start = time.time()
+    batch_end = time.time()
+    pixel_batch_end = time.time()
+    
+    model.eval()
+    with torch.no_grad():
+        for idx, batch in enumerate(test_loader):
+            image = batch["image"].cuda(non_blocking=True)
+            target = batch["label"].cuda(non_blocking=True)
+            
+            reshaped_image = image.contiguous().view(-1,band,image.shape[3])
+            reshaped_target = target.contiguous().view(-1)
+            
+             
+            num_pixels = reshaped_image.size(0)
+            # random_order = torch.randperm(num_pixels)
+            # shuffled_image = reshaped_image[random_order]
+            # shuffled_target = reshaped_target[random_order]
+            shuffled_image = reshaped_image
+            shuffled_target = reshaped_target
 
-        batch_pred = model(batch_data)
+            pixel_batch_start=time.time()
+            for i in range(0, shuffled_image.size(0), pixel_batch):
+                pixel_batch_image = shuffled_image[i:i+pixel_batch,:,:]
+                pixel_batch_target = shuffled_target[i:i+pixel_batch]
 
-        _, pred = batch_pred.topk(1, 1, True, True)
-        pp = pred.squeeze()
-        pre = np.append(pre, pp.data.cpu().numpy())
-    return pre
+                batch_pred = model(pixel_batch_image)
+                # loss = criterion(batch_pred, pixel_batch_target)
+
+                prec1, t, p = accuracy(batch_pred, pixel_batch_target, topk=(1,))
+                n = pixel_batch_image.shape[0]
+                # loss_meter.update(loss.data, n)
+                # loss_meter.update(loss.item(), n)
+                # lr_meter.update(optimizer.param_groups[0]["lr"])
+                top1.update(prec1[0].data, n)
+                tar = np.append(tar, t.data.cpu().numpy())
+                pre = np.append(pre, p.data.cpu().numpy())
+                pixel_batch_time.update(time.time() - pixel_batch_end)
+                pixel_batch_end = time.time()
+                
+            # OA, AA_mean, Kappa, AA = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
+            OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
+            OA_meter.update(OA,1)
+            Kappa_meter.update(Kappa,1)
+            # AA_meter.update(AA,1)
+            
+            batch_time.update(time.time() - batch_end)
+            batch_end = time.time()
+        
+        
+                
+            # if idx % print_freq == 0:
+            
+            memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
+            etas = batch_time.avg * (num_steps - idx)
+            logger.info(
+            f'Test: [{idx}/{num_steps}]\t'
+            # f'eta {datetime.timedelta(seconds=int(etas))}\t'
+            f'OA, kappa: {OA:.4f}, {Kappa:.4f}')
+            # f'PixelBatchTime {pixel_batch_time.val:.8f} ({pixel_batch_time.avg:.8f})\t'
+            # f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'                        
+            # f'mem {memory_used:.0f}MB')
+    
+    
+    epoch_time = time.time() - batch_start
+    
+    return [top1, OA_meter, Kappa_meter]

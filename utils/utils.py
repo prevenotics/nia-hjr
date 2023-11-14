@@ -248,7 +248,7 @@ def accuracy(output, target, topk=(1,)):
 def output_metric(tar, pre):
     matrix = confusion_matrix(tar, pre, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30])
     # OA, AA_mean, Kappa, AA = cal_results(matrix)
-    labels=["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",]
+    labels=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31",]
     plot_confusion_matrix(matrix, labels = labels)
     # plt.savefig("cm.jpg")
     OA, Kappa = cal_results(matrix)
@@ -279,7 +279,8 @@ def cal_results(matrix):
 #-------------------------------------------------------------------------------
 
 # confusion matrix 그리는 함수 
-def plot_confusion_matrix(con_mat, labels, title='Confusion Matrix', cmap=plt.cm.get_cmap('Blues'), normalize=True):
+def plot_confusion_matrix(con_mat, labels, title='Confusion Matrix', cmap=plt.cm.get_cmap('Blues'), normalize=False):
+    plt.figure(figsize=[20,20])
     plt.imshow(con_mat, interpolation='nearest', cmap=cmap)
     plt.title(title)
     plt.colorbar()
@@ -293,18 +294,19 @@ def plot_confusion_matrix(con_mat, labels, title='Confusion Matrix', cmap=plt.cm
     plt.yticks(marks, nlabels)
 
     thresh = con_mat.max() / 2.
-    # if normalize:
-    #     for i, j in itertools.product(range(con_mat.shape[0]), range(con_mat.shape[1])):
-    #         plt.text(j, i, '{0}%'.format(con_mat[i, j] * 100 / n), horizontalalignment="center", color="white" if con_mat[i, j] > thresh else "black")
-    # else:
-    #     for i, j in itertools.product(range(con_mat.shape[0]), range(con_mat.shape[1])):
-    #         plt.text(j, i, con_mat[i, j], horizontalalignment="center", color="white" if con_mat[i, j] > thresh else "black")
+    if normalize:
+        for i, j in itertools.product(range(con_mat.shape[0]), range(con_mat.shape[1])):
+            plt.text(j, i, '{0}%'.format(con_mat[i, j] * 100 / n), horizontalalignment="center", color="white" if con_mat[i, j] > thresh else "black")
+    else:
+        for i, j in itertools.product(range(con_mat.shape[0]), range(con_mat.shape[1])):
+            plt.text(j, i, con_mat[i, j], horizontalalignment="center", color="white" if con_mat[i, j] > thresh else "black")
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.savefig('cm.png')
     plt.clf()
     
+
 
 
 #DeepLabV3plus utils    
