@@ -45,10 +45,11 @@ def process_image(root, image_folder, output_mat_folder, prefix, file_extension,
         label_path = label_path.replace(".tif", "_RE21.json")
         mat_label = create_label_mat(label_path, prefix[2], sampling_coords[1], output_size)
     elif prefix[2] == 'D':
-        mat_image_RA = D_file(image_path, imgtype[0])
-        mat_image_RE = D_file(image_path, imgtype[1])
+        output_size = 256
+        mat_image_RA = D_file(image_path, imgtype[0], sampling_coords[2], output_size)
+        mat_image_RE = D_file(image_path, imgtype[1], sampling_coords[2], output_size)
         label_path = label_path.replace(".tif", "_RE36.json")
-        mat_label = create_label_mat(label_path, prefix[2], sampling_coords)
+        mat_label=create_label_mat(label_path, prefix[2], sampling_coords[2], output_size)
     
     if mat_label is not None:        
         io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
@@ -139,7 +140,7 @@ def create_label_mat(label_path, loc, sampling_coords, output_size):
     return label
 
 
-CLIPPING = 40000
+
 def L_file(image_path, imgtype, sampling_coords, output_size): # land
     # imgtype = ["RA", "RE"]
     image_shape = (512,512)
@@ -209,8 +210,38 @@ def U_file(image_path, imgtype, sampling_coords, output_size): #under water
     return selected_band_image
     
 
-def D_file(image_path): #drone
-    return 0
+def D_file(image_path, imgtype, sampling_coords, output_size): #drone
+    image_shape = (256,256)
+    num_channels = 37    
+    selected_band_list = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86]
+
+    total_channel = 111 # RE/RA 36, 37, 38 (각 37개씩,,, 37x3 = 111)
+    band = 80
+    
+    file_dir, file_name = os.path.split(image_path)
+    base_name, file_extension = os.path.splitext(file_name)
+    
+    concatenated_image = np.zeros(image_shape + (total_channel,), dtype=np.uint16)
+    for i in range(1, int(total_channel/num_channels) +1):
+        tif_file_path = os.path.join(file_dir, f"{base_name}_{imgtype}{i+35:02d}{file_extension}")
+        try:
+            os.path.exists(tif_file_path)
+            img = tifffile.imread(tif_file_path)
+            concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img        
+        except FileNotFoundError as e:
+            raise e
+            
+
+
+    selected_band_image = concatenated_image[:,:,selected_band_list]
+    ##############(1024->512)##########################################    
+    selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(output_size,output_size,band)
+    ##############(1024->512)##########################################
+    
+    
+    return selected_band_image
+    
+
 
 def sampling_point(image_size, y):
     image_width = image_size
@@ -237,8 +268,9 @@ def main():
     imgtype = ["RA", "RE"]
     band = 100
     # band = 120
-    output_size = 256
-    sampling_coords = [sampling_point(512, output_size), sampling_point(1024, output_size)]
+    output_size = 512    
+    output_size_drone = 256
+    sampling_coords = [sampling_point(512, output_size), sampling_point(1024, output_size), sampling_point(256, output_size_drone)]
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
