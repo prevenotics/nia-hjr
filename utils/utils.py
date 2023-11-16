@@ -131,8 +131,8 @@ def mirror_hsi(height,width,band,input_normalize,patch=5):
 #-------------------------------------------------------------------------------
 # 获取patch的图像数据
 def gain_neighborhood_pixel(mirror_image, point, i, patch=5):
-    x = point[i,0]
-    y = point[i,1]
+    x = point[i,1]
+    y = point[i,0]
     temp_image = mirror_image[x:(x+patch),y:(y+patch),:]
     # half_patch = patch //2
     # temp_image = mirror_image[:,:, x-half_patch:(x+half_patch+1),y-half_patch:(y+half_patch+1)]
@@ -247,9 +247,13 @@ def accuracy(output, target, topk=(1,)):
 #-------------------------------------------------------------------------------
 def output_metric(tar, pre):
     matrix = confusion_matrix(tar, pre, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30])
+    matrix = matrix[:30,:30] #ignore_class = 30
     # OA, AA_mean, Kappa, AA = cal_results(matrix)
-    labels=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31",]
-    plot_confusion_matrix(matrix, labels = labels)
+    
+    ####################################################################################################################################################################
+    # labels=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31",]
+    # plot_confusion_matrix(matrix, labels = labels)
+    ####################################################################################################################################################################
     # plt.savefig("cm.jpg")
     OA, Kappa = cal_results(matrix)
     # return OA, AA_mean, Kappa, AA
@@ -261,7 +265,7 @@ def cal_results(matrix):
     number = 0
     sum = 0
     # AA = np.zeros([shape[0]], dtype=np.float)
-    for i in range(shape[0]):
+    for i in range(shape[0]): 
         number += matrix[i, i]
         # try:
         #     # AA[i] = matrix[i, i] / (np.sum(matrix[i, :]) + epsilon)

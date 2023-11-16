@@ -32,6 +32,7 @@ import yaml
 # import sys
 # sys.argv=['']
 # del sys
+#CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nproc_per_node 8 --master_port 1234 train_hjr.py --eval_freq 1
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 train_hjr.py --eval_freq 1
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
 os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
@@ -101,8 +102,8 @@ def main(cfg):
         sample_point = get_point(cfg['image_param']['size'], cfg['network']['spectralformer']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
-        train_data_loader = build_data_loader(cfg['dataset'], cfg['path']['train_csv'], cfg['image_param']['type'], sample_point, cfg['train_param']['train_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
-        val_data_loader   = build_data_loader(cfg['dataset'], cfg['path']['val_csv'],   cfg['image_param']['type'], sample_point, cfg['train_param']['val_batch'],   cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])
+        train_data_loader = build_data_loader(cfg['dataset'], 'train', cfg['path']['train_csv'], cfg['image_param']['type'], sample_point, cfg['train_param']['train_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
+        val_data_loader   = build_data_loader(cfg['dataset'], 'train', cfg['path']['val_csv'],   cfg['image_param']['type'], sample_point, cfg['train_param']['val_batch'],   cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])
     
     
     elif cfg['network']['arch'] == 'DL':

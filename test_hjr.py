@@ -32,8 +32,8 @@ import yaml
 # import sys
 # sys.argv=['']
 # del sys
-#CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 train_hjr.py --eval_freq 1
-#CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
+#CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 test_hjr.py
+#CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  test_hjr.py
 os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
 def main(cfg):
@@ -79,7 +79,7 @@ def main(cfg):
             mode = cfg['network']['spectralformer']['mode']
         )
         # criterion
-        criterion = nn.CrossEntropyLoss(ignore_index=255).cuda() 
+        criterion = nn.CrossEntropyLoss(ignore_index=30).cuda() 
         # optimizer
         opt = cfg['train_param']['opt']
         logger.info(f"optimizer = {opt} ......")
@@ -98,10 +98,10 @@ def main(cfg):
         elif lrs == "steplr":
             # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
             scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=cfg['train_param']['epoch']//10, gamma=cfg['train_param']['gamma'])
-        sample_point = get_point(cfg['image_param']['size'], cfg['network']['spectralformer']['sampling_num'])   
+        sample_point = get_point(cfg['image_param']['size'], cfg['test_param']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
-        test_data_loader = build_data_loader(cfg['dataset'], cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
+        test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
         
     
     
@@ -140,8 +140,8 @@ def main(cfg):
     logger.info(">>>>>>>>>> Start Testing")
     start_time = time.time()
         
-    
-    test_res = test_epoch(model, test_data_loader, cfg, logger)       
+    save_img = True
+    test_res = test_epoch(model, test_data_loader, cfg, save_img, logger)       
 
             
             

@@ -10,7 +10,7 @@ import datetime
 import pymysql
 
 
-image_folder = r'/root/work/hjr/dataset//1.원천데이터/'
+image_folder = r'/root/work/hjr/dataset/1.원천데이터_temp/'
 # json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 # output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
 # output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'
@@ -83,17 +83,18 @@ def create_label_mat(label_path, loc, sampling_coords):
     label = np.array(label)    
     # label[label==30] = 255
     label[label==255] = 30
-    
+    # temp = label*8
     return label
 
 
 CLIPPING = 40000
-def L_file(image_path, imgtype): # land
+def L_file(image_path, imgtype, sampling_coords, output_size): # land
     # imgtype = ["RA", "RE"]
     image_shape = (512,512)
     num_channels = 10
     # total_channel = 120
-    total_channel = 100
+    total_channel = 100    
+    band = 100
     
     file_dir, file_name = os.path.split(image_path)
     base_name, file_extension = os.path.splitext(file_name)
@@ -117,10 +118,10 @@ def L_file(image_path, imgtype): # land
                 concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img
             except FileNotFoundError as e:
                 raise e
-    
+    concatenated_image = concatenated_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(output_size,output_size,band)
     return concatenated_image
 
-def U_file(image_path, imgtype, sampling_coords): #under water
+def U_file(image_path, imgtype, sampling_coords, output_size): #under water
     #120 band
     selected_band_list = [10,12,13,15,17,19,20,22,24,25,27,29,31,32,34,36,37,39,41,42,44,46,48,49,51,53,54,56,58,59,61,63,65,66,68,70,71,73,75,76,78,80,81,83,85,87,88,90,92,93,95,97,98,100,102,104,105,107,108,110,112,114,115,117,118,120,122,124,125,127,129,130,132,134,135,137,139,140,142,144,145,147,149,150,152,154,155,157,158,160,162,164,165,167,169,170,172,174,175,177,179,180,182,183,185,187,188,190,192,193,195,197,198,200,202,203,205,207,208,209,]
     band = 120
@@ -148,7 +149,7 @@ def U_file(image_path, imgtype, sampling_coords): #under water
 
     selected_band_image = concatenated_image[:,:,selected_band_list]
     ##############(1024->512)##########################################
-    selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(512,512,band)
+    selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(output_size,output_size,band)
     ##############(1024->512)##########################################
     
     
@@ -189,8 +190,9 @@ def main():
     imgtype = ["RA", "RE"]
     band = 100
     # band = 120
+    output_size = 256
     
-    sampling_coords = sampling_point(1024, 512)
+    sampling_coords = [sampling_point(512, output_size), sampling_point(1024, output_size)]
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
@@ -235,14 +237,14 @@ def main():
                     try:
                         if prefix[2] == 'L':
                             print(f"{cnt}/{int(total_cnt/40)}({total_cnt})\t{image_path}\n") 
-                            mat_image_RA = L_file(image_path, imgtype[0])
-                            mat_image_RE = L_file(image_path, imgtype[1])
+                            mat_image_RA = L_file(image_path, imgtype[0], sampling_coords[0], output_size)
+                            mat_image_RE = L_file(image_path, imgtype[1], sampling_coords[0], output_size)                            
                             label_path = label_path.replace(".tif", "_RE01.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords)
                         elif prefix[2] == 'U':                        
                             print(f"{cnt}/{int(total_cnt/30)}({total_cnt})\t{image_path}\n") 
-                            mat_image_RA = U_file(image_path, imgtype[0], sampling_coords)
-                            mat_image_RE = U_file(image_path, imgtype[1], sampling_coords)                        
+                            mat_image_RA = U_file(image_path, imgtype[0], sampling_coords[1], output_size)
+                            mat_image_RE = U_file(image_path, imgtype[1], sampling_coords[1], output_size)                            
                             label_path = label_path.replace(".tif", "_RE21.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords)
                         elif prefix[2] == 'D':
@@ -250,7 +252,10 @@ def main():
                             mat_image_RE = D_file(image_path, imgtype[1])                        
                             label_path = label_path.replace(".tif", "_RE36.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords)
-                        
+                                                  
+                        # img_RA = (np.clip(np.array(mat_image_RA)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
+                        # img_RE = (np.clip(np.array(mat_image_RE)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
+
                         io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
                         io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : mat_label})
                     except FileNotFoundError as e:

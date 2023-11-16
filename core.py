@@ -1,11 +1,13 @@
 import torch
+from torchvision import transforms
 import time
 import datetime
 import numpy as np
 from timm.utils import AverageMeter
 from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results
-
-
+from PIL import Image, ImageDraw, ImageFont
+import os
+import cv2
 # class AvgrageMeter(object):
     
 #   def __init__(self):
@@ -58,8 +60,8 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
         reshaped_image = image.contiguous().view(-1,band,image.shape[3])
         reshaped_target = target.contiguous().view(-1)
         
-        # reshaped_image = image[:,:,sample_point[:,0],sample_point[:,1]].permute(0,2,1).contiguous().view(-1, 200, 1)
-        # reshaped_target = target[:,sample_point[:,0],sample_point[:,1]].view(-1)
+        # reshaped_image = image[:,:,sample_point[:,1],sample_point[:,0]].permute(0,2,1).contiguous().view(-1, 200, 1)
+        # reshaped_target = target[:,sample_point[:,1],sample_point[:,0]].view(-1)
         
         num_pixels = reshaped_image.size(0)
         random_order = torch.randperm(num_pixels)
@@ -264,7 +266,7 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
         
 #     return tar, pre
 
-def test_epoch(model, test_loader, cfg, logger):
+def test_epoch(model, test_loader, cfg, save_img, logger):
     # objs = AverageMeter() #loss
     # loss_meter = AverageMeter() #loss
     top1 = AverageMeter()
@@ -291,23 +293,29 @@ def test_epoch(model, test_loader, cfg, logger):
     with torch.no_grad():
         for idx, batch in enumerate(test_loader):
             image = batch["image"].cuda(non_blocking=True)
+            # origin_image = batch["origin_image"].cuda(non_blocking=True)
+            origin_image = batch["origin_image"].cuda(non_blocking=True)
             target = batch["label"].cuda(non_blocking=True)
             
+            # path = batch["path"].cuda(non_blocking=True)
+            path = batch["path"]
+            
+                        
+            # B 470nm = 15 // G 540nm = 39 // R 660nm = 80
+            
+            image_size = int(image.shape[1] **(1/2))
+            batch_size = image.shape[0]     
             reshaped_image = image.contiguous().view(-1,band,image.shape[3])
             reshaped_target = target.contiguous().view(-1)
-            
-             
+                         
             num_pixels = reshaped_image.size(0)
-            # random_order = torch.randperm(num_pixels)
-            # shuffled_image = reshaped_image[random_order]
-            # shuffled_target = reshaped_target[random_order]
-            shuffled_image = reshaped_image
-            shuffled_target = reshaped_target
+            tar_one = np.array([])
+            pre_one = np.array([])    
 
             pixel_batch_start=time.time()
-            for i in range(0, shuffled_image.size(0), pixel_batch):
-                pixel_batch_image = shuffled_image[i:i+pixel_batch,:,:]
-                pixel_batch_target = shuffled_target[i:i+pixel_batch]
+            for i in range(0, reshaped_image.size(0), pixel_batch):
+                pixel_batch_image = reshaped_image[i:i+pixel_batch,:,:]
+                pixel_batch_target = reshaped_target[i:i+pixel_batch]
 
                 batch_pred = model(pixel_batch_image)
                 # loss = criterion(batch_pred, pixel_batch_target)
@@ -320,14 +328,105 @@ def test_epoch(model, test_loader, cfg, logger):
                 top1.update(prec1[0].data, n)
                 tar = np.append(tar, t.data.cpu().numpy())
                 pre = np.append(pre, p.data.cpu().numpy())
+                tar_one = np.append(tar_one, t.data.cpu().numpy())
+                pre_one = np.append(pre_one, p.data.cpu().numpy())
                 pixel_batch_time.update(time.time() - pixel_batch_end)
                 pixel_batch_end = time.time()
-                
+            
+            
             # OA, AA_mean, Kappa, AA = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
             OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
             OA_meter.update(OA,1)
             Kappa_meter.update(Kappa,1)
-            # AA_meter.update(AA,1)
+            
+            
+            if save_img:       
+                
+                label_pre =pre_one.reshape(batch_size,image_size,image_size)
+                label_tar= tar_one.reshape(batch_size,image_size,image_size)
+                
+
+                
+                # Image.fromarray(pre.reshape(batch_size,image_size,image_size)[0,:,:])
+                image_margin = 5
+                # for i in range(batch_size):
+                    
+                #     label_tar_3d = np.zeros((image_size,image_size,3), dtype=np.uint8)
+                #     label_tar_3d[:,:,0] =label_tar_3d[:,:,1]=label_tar_3d[:,:,2] = label_tar[i,:,:]
+                    
+                #     label_pre_3d = np.zeros((image_size,image_size,3), dtype=np.uint8)
+                #     label_pre_3d[:,:,0] =label_pre_3d[:,:,1]=label_pre_3d[:,:,2] = label_pre[i,:,:]
+                    
+                #     ignore_idxs = np.all(label_tar_3d == [30, 30, 30], axis=2)  # 값이 30인 부분 찾기
+                #     label_pre_3d[ignore_idxs] = [255, 255, 0]  # 노란색으로 변경
+                #     label_tar_3d[ignore_idxs] = [255, 255, 0]  # 노란색으로 변경
+                    
+                #     # y_index = label_tar[i,:,:]==30
+                #     # label_tar_3d[y_index] = [31,31,0]
+                #     # label_pre_3d[y_index] = [31,31,0]
+                    
+                #     res_image = Image.fromarray((origin_image[i,:,:].reshape(image_size, image_size, band)[:,:,[15,39,80]].cpu().numpy()*255).astype(np.uint8))
+                #     # temp_label = (target[i,:].reshape(image_size, image_size)*8)
+                #     result_img = Image.new('RGB', (image_size*3+image_margin*2, image_size+70))                
+                #     result_img.paste(res_image, (0,0))
+                #     result_img.paste(Image.fromarray(label_tar_3d[i,:,:]*8), (image_size+image_margin,0))
+                #     result_img.paste(Image.fromarray(label_pre_3d[i,:,:]*8), (image_size*2+image_margin,0))
+                #     result_img_draw = ImageDraw.Draw(result_img)
+                #     font = ImageFont.truetype("ARIAL.TTF", 20)
+                #     result_img_draw.text((image_size/2,image_size+5), " OA   : " + "{0:.3f}".format(OA_one), (0,255,0), font=font)
+                #     result_img_draw.text((image_size/2,image_size+35), "Kappa: " + "{0:.3f}".format(Kappa_one), (0,255,0), font=font)
+
+
+                #     img_name = os.path.basename(path[i]).split('.')[0]
+                #     result_img.save(os.path.join(cfg['test_param']['out_img_path'], img_name+'_rst.png'))
+                          
+                              
+                for i in range(batch_size):
+                    res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [80, 39, 15]].cpu().numpy()
+                    res_image = (res_image * 255).astype(np.uint8)
+                    
+                    label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
+                    label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
+                    
+                    # label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
+                    OA_one, Kappa_one = output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))
+                    
+                    label_tar_i = np.repeat(label_tar_i[:, :, np.newaxis] * 8, 3, axis=2)
+                    label_pre_i = np.repeat(label_pre_i[:, :, np.newaxis] * 8, 3, axis=2)       
+                    
+                    
+                    
+                    ignore_idxs = np.all(label_tar_i == [240, 240, 240], axis=2)  # 값이 30 * 8 = 240인 부분 찾기
+                    label_tar_i[ignore_idxs] = [255, 240, 0]
+                    label_pre_i[ignore_idxs] = [255, 240, 0]
+                    
+                    result_img = np.zeros((image_size + 70, image_size * 3 + image_margin * 2, 3), dtype=np.uint8)
+                    
+                    # Copy images to result_img
+                    result_img[:image_size, :image_size] = cv2.cvtColor(res_image, cv2.COLOR_RGB2BGR)
+                    result_img[:image_size, image_size + image_margin:image_size*2 + image_margin] = label_tar_i
+                    result_img[:image_size, image_size*2 + image_margin*2:] = label_pre_i
+                    
+                    # Add text to the image
+                    font = cv2.FONT_HERSHEY_SIMPLEX
+                    font_scale = 0.8
+                    font_color = (0, 255, 0)
+                    font_thickness = 2
+                    text_x = image_margin
+                    text_y = result_img.shape[0] - 40
+                    text = f' OA   : {OA_one:.3f}'
+                    cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness, lineType=cv2.LINE_AA)
+                    # text_size = cv2.getTextSize(text, font, font_scale, font_thickness)[0]
+                    text_y = result_img.shape[0] - 10
+                    text = f'Kappa: {Kappa_one:.3f}'
+                    cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness)
+                    
+                    
+                    img_name = os.path.basename(path[i]).split('.')[0]
+                    result_img_path = os.path.join(cfg['test_param']['out_img_path'], img_name + '_rst.png')
+                    cv2.imwrite(result_img_path, result_img)                
+                
+            
             
             batch_time.update(time.time() - batch_end)
             batch_end = time.time()
@@ -340,7 +439,7 @@ def test_epoch(model, test_loader, cfg, logger):
             etas = batch_time.avg * (num_steps - idx)
             logger.info(
             f'Test: [{idx}/{num_steps}]\t'
-            # f'eta {datetime.timedelta(seconds=int(etas))}\t'
+            f'eta {datetime.timedelta(seconds=int(etas))}\t'
             f'OA, kappa: {OA:.4f}, {Kappa:.4f}')
             # f'PixelBatchTime {pixel_batch_time.val:.8f} ({pixel_batch_time.avg:.8f})\t'
             # f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'                        
