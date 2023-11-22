@@ -34,7 +34,8 @@ import yaml
 # del sys
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 test_hjr.py
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  test_hjr.py
-os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
+#CUDA_VISIBLE_DEVICES=1 python -m torch.distributed.launch --nproc_per_node 1 --master_port 1234  test_hjr.py
+os.chdir("/root/work/hjr/nia-hjr")
 
 def main(cfg):
 
@@ -170,7 +171,7 @@ if __name__ == '__main__':
     # parser = TrainParser()
     # args = parser.parse_args(args=[])
     
-    with open('./config.yaml') as f:
+    with open('./config_test.yaml') as f:
         cfg = yaml.safe_load(f)
         
 

@@ -41,7 +41,7 @@ def make_directory(path):
 
 def make_output_directory(config):
     make_directory(config['path']['output_dir'])
-
+    make_directory(config['test_param']['out_img_path'])
     # create log file
     log_dir = os.path.join(config['path']['output_dir'], "logs")
     make_directory(log_dir)
@@ -123,19 +123,49 @@ def mirror_hsi(height,width,band,input_normalize,patch=5):
     for i in range(padding):
         mirror_hsi[height+padding+i,:,:]=mirror_hsi[height+padding-1-i,:,:]
 
-    print("**************************************************")
-    print("patch is : {}".format(patch))
-    print("mirror_image shape : [{0},{1},{2}]".format(mirror_hsi.shape[0],mirror_hsi.shape[1],mirror_hsi.shape[2]))
-    print("**************************************************")
+    # print("**************************************************")
+    # print("patch is : {}".format(patch))
+    # print("mirror_image shape : [{0},{1},{2}]".format(mirror_hsi.shape[0],mirror_hsi.shape[1],mirror_hsi.shape[2]))
+    # print("**************************************************")
+    return mirror_hsi
+
+
+def mirror(image, band, patch=5):
+    height = width = image.shape[0]
+    padding=patch//2
+    mirror_hsi=np.zeros((height+2*padding,width+2*padding,band),dtype=float)
+    #中心区域
+    mirror_hsi[padding:(padding+height),padding:(padding+width),:]=image
+    #左边镜像
+    for i in range(padding):
+        mirror_hsi[padding:(height+padding),i,:]=image[:,padding-i-1,:]
+    #右边镜像
+    for i in range(padding):
+        mirror_hsi[padding:(height+padding),width+padding+i,:]=image[:,width-1-i,:]
+    #上边镜像
+    for i in range(padding):
+        mirror_hsi[i,:,:]=mirror_hsi[padding*2-i-1,:,:]
+    #下边镜像
+    for i in range(padding):
+        mirror_hsi[height+padding+i,:,:]=mirror_hsi[height+padding-1-i,:,:]
+
+    # print("**************************************************")
+    # print("patch is : {}".format(patch))
+    # print("mirror_image shape : [{0},{1},{2}]".format(mirror_hsi.shape[0],mirror_hsi.shape[1],mirror_hsi.shape[2]))
+    # print("**************************************************")
     return mirror_hsi
 #-------------------------------------------------------------------------------
 # 获取patch的图像数据
 def gain_neighborhood_pixel(mirror_image, point, i, patch=5):
-    x = point[i,1]
-    y = point[i,0]
-    temp_image = mirror_image[x:(x+patch),y:(y+patch),:]
-    # half_patch = patch //2
+    half_patch = patch //2
+    x = point[i,1]+half_patch
+    y = point[i,0]+half_patch
+    # temp_image = mirror_image[x:(x+patch),y:(y+patch),:]
+    
+    # if x-half_patch < 0 or y-half_patch < 0:        
+    temp_image = mirror_image[x-half_patch:(x+half_patch+1),y-half_patch:(y+half_patch+1), :]
     # temp_image = mirror_image[:,:, x-half_patch:(x+half_patch+1),y-half_patch:(y+half_patch+1)]
+    
     return temp_image
 
 def gain_neighborhood_band(x_train, band, band_patch, patch=5):

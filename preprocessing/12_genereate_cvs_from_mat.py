@@ -6,7 +6,7 @@ from collections import Counter
 
 min_file_num = 10
 
-with open('/root/work/hjr/IEEE_TGRS_SpectralFormer/config.yaml') as f:
+with open('/root/work/hjr/nia-hjr/config.yaml') as f:
     cfg = yaml.safe_load(f)
 
 dataset_path= cfg['path']['dataset_path']
@@ -25,16 +25,16 @@ for root, dirs, files in os.walk(dataset_path):
 
 random.shuffle(list_mat)
 
-# key_counter = Counter("".join(file_path.split("/")[-4]) for file_path in list_mat)
-key_counter = Counter("".join(file_path.split("_")[-2]) for file_path in list_mat)
+key_counter = Counter("".join(file_path.split("/")[-4]) for file_path in list_mat)
+# key_counter = Counter("".join(file_path.split("_")[-2]) for file_path in list_mat)
 sorted_key_counter = dict(sorted(key_counter.items()))
 
 
 list_mat_selected = []
 for key, count in key_counter.items():
-    # matching_paths = [file_path for file_path in list_mat if f'/{key}/' in file_path]
+    matching_paths = [file_path for file_path in list_mat if f'/{key}/' in file_path]
     # matching_paths = [file_path for file_path in list_mat if f'class_{key}_' in file_path]
-    matching_paths = [file_path for file_path in list_mat if f'class_{int(key):02d}_' in file_path]
+    # matching_paths = [file_path for file_path in list_mat if f'class_{int(key):02d}_' in file_path]
 
     if count <= min_file_num:
         list_mat_selected.extend(matching_paths)

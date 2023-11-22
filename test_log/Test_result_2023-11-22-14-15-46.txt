@@ -1,0 +1,37 @@
+Start Time [2023-11-22 14:15:46]
+/root/work/hjr/dataset/3.mat/01.갈파래류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0065_20230826_1119_W01_RE.mat	OA	0.077	kappa	0.064	 	 
+/root/work/hjr/dataset/3.mat/12.돌가사리류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0011_20230804_0732_W01_RE.mat	OA	0.824	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/13.새우말류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0042_20230827_1523_W01_RE.mat	OA	0.661	kappa	0.453	 	 
+/root/work/hjr/dataset/3.mat/27.조개류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0010_20230827_0924_W01_RE.mat	OA	0.957	kappa	0.447	O	 
+/root/work/hjr/dataset/3.mat/25.고둥류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0057_20231007_1136_W02_RE.mat	OA	0.517	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat/23.담치류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0077_20230827_1606_W01_RE.mat	OA	0.947	kappa	0.167	O	 
+/root/work/hjr/dataset/3.mat/23.담치류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0025_20230823_0936_W02_RE.mat	OA	0.984	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/13.새우말류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0043_20230827_1524_W01_RE.mat	OA	0.658	kappa	0.429	 	 
+/root/work/hjr/dataset/3.mat/27.조개류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0086_20230827_1616_W01_RE.mat	OA	0.286	kappa	0.002	 	 
+/root/work/hjr/dataset/3.mat/04.그물바탕말류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0052_20230827_1534_W01_RE.mat	OA	0.393	kappa	0.016	 	 
+/root/work/hjr/dataset/3.mat/01.갈파래류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0059_20230825_1649_W01_RE.mat	OA	0.974	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/11.도박류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0072_20230804_1357_W01_RE.mat	OA	0.914	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/23.담치류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0007_20230823_0914_W02_RE.mat	OA	0.826	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/02.청각류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0009_20230922_1540_W01_RE.mat	OA	0.972	kappa	0.910	O	O
+/root/work/hjr/dataset/3.mat/16.모래류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0095_20230823_1420_W02_RE.mat	OA	0.937	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/12.돌가사리류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0035_20230825_1026_W01_RE.mat	OA	0.720	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat/15.암반류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0060_20230823_1342_W02_RE.mat	OA	0.839	kappa	0.551	O	 
+/root/work/hjr/dataset/3.mat/31.기타/02.수중 및 지상 초분광/002.TIFF/02L_A000_0046_20230826_1018_W01_RE.mat	OA	0.980	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/25.고둥류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0080_20230924_1630_W01_RE.mat	OA	0.608	kappa	0.028	 	 
+/root/work/hjr/dataset/3.mat/02.청각류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0067_20230922_1533_W01_RE.mat	OA	0.981	kappa	0.905	O	O
+/root/work/hjr/dataset/3.mat/12.돌가사리류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0048_20230803_1843_W01_RE.mat	OA	0.753	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat/01.갈파래류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0051_20230822_1218_W01_RE.mat	OA	0.978	kappa	0.912	O	O
+/root/work/hjr/dataset/3.mat/31.기타/02.수중 및 지상 초분광/002.TIFF/02L_A000_0033_20230826_1004_W01_RE.mat	OA	0.962	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/27.조개류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0079_20230827_1608_W01_RE.mat	OA	0.756	kappa	0.033	 	 
+/root/work/hjr/dataset/3.mat/05.모자반류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0037_20230825_1029_W01_RE.mat	OA	0.580	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat/31.기타/02.수중 및 지상 초분광/002.TIFF/01L_A000_0073_20230922_1534_W01_RE.mat	OA	0.979	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/20.소라류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0060_20231004_1552_W01_RE.mat	OA	0.978	kappa	0.855	O	O
+/root/work/hjr/dataset/3.mat/10.우뭇가사리류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0046_20230825_1044_W01_RE.mat	OA	0.642	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat/10.우뭇가사리류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0044_20230825_1042_W01_RE.mat	OA	0.897	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat/29.해양쓰레기류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0086_20230826_1456_W01_RE.mat	OA	0.663	kappa	0.014	 	 
+/root/work/hjr/dataset/3.mat/05.모자반류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0044_20230827_1525_W01_RE.mat	OA	0.799	kappa	0.411	 	 
+/root/work/hjr/dataset/3.mat/02.청각류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0063_20230922_1532_W01_RE.mat	OA	0.894	kappa	0.687	O	 
+/root/work/hjr/dataset/3.mat/29.해양쓰레기류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0064_20230823_1346_W02_RE.mat	OA	0.909	kappa	0.132	O	 
+/root/work/hjr/dataset/3.mat/29.해양쓰레기류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0001_20230826_0916_W01_RE.mat	OA	0.834	kappa	0.087	O	 
+/root/work/hjr/dataset/3.mat/05.모자반류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0043_20230922_1526_W01_RE.mat	OA	0.984	kappa	0.785	O	O
+/root/work/hjr/dataset/3.mat/29.해양쓰레기류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0061_20230823_1343_W02_RE.mat	OA	0.763	kappa	0.022	 	 

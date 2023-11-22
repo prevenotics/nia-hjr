@@ -289,6 +289,12 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
     batch_end = time.time()
     pixel_batch_end = time.time()
     
+    current_time = datetime.datetime.now()
+    formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    formatted_time_for_filename = current_time.strftime("%Y-%m-%d-%H-%M-%S")
+    with open(f"./test_log/Test_result_{formatted_time_for_filename}.txt", "w") as log:
+        log.write(f"Start Time [{formatted_time}]\n")
+    
     model.eval()
     with torch.no_grad():
         for idx, batch in enumerate(test_loader):
@@ -326,27 +332,33 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
                 # loss_meter.update(loss.item(), n)
                 # lr_meter.update(optimizer.param_groups[0]["lr"])
                 top1.update(prec1[0].data, n)
-                tar = np.append(tar, t.data.cpu().numpy())
-                pre = np.append(pre, p.data.cpu().numpy())
+                # tar = np.append(tar, t.data.cpu().numpy())
+                # pre = np.append(pre, p.data.cpu().numpy())
                 tar_one = np.append(tar_one, t.data.cpu().numpy())
                 pre_one = np.append(pre_one, p.data.cpu().numpy())
                 pixel_batch_time.update(time.time() - pixel_batch_end)
                 pixel_batch_end = time.time()
-            
-            
-            # OA, AA_mean, Kappa, AA = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
-            OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
-            OA_meter.update(OA,1)
-            Kappa_meter.update(Kappa,1)
-            
-            
-            if save_img:       
-                
-                label_pre =pre_one.reshape(batch_size,image_size,image_size)
-                label_tar= tar_one.reshape(batch_size,image_size,image_size)
-                
 
+            
+            label_pre =pre_one.reshape(batch_size,image_size,image_size)
+            label_tar= tar_one.reshape(batch_size,image_size,image_size)
+            
+            OA_batch = np.array([])
+            Kappa_batch = np.array([])  
+            
+            for i in range(batch_size):
+                label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
+                label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
                 
+                label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
+                OA_one, Kappa_one = output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))
+                OA_batch = np.append(OA_batch, OA_one)
+                Kappa_batch = np.append(Kappa_batch, Kappa_one)
+                
+                tar = np.append(tar, label_tar_i.reshape(-1))
+                pre = np.append(pre, label_pre_i.reshape(-1))  
+            
+            if save_img:                       
                 # Image.fromarray(pre.reshape(batch_size,image_size,image_size)[0,:,:])
                 image_margin = 5
                 # for i in range(batch_size):
@@ -389,7 +401,10 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
                     label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
                     
                     # label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
-                    OA_one, Kappa_one = output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))
+                    # OA_one, Kappa_one = output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))
+                    
+                    # tar = np.append(tar, label_tar_i.reshape(-1))
+                    # pre = np.append(pre, label_pre_i.reshape(-1))  
                     
                     label_tar_i = np.repeat(label_tar_i[:, :, np.newaxis] * 8, 3, axis=2)
                     label_pre_i = np.repeat(label_pre_i[:, :, np.newaxis] * 8, 3, axis=2)       
@@ -414,23 +429,38 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
                     font_thickness = 2
                     text_x = image_margin
                     text_y = result_img.shape[0] - 40
-                    text = f' OA   : {OA_one:.3f}'
+                    text = f' OA   : {OA_batch[i]:.3f}'
                     cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness, lineType=cv2.LINE_AA)
                     # text_size = cv2.getTextSize(text, font, font_scale, font_thickness)[0]
                     text_y = result_img.shape[0] - 10
-                    text = f'Kappa: {Kappa_one:.3f}'
+                    text = f'Kappa: {Kappa_batch[i]:.3f}'
                     cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness)
                     
                     
                     img_name = os.path.basename(path[i]).split('.')[0]
                     result_img_path = os.path.join(cfg['test_param']['out_img_path'], img_name + '_rst.png')
                     cv2.imwrite(result_img_path, result_img)                
+                    
+                    with open(f"./test_log/Test_result_{formatted_time_for_filename}.txt", "a") as file:                    
+                        path_one = path[i]
+                        if OA_batch[i] > 0.8 and Kappa_batch[i] >0.7:
+                            file.write(f'{path_one}\tOA\t{OA_batch[i]:0.3f}\tkappa\t{Kappa_batch[i]:0.3f}\tO\tO\n')
+                        elif OA_batch[i] > 0.8 and Kappa_batch[i] <= 0.7: 
+                            file.write(f'{path_one}\tOA\t{OA_batch[i]:0.3f}\tkappa\t{Kappa_batch[i]:0.3f}\tO\t \n')
+                        elif OA_batch[i] <= 0.8 and Kappa_batch[i] > 0.7: 
+                            file.write(f'{path_one}\tOA\t{OA_batch[i]:0.3f}\tkappa\t{Kappa_batch[i]:0.3f}\t \tO\n')
+                        else:
+                            file.write(f'{path_one}\tOA\t{OA_batch[i]:0.3f}\tkappa\t{Kappa_batch[i]:0.3f}\t \t \n')
                 
             
             
             batch_time.update(time.time() - batch_end)
             batch_end = time.time()
-        
+
+            # OA, AA_mean, Kappa, AA = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
+            OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
+            OA_meter.update(OA,1)
+            Kappa_meter.update(Kappa,1)
         
                 
             # if idx % print_freq == 0:
@@ -444,7 +474,14 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
             # f'PixelBatchTime {pixel_batch_time.val:.8f} ({pixel_batch_time.avg:.8f})\t'
             # f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'                        
             # f'mem {memory_used:.0f}MB')
-    
+
+
+    current_time = datetime.datetime.now()
+    formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")    
+    print(f"End Time [{formatted_time}]\n")
+            
+    with open(f"./test_log/Test_result_{formatted_time_for_filename}.txt", "a") as file:
+        file.write(f"End Time [{formatted_time}]\n")    
     
     epoch_time = time.time() - batch_start
     

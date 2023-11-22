@@ -7,19 +7,20 @@ system:
 image_param:
   size: 256
   band : 100
-  type : 'RA' #choice ['RE', 'RA']
+  type : 'RE' #choice ['RE', 'RA']
 
 path:
-  dataset_path : '/root/work/hjr/dataset/4.mat_old'
-  train_csv: '/root/work/hjr/dataset/train_RA.csv'
-  val_csv: '/root/work/hjr/dataset/val_RA.csv'
-  test_csv: '/root/work/hjr/dataset/test_RA_temp.csv'
-  output_dir : 'output/output_231114_RA_norm_clipping40000_cosinealr'
-  model_path : 'output/output_231114_RA_norm_clipping40000_cosinealr/pths/best_checkpoint_OA.pth'
+  dataset_path : '/root/work/hjr/dataset/4.mat_256_selected'
+  # dataset_path : '/root/work/hjr/dataset/3.mat'
+  train_csv: '/root/work/hjr/dataset/train_RE.csv'
+  val_csv: '/root/work/hjr/dataset/val_RE.csv'
+  test_csv: '/root/work/hjr/dataset/test_RE.csv'
+  output_dir : 'output/output_231120_server2_RE_cosinealr_nadam'
+  model_path : 'output/output_231120_server2_RE_cosinealr_nadam/pths/best_checkpoint_OA.pth'
   
 
 dataset: 'hjr'
-num_class : 30
+num_class : 31
 
 
 
@@ -38,8 +39,8 @@ network:
 
 
 train_param:
-  epoch : 3000
-  train_batch: 32
+  epoch : 300000
+  train_batch: 16
   val_batch : 16
   pixel_batch : 4096 #1024
   eval_freq : 2
@@ -48,13 +49,13 @@ train_param:
   learning_rate : 0.0005
   gamma : 0.9
   weight_decay : 0
-  opt : 'adam' #choide ['adam','nadam']
+  opt : 'nadam' #choide ['adam','nadam']
   lrs : 'cosinealr' #choice ['steplr', 'cosinealr']
   resume : True
 
 test_param: 
   test_batch : 2
-  sampling_num : 256
+  sampling_num : 512
   save_img : True
   out_img_path : 'output/output_temp/result_img'
 

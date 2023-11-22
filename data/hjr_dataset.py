@@ -10,7 +10,7 @@ import numpy as np
 import sys, os
 import tifffile as tiff
 from scipy.io import loadmat
-from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point
+from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -18,7 +18,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 # import cv2
 
 DATA_PATH =""
-CLIPPING = 40000
+# CLIPPING = 40000
 
 class HJRDataset(torch.utils.data.Dataset):
     def __init__(
@@ -65,10 +65,20 @@ class HJRDataset(torch.utils.data.Dataset):
         mat_data = loadmat(path_img)
         
         image_mat = mat_data['image']       
-        image_mat = np.clip(image_mat.astype(np.float32)/CLIPPING, 0.0, 1.0)                 
+        if imgtype == 'RA':
+            clipping = 40000
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        elif imgtype =='RE':
+            clipping = 65535
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
         data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
-        for i in range(sample_point.shape[0]):
-            data[i,:,:,:] = gain_neighborhood_pixel(image_mat, sample_point, i, patch)
+        if patch > 1:
+            image_mat_mirror = mirror(image_mat, band, patch)        
+            for i in range(sample_point.shape[0]):
+                data[i,:,:,:] = gain_neighborhood_pixel(image_mat_mirror, sample_point, i, patch)        
+        else:
+            for i in range(sample_point.shape[0]):
+                data[i,:,:,:] = gain_neighborhood_pixel(image_mat, sample_point, i, patch)        
         data = gain_neighborhood_band(data, band, band_patch, patch)
         image = torch.from_numpy(data.transpose(0, 2, 1)).type(torch.FloatTensor)
         
@@ -97,7 +107,12 @@ class HJRDataset(torch.utils.data.Dataset):
             tif_file_path = os.path.join(file_dir, f"{base_name}_{imgtype}{i:02d}{file_extension}")
             if os.path.exists(tif_file_path):
                 img = tiff.imread(tif_file_path)
-                img = np.clip(img.astype(np.float32)/CLIPPING, 0.0, 1.0) 
+                if imgtype == 'RA':
+                    clipping = 40000
+                    image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+                elif imgtype =='RE':
+                    clipping = 65535
+                    image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
                 concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img
         
         data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
@@ -183,7 +198,16 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
         mat_data = loadmat(path_img)
         
         image_mat = mat_data['image']       
-        image_mat = np.clip(image_mat.astype(np.float32)/CLIPPING, 0.0, 1.0)    
+        
+        if imgtype == 'RA':
+            clipping = 40000
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        elif imgtype =='RE':
+            clipping = 65535
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
+            
+            
+            
         
         
         # for i in range(batch_size):
@@ -193,8 +217,15 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
         
                      
         data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
-        for i in range(sample_point.shape[0]):
-            data[i,:,:,:] = gain_neighborhood_pixel(image_mat, sample_point, i, patch)
+
+        if patch > 1:
+            image_mat_mirror = mirror(image_mat, band, patch)        
+            for i in range(sample_point.shape[0]):
+                data[i,:,:,:] = gain_neighborhood_pixel(image_mat_mirror, sample_point, i, patch)        
+        else:
+            for i in range(sample_point.shape[0]):
+                data[i,:,:,:] = gain_neighborhood_pixel(image_mat, sample_point, i, patch)        
+        
         data = gain_neighborhood_band(data, band, band_patch, patch)
         image = torch.from_numpy(data.transpose(0, 2, 1)).type(torch.FloatTensor)
         
@@ -229,7 +260,12 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
             tif_file_path = os.path.join(file_dir, f"{base_name}_{imgtype}{i:02d}{file_extension}")
             if os.path.exists(tif_file_path):
                 img = tiff.imread(tif_file_path)
-                img = np.clip(img.astype(np.float32)/CLIPPING, 0.0, 1.0) 
+                if imgtype == 'RA':
+                    clipping = 40000
+                    image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+                elif imgtype =='RE':
+                    clipping = 65535
+                    image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
                 concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img
         
         data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)

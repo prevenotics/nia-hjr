@@ -35,7 +35,7 @@ import yaml
 #CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nproc_per_node 8 --master_port 1234 train_hjr.py --eval_freq 1
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 train_hjr.py --eval_freq 1
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
-os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
+# os.chdir("/root/work/hjr/IEEE_TGRS_SpectralFormer")
 
 def main(cfg):
 
@@ -111,7 +111,9 @@ def main(cfg):
         if cfg['network']['DeepLab']['separable_conv'] and 'plus' in cfg['network']['arch']['model']:
             network.convert_to_separable_conv(model.classifier)
         set_bn_momentum(model.backbone, momentum=0.01)
-    
+        
+    elif cfg['network']['arch'] == 'HSIUnet':        
+        model =HSIUNet(cfg['image_param']['band'], num_class)
         
     
     

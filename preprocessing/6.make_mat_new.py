@@ -68,13 +68,14 @@ def create_label_mat(label_path, loc, sampling_coords, output_size):
     for key, value in feat_cnt.items():
         if value < 2:
             category_id = features[key]['properties']['categories_id']
-            polygon = features[key]['geometry']['coordinates'][0]
-            for sublist in polygon:
-                for i in range(len(sublist)):
-                    sublist[i] = abs(sublist[i])
-            polygon = [item for sublist in polygon for item in sublist]        
-            class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
-            draw.polygon(polygon, outline=class_value, fill=class_value)
+            if features[key]['geometry']['coordinates']:
+                polygon = features[key]['geometry']['coordinates'][0]
+                for sublist in polygon:
+                    for i in range(len(sublist)):
+                        sublist[i] = abs(sublist[i])
+                polygon = [item for sublist in polygon for item in sublist]        
+                class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
+                draw.polygon(polygon, outline=class_value, fill=class_value)
                 
     # if loc == "U":
     label = np.array(label)[sampling_coords[:,1], sampling_coords[:,0]].reshape(output_size,output_size)
