@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+#서버마다 다른 설정으로 인하여
+*.yaml
+
 # Distribution / packaging
 .Python
 dataset/
