@@ -25,7 +25,7 @@ for root, dirs, files in os.walk(dataset_path):
 
 random.shuffle(list_mat)
 
-key_counter = Counter("".join(file_path.split("/")[-4]) for file_path in list_mat)
+key_counter = Counter("".join(os.path.basename(file_path).split("_")[2]) for file_path in list_mat)
 # key_counter = Counter("".join(file_path.split("_")[-2]) for file_path in list_mat)
 sorted_key_counter = dict(sorted(key_counter.items()))
 
@@ -42,7 +42,7 @@ for key, count in key_counter.items():
         list_mat_selected.extend(random.sample(matching_paths, min_file_num))
 
 # key_counter = Counter("".join(file_path.split("/")[-4]) for file_path in list_mat_selected)
-key_counter = Counter("".join(file_path.split("_")[-2]) for file_path in list_mat_selected)
+key_counter = Counter("".join(os.path.basename(file_path).split("_")[2]) for file_path in list_mat_selected)
 sorted_key_counter = dict(sorted(key_counter.items()))
 random.shuffle(list_mat_selected)
 
