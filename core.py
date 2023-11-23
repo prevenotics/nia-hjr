@@ -4,10 +4,13 @@ import time
 import datetime
 import numpy as np
 from timm.utils import AverageMeter
-from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results
+# from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results
+import utils.utils as util
 from PIL import Image, ImageDraw, ImageFont
 import os
 import cv2
+from collections import Counter
+
 # class AvgrageMeter(object):
     
 #   def __init__(self):
@@ -87,8 +90,8 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
             optimizer.step()       
             lr_scheduler.step()
 
-            prec1, t, p = accuracy(batch_pred, pixel_batch_target, topk=(1,))
-            n = pixel_batch_image.shape[0]
+            prec1, t, p, ignore_cnt = util.accuracy(batch_pred, pixel_batch_target, topk=(1,))                
+            n = pixel_batch_image.shape[0] - ignore_cnt
             loss_meter.update(loss.data, n)
             # loss_meter.update(loss.item(), n)
             lr_meter.update(optimizer.param_groups[0]["lr"])
@@ -107,7 +110,7 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
         batch_time.update(time.time() - batch_end)
         batch_end = time.time()
       
-        OA, Kappa = output_metric(tar, pre)     
+        OA, Kappa = util.output_metric(tar, pre)     
             
         if idx % print_freq == 0:
             memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
@@ -122,7 +125,7 @@ def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_schedule
             f'grad_norm(lr) {lr_meter.val:.2f} ({lr_meter.avg:.2f})\t')
             # f'mem {memory_used:.0f}MB')
     
-    OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함    
+    OA, Kappa = util.output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함    
     OA_meter.update(OA,1)
     Kappa_meter.update(Kappa,1)
     
@@ -179,8 +182,8 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
                 batch_pred = model(pixel_batch_image)
                 loss = criterion(batch_pred, pixel_batch_target)
 
-                prec1, t, p = accuracy(batch_pred, pixel_batch_target, topk=(1,))
-                n = pixel_batch_image.shape[0]
+                prec1, t, p, ignore_cnt = util.accuracy(batch_pred, pixel_batch_target, topk=(1,))                
+                n = pixel_batch_image.shape[0] - ignore_cnt
                 loss_meter.update(loss.data, n)
                 # loss_meter.update(loss.item(), n)
                 # lr_meter.update(optimizer.param_groups[0]["lr"])
@@ -191,7 +194,7 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
                 pixel_batch_end = time.time()
                 
             # OA, AA_mean, Kappa, AA = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
-            OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
+            OA, Kappa = util.output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
             OA_meter.update(OA,1)
             Kappa_meter.update(Kappa,1)
             # AA_meter.update(AA,1)
@@ -283,7 +286,8 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
     num_epochs = cfg['train_param']['epoch']
     band =cfg['image_param']['band']
     num_steps = len(test_loader)
-    
+    cls_name = util.class_name()
+    ignore_cls = 30
     
     batch_start = time.time()
     batch_end = time.time()
@@ -326,8 +330,9 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
                 batch_pred = model(pixel_batch_image)
                 # loss = criterion(batch_pred, pixel_batch_target)
 
-                prec1, t, p = accuracy(batch_pred, pixel_batch_target, topk=(1,))
-                n = pixel_batch_image.shape[0]
+                prec1, t, p, ignore_cnt = util.accuracy(batch_pred, pixel_batch_target, topk=(1,))                
+                n = pixel_batch_image.shape[0] - ignore_cnt
+                
                 # loss_meter.update(loss.data, n)
                 # loss_meter.update(loss.item(), n)
                 # lr_meter.update(optimizer.param_groups[0]["lr"])
@@ -349,9 +354,10 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
             for i in range(batch_size):
                 label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
                 label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
+                               
                 
                 label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
-                OA_one, Kappa_one = output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))
+                OA_one, Kappa_one = util.output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))
                 OA_batch = np.append(OA_batch, OA_one)
                 Kappa_batch = np.append(Kappa_batch, Kappa_one)
                 
@@ -400,6 +406,16 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
                     label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
                     label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
                     
+                    tar_unique, tar_cnt = np.unique(label_tar_i[label_tar_i !=30], return_counts=True)
+                    sorted_indices = np.argsort(-tar_cnt)
+                    tar_unique = tar_unique[sorted_indices]
+                    tar_cnt = tar_cnt[sorted_indices]
+
+                    pre_unique, pre_cnt = np.unique(label_pre_i, return_counts=True)
+                    sorted_indices = np.argsort(-pre_cnt)
+                    pre_unique = pre_unique[sorted_indices]
+                    pre_cnt = pre_cnt[sorted_indices]
+                    
                     # label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
                     # OA_one, Kappa_one = output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))
                     
@@ -415,31 +431,68 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
                     label_tar_i[ignore_idxs] = [255, 240, 0]
                     label_pre_i[ignore_idxs] = [255, 240, 0]
                     
-                    result_img = np.zeros((image_size + 70, image_size * 3 + image_margin * 2, 3), dtype=np.uint8)
+                    result_img = np.zeros((image_size + 100, image_size * 3 + image_margin * 2, 3), dtype=np.uint8)
                     
+                    
+                    result_img = Image.new('RGB', (image_size*3+image_margin*2, image_size+100))                
+                    result_img.paste(Image.fromarray(res_image), (0,0))
+                    result_img.paste(Image.fromarray(label_tar_i), (image_size+image_margin,0))
+                    result_img.paste(Image.fromarray(label_pre_i), (image_size*2+image_margin,0))
+                    result_img_draw = ImageDraw.Draw(result_img)
+                    font = ImageFont.truetype("ARIAL.TTF", 20)
+                    result_img_draw.text((10,image_size+5), f" OA   : {OA_batch[i]:.3f}", (0,255,0), font=font)
+                    result_img_draw.text((10,image_size+35), f"Kappa: {Kappa_batch[i]:.3f}", (0,255,0), font=font)
+                    font = ImageFont.truetype("MALGUN.TTF", 15)
+                    for idx in range(len(tar_unique)):
+                        # cv2.putText(result_img, tar_unique[idx]
+                        text_x = image_size +15
+                        text_y = image_size + 3 + 20*(idx)
+                        text = f'GT[{idx}] : {cls_name[tar_unique[idx]]}'
+                        result_img_draw.text((text_x,text_y), text, (0,255,0), font=font)
+                        text_x = image_size *2+15
+                        text_y = image_size + 3 + 20*(idx)
+                        text = f'Result[{idx}] : {cls_name[pre_unique[idx]]}'
+                        result_img_draw.text((text_x,text_y), text, (0,255,0), font=font)
+                    
+                    
+                    
+                    #####################################################
                     # Copy images to result_img
-                    result_img[:image_size, :image_size] = cv2.cvtColor(res_image, cv2.COLOR_RGB2BGR)
-                    result_img[:image_size, image_size + image_margin:image_size*2 + image_margin] = label_tar_i
-                    result_img[:image_size, image_size*2 + image_margin*2:] = label_pre_i
+                    # result_img[:image_size, :image_size] = cv2.cvtColor(res_image, cv2.COLOR_RGB2BGR)
+                    # result_img[:image_size, image_size + image_margin:image_size*2 + image_margin] = label_tar_i
+                    # result_img[:image_size, image_size*2 + image_margin*2:] = label_pre_i
                     
-                    # Add text to the image
-                    font = cv2.FONT_HERSHEY_SIMPLEX
-                    font_scale = 0.8
-                    font_color = (0, 255, 0)
-                    font_thickness = 2
-                    text_x = image_margin
-                    text_y = result_img.shape[0] - 40
-                    text = f' OA   : {OA_batch[i]:.3f}'
-                    cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness, lineType=cv2.LINE_AA)
-                    # text_size = cv2.getTextSize(text, font, font_scale, font_thickness)[0]
-                    text_y = result_img.shape[0] - 10
-                    text = f'Kappa: {Kappa_batch[i]:.3f}'
-                    cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness)
+                    # # Add text to the image
+                    # font = 'ARIAL.TTF'
+                    # font_scale = 0.8
+                    # font_color = (0, 255, 0)
+                    # font_thickness = 2
+                    # text_x = image_margin
+                    # text_y = result_img.shape[0] - 40
+                    # text = f' OA   : {OA_batch[i]:.3f}'
+                    # cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness, lineType=cv2.LINE_AA)
+                    # # text_size = cv2.getTextSize(text, font, font_scale, font_thickness)[0]
+                    # text_y = result_img.shape[0] - 10
+                    # text = f'Kappa: {Kappa_batch[i]:.3f}'
+                    # cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness)
                     
+                    
+                    # font = 'ARIAL.TTF'
+                    # font_scale = 0.5
+                    # font_color = (0, 255, 0)
+                    # font_thickness = 1
+                    # for idx in range(len(tar_unique)):
+                    #     # cv2.putText(result_img, tar_unique[idx]
+                    #     text_x = image_size 
+                    #     text_y = image_size + 5*(idx)
+                    #     text = f'GT[{idx}] : {cls_name[tar_unique[idx]]} / Result[{idx}] : {cls_name[pre_unique[idx]]}'
+                    #     cv2.putText(result_img, text, (text_x, text_y), font, font_scale, font_color, font_thickness)
+                    #####################################################
                     
                     img_name = os.path.basename(path[i]).split('.')[0]
                     result_img_path = os.path.join(cfg['test_param']['out_img_path'], img_name + '_rst.png')
-                    cv2.imwrite(result_img_path, result_img)                
+                    # cv2.imwrite(result_img_path, result_img)                
+                    result_img.save(result_img_path)
                     
                     with open(f"./test_log/Test_result_{formatted_time_for_filename}.txt", "a") as file:                    
                         path_one = path[i]
@@ -458,7 +511,7 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
             batch_end = time.time()
 
             # OA, AA_mean, Kappa, AA = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
-            OA, Kappa = output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
+            OA, Kappa = util.output_metric(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
             OA_meter.update(OA,1)
             Kappa_meter.update(Kappa,1)
         
@@ -475,7 +528,7 @@ def test_epoch(model, test_loader, cfg, save_img, logger):
             # f'BatchTime {batch_time.val:.8f} ({batch_time.avg:.8f})\t'                        
             # f'mem {memory_used:.0f}MB')
 
-
+    _, _ = util.output_metric_with_savefig(tar, pre)  #최종 OA, Kappa 값은 testset의 전체 픽셀레벨로 따로 구해야함. 이건 추이를 보기 위함
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")    
     print(f"End Time [{formatted_time}]\n")

@@ -1,4 +1,0 @@
-Start Time [2023-11-22 14:19:00]
-/root/work/hjr/dataset/3.mat/01.갈파래류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0065_20230826_1119_W01_RE.mat	OA	0.992	kappa	0.945	O	O
-/root/work/hjr/dataset/3.mat/12.돌가사리류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0011_20230804_0732_W01_RE.mat	OA	0.944	kappa	0.000	O	 
-/root/work/hjr/dataset/3.mat/13.새우말류/02.수중 및 지상 초분광/002.TIFF/02L_A000_0042_20230827_1523_W01_RE.mat	OA	0.849	kappa	0.688	O	 

@@ -13,10 +13,10 @@ path:
   dataset_path : '/root/work/hjr/dataset/4.mat'
   train_csv: '/root/work/hjr/dataset/train_RA.csv'
   val_csv: '/root/work/hjr/dataset/val_RA.csv'
-  test_csv: '/root/work/hjr/dataset/train_RE_test_best.csv'
+  test_csv: '/root/work/hjr/dataset/train_RE_test_best_temp.csv'
   output_dir : 'output/output_231119_server2_RA_cosinealr'
   #model_path : 'output/output_231119_server2_RA_cosinealr/pths/best_checkpoint_OA.pth'
-  model_path : 'output/output_231121_RE_mfA100_patch3_Bpatch3_cosinealr/pths/best_checkpoint_OA.pth'
+  model_path : 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam/pths/best_checkpoint_OA.pth'
   # model_path : 'output/output_231119_server2_RA_cosinealr/pths/best_checkpoint_OA.pth'
   
 
@@ -58,6 +58,5 @@ test_param:
   test_batch : 1
   sampling_num : 256
   save_img : False #True
-  out_img_path : 'output/output_temp/output_231121_RE_mfA100_patch3_Bpatch3_cosinealr'
+  out_img_path : 'output/output_temp/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam'
 
-  

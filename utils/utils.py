@@ -260,24 +260,34 @@ def get_point(img_size, num):
     return sampling_coords
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
-def accuracy(output, target, topk=(1,)):
+def accuracy(output, target, topk=(1,), ignore_class=30):
   maxk = max(topk)
   batch_size = target.size(0)
 
   _, pred = output.topk(maxk, 1, True, True)
   pred = pred.t()
+  
+  ignore_mask = (target != ignore_class).view(1, -1).expand_as(pred)
+  ignore_cnt = target.shape[0] - torch.sum(ignore_mask).item()
   correct = pred.eq(target.view(1, -1).expand_as(pred))
+  correct = correct * ignore_mask  # ignore_class를 제외한 부분에만 1이 되도록 마스크 적용
+#   correct = pred.eq(target.view(1, -1).expand_as(pred))
 
   res = []
   for k in topk:
-    correct_k = correct[:k].view(-1).float().sum(0)
-    res.append(correct_k.mul_(100.0/batch_size))
-  return res, target, pred.squeeze()
+    correct_k = correct[:k].view(-1).float().sum(0)    
+    res.append(correct_k.mul_(100.0/(batch_size)))   
+        
+  return res, target, pred.squeeze(), ignore_cnt
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
-def output_metric(tar, pre):
-    matrix = confusion_matrix(tar, pre, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30])
-    matrix = matrix[:30,:30] #ignore_class = 30
+def output_metric(tar, pre, ignore_class=30):
+    # matrix = confusion_matrix(tar, pre, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29, 30])
+    # matrix = matrix[:30,:30] #ignore_class = 30
+    # OA, Kappa = cal_results(matrix)
+    tar_no_ignore = tar[tar !=ignore_class]
+    pre_no_ignore = pre[tar !=ignore_class]
+    matrix = confusion_matrix(tar_no_ignore, pre_no_ignore, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29])
     # OA, AA_mean, Kappa, AA = cal_results(matrix)
     
     ####################################################################################################################################################################
@@ -289,6 +299,26 @@ def output_metric(tar, pre):
     # return OA, AA_mean, Kappa, AA
     return OA, Kappa #, matrix
 #-------------------------------------------------------------------------------
+
+def output_metric_with_savefig(tar, pre, ignore_class=30):
+    # matrix = confusion_matrix(tar, pre, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29, 30])
+    # matrix = matrix[:30,:30] #ignore_class = 30
+    # OA, Kappa = cal_results(matrix)
+    tar_no_ignore = tar[tar !=ignore_class]
+    pre_no_ignore = pre[tar !=ignore_class]
+    matrix = confusion_matrix(tar_no_ignore, pre_no_ignore, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29])
+    # OA, AA_mean, Kappa, AA = cal_results(matrix)
+    
+    ####################################################################################################################################################################
+    labels=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
+    plot_confusion_matrix(matrix, labels = labels)
+    ###################################################################################################################################################################
+    plt.savefig("confusion_matrix.jpg")
+    OA, Kappa = cal_results(matrix)
+    # return OA, AA_mean, Kappa, AA
+    return OA, Kappa #, matrix
+#-------------------------------------------------------------------------------
+
 def cal_results(matrix):
     epsilon = 1e-15
     shape = np.shape(matrix)
@@ -377,3 +407,39 @@ def fix_bn(model):
 def mkdir(path):
     if not os.path.exists(path):
         os.mkdir(path)
+
+def class_name():
+    cls_name = [
+        '01.갈파래류',
+        '02.청각류',
+        '03.대마디말류',
+        '04.그물바탕말류',
+        '05.모자반류',
+        '06.나래미역류',
+        '07.감태류',
+        '08.유절산호말류',
+        '09.무절산호말류',
+        '10.우뭇가사리류',
+        '11.도박류',
+        '12.돌가사리류',
+        '13.새우말류',
+        '14.거머리말류',
+        '15.암반류',
+        '16.모래류',
+        '17.인공어초류',
+        '18.성게류',
+        '19.불가사리류',
+        '20.소라류',
+        '21.군소전복류',
+        '22.해면류',
+        '23.담치류',
+        '24.따개비류',
+        '25.고둥류',
+        '26.군부류',
+        '27.조개류',
+        '28.연성경성산호류',
+        '29.해양쓰레기류',
+        '30.폐어구류',
+        '31.기타'        
+    ]    
+    return cls_name
