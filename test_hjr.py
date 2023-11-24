@@ -1,25 +1,19 @@
 import torch
-# import argparse
 import torch.nn as nn
 import torch.utils.data as Data
 import torch.distributed as dist
 import torch.backends.cudnn as cudnn
-
-from scipy.io import loadmat
-from scipy.io import savemat
 from torch import optim
 from torch.autograd import Variable
-# from model.vit_pytorch import ViT # For SpectralFormer
 import network
 from param_parser import TrainParser
-# import utils
-from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point, set_bn_momentum
+import argparse
+import utils.utils as util
 from utils.logger import create_logger
-from core import train_epoch, valid_epoch, test_epoch
+from core import test_epoch
 from tensorboardX import SummaryWriter
-from data.hjr_dataset import HJRDataset
 from data.build_data import build_data_loader
-from utils.tensorboard import log_tensorboard
+
 
 import matplotlib.pyplot as plt
 from matplotlib import colors
@@ -29,9 +23,7 @@ import datetime
 import os
 import yaml
 
-# import sys
-# sys.argv=['']
-# del sys
+
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 test_hjr.py
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  test_hjr.py
 #CUDA_VISIBLE_DEVICES=1 python -m torch.distributed.launch --nproc_per_node 1 --master_port 1234  test_hjr.py
@@ -52,7 +44,7 @@ def main(cfg):
     best_acc = -9999
     
     
-    log_dir, pth_dir, tensorb_dir = make_output_directory(cfg)
+    log_dir, pth_dir, tensorb_dir = util.make_output_directory(cfg)
     logger = create_logger(log_dir, dist_rank=0, name='')
     
     
@@ -99,7 +91,7 @@ def main(cfg):
         elif lrs == "steplr":
             # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
             scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=cfg['train_param']['epoch']//10, gamma=cfg['train_param']['gamma'])
-        sample_point = get_point(cfg['image_param']['size'], cfg['test_param']['sampling_num'])   
+        sample_point = util.get_point(cfg['image_param']['size'], cfg['test_param']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
         test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
@@ -110,7 +102,7 @@ def main(cfg):
         model = network.modeling.__dict__[cfg['network']['arch']['model']](num_classes=num_class, output_stride=cfg['network']['DeepLab']['output_stride'])
         if cfg['network']['DeepLab']['separable_conv'] and 'plus' in cfg['network']['arch']['model']:
             network.convert_to_separable_conv(model.classifier)
-        set_bn_momentum(model.backbone, momentum=0.01)
+        util.set_bn_momentum(model.backbone, momentum=0.01)
     
         
     
@@ -130,7 +122,7 @@ def main(cfg):
     #resume
     ckpt_file_path = cfg['path']['model_path'] #os.path.join(pth_dir, "checkpoints.pth")
     if os.path.isfile(ckpt_file_path):
-        start_epoch, best_loss, best_acc = load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
+        start_epoch, best_loss, best_acc = util.load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
         
     
     # best_loss_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_loss.pth")
@@ -162,20 +154,12 @@ def main(cfg):
 
 if __name__ == '__main__':
     
-    
-
-    # parser = argparse.ArgumentParser("HSI")
-    # parser.add_argument('--dataset', choices=['Indian', 'Pavia', 'Houston'], default='Indian', help='dataset to use')
-    # parser.add_argument('--flag_test', choices=['test', 'train'], default='train', help='testing mark')
-    
-    # parser = TrainParser()
-    # args = parser.parse_args(args=[])
-    
-    with open('./config_test.yaml') as f:
+    parser = argparse.ArgumentParser(description='Parser')    
+    # parser.add_argument('--hsi', type=str,  default='hsi', choices=['hsi','hsi_drone'])
+    parser.add_argument('--yaml', type=str,  default='cfg_test.yaml', choices=['cfg_train.yaml','cfg_train_drone.yaml'])
+    config = parser.parse_args()
+    with open(config.yaml) as f:
         cfg = yaml.safe_load(f)
-        
-
-    # os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu_id)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
         rank = int(os.environ["RANK"])

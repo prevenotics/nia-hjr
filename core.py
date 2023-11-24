@@ -4,27 +4,11 @@ import time
 import datetime
 import numpy as np
 from timm.utils import AverageMeter
-# from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror_hsi, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results
 import utils.utils as util
 from PIL import Image, ImageDraw, ImageFont
 import os
 import cv2
 from collections import Counter
-
-# class AvgrageMeter(object):
-    
-#   def __init__(self):
-#     self.reset()
-
-#   def reset(self):
-#     self.avg = 0
-#     self.sum = 0
-#     self.cnt = 0
-
-#   def update(self, val, n=1):
-#     self.sum += val * n
-#     self.cnt += n
-#     self.avg = self.sum / self.cnt
 
 # train model
 def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_scheduler, epoch, cfg, logger, print_freq=1000):
