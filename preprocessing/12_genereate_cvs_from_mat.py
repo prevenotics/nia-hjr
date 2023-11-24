@@ -49,7 +49,7 @@ random.shuffle(list_mat_selected)
 ratio = 10
 index = 0
 
-with open(f'train_{imgtype}.csv', mode='w', newline='') as train_file, open(f'val_{imgtype}.csv', mode='w', newline='') as val_file, open(f'test_{imgtype}.csv', mode='w', newline='') as test_file:
+with open(output_train_csv, mode='w', newline='') as train_file, open(output_val_csv, mode='w', newline='') as val_file, open(output_test_csv, mode='w', newline='') as test_file:
     for line in list_mat_selected:        
         mat = line.replace("\n", "")                
         index+=1
