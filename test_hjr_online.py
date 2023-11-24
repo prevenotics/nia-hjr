@@ -6,7 +6,7 @@ import torch.backends.cudnn as cudnn
 from torch import optim
 from torch.autograd import Variable
 import network
-# from param_parser import TrainParser
+from param_parser import TrainParser
 import argparse
 import utils.utils as util
 from utils.logger import create_logger
@@ -27,7 +27,7 @@ import yaml
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 test_hjr.py
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  test_hjr.py
 #CUDA_VISIBLE_DEVICES=1 python -m torch.distributed.launch --nproc_per_node 1 --master_port 1234  test_hjr.py
-os.chdir("/root/work/hjr/nia-hjr")
+# os.chdir("/root/work/hjr/nia-hjr")
 
 def main(cfg):
 
@@ -94,7 +94,8 @@ def main(cfg):
         sample_point = util.get_point(cfg['image_param']['size'], cfg['test_param']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
-        test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
+        # test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
+        test_data_loader = build_data_loader(cfg['dataset'], 'test', 'test_online.csv', cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
         
     
     
@@ -156,9 +157,9 @@ if __name__ == '__main__':
     
     # parser = argparse.ArgumentParser(description='Parser')    
     # # parser.add_argument('--hsi', type=str,  default='hsi', choices=['hsi','hsi_drone'])
-    # parser.add_argument('--yaml', default='cfg_test.yaml', type=str) #, choices=['cfg_test.yaml','cfg_test_drone.yaml'])
+    # parser.add_argument('--yaml', type=str,  default='cfg_test.yaml', choices=['cfg_train.yaml','cfg_train_drone.yaml'])
     # config = parser.parse_args()
-    with open('cfg_train.yaml') as f:
+    with open('config_online.yaml') as f:
         cfg = yaml.safe_load(f)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
