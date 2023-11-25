@@ -211,11 +211,11 @@ def main(cfg):
 
 if __name__ == '__main__':
     
-    parser = argparse.ArgumentParser(description='Parser')    
-    # parser.add_argument('--hsi', type=str,  default='hsi', choices=['hsi','hsi_drone'])
-    parser.add_argument('--yaml', type=str,  default='cfg_train.yaml', choices=['cfg_train.yaml','cfg_train_drone.yaml'])
-    config = parser.parse_args()
-    with open(config.yaml) as f:
+    # parser = argparse.ArgumentParser(description='Parser')    
+    # # parser.add_argument('--hsi', type=str,  default='hsi', choices=['hsi','hsi_drone'])
+    # parser.add_argument('--yaml', type=str,  default='cfg_train.yaml', choices=['cfg_train.yaml','cfg_train_drone.yaml'])
+    # config = parser.parse_args()
+    with open('cfg_train.yaml') as f:
         cfg = yaml.safe_load(f)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:

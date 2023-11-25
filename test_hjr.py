@@ -133,8 +133,8 @@ def main(cfg):
     logger.info(">>>>>>>>>> Start Testing")
     start_time = time.time()
         
-    save_img = True
-    test_res = test_epoch(model, test_data_loader, cfg, save_img, logger)       
+    
+    test_res = test_epoch(model, test_data_loader, cfg, logger)       
 
             
             
