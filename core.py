@@ -357,7 +357,7 @@ def test_epoch(model, test_loader, cfg, logger):
                 
                 OA_list.append(OA_one)
                 Kappa_list.append(Kappa_one)
-                
+                 
                 # tar = np.append(tar, label_tar_i.reshape(-1))
                 # pre = np.append(pre, label_pre_i.reshape(-1))
                 npy_path_idx = os.path.join(npy_path, f'{formatted_time_for_filename}_{idx}.npy')
