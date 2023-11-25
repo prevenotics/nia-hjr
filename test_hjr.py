@@ -30,28 +30,9 @@ import yaml
 os.chdir("/root/work/hjr/nia-hjr")
 
 def main(cfg):
-
-    # # Parameter Setting
-    # np.random.seed(args.seed)
-    # torch.manual_seed(args.seed)
-    # torch.cuda.manual_seed(args.seed)
-    # cudnn.deterministic = True
-    # cudnn.benchmark = False
-    start_epoch=0
-    # num_epochs=args.epoches
-    num_epochs=cfg['train_param']['epoch']
-    best_loss = 9999
-    best_acc = -9999
-    
-    
-    log_dir, pth_dir, tensorb_dir = util.make_output_directory(cfg)
+   
+    log_dir, _, _ = util.make_output_directory(cfg)
     logger = create_logger(log_dir, dist_rank=0, name='')
-    
-    
-    
-    #create tensorboard
-    if cfg['system']['tensorboard']:
-        writer_tb = SummaryWriter(log_dir=tensorb_dir)
 
     band =cfg['image_param']['band']
     num_class = cfg['num_class']
@@ -71,8 +52,8 @@ def main(cfg):
             emb_dropout = 0.1,
             mode = cfg['network']['spectralformer']['mode']
         )
-        # criterion
-        criterion = nn.CrossEntropyLoss(ignore_index=30).cuda() 
+        # # criterion
+        # criterion = nn.CrossEntropyLoss(ignore_index=30).cuda() 
         # optimizer
         opt = cfg['train_param']['opt']
         logger.info(f"optimizer = {opt} ......")
@@ -104,47 +85,21 @@ def main(cfg):
             network.convert_to_separable_conv(model.classifier)
         util.set_bn_momentum(model.backbone, momentum=0.01)
     
-        
-    
-    
-    
-    # train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sample_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
-    # val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sample_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
-    # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
-    
-
-
     
     local_rank = int(os.environ["LOCAL_RANK"])
     model = model.cuda()
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[local_rank],
                                                               find_unused_parameters=True, broadcast_buffers=False)
     #resume
-    ckpt_file_path = cfg['path']['model_path'] #os.path.join(pth_dir, "checkpoints.pth")
+    ckpt_file_path = cfg['path']['model_path'] 
     if os.path.isfile(ckpt_file_path):
         start_epoch, best_loss, best_acc = util.load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
         
-    
-    # best_loss_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_loss.pth")
-    # best_acc_c_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_corr.pth")
-    # best_acc_r_ckpt_file_path = os.path.join(pth_dir, "best_checkpoints_acc_r.pth")
-
-    
     logger.info(">>>>>>>>>> Start Testing")
     start_time = time.time()
         
     
     test_res = test_epoch(model, test_data_loader, cfg, logger)       
-
-            
-            
-            
-
-        # if (epoch % args.test_freq == 0) | (epoch == args.epoches - 1):         
-        #     model.eval()
-        #     tar_v, pre_v = valid_epoch(model, label_test_loader, criterion, optimizer)
-        #     OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
-        #     print("Epoch: {:03d} val_OA: {:.4f}val_Kappa: {:.4f}".format(epoch+1, OA2, Kappa2))
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
@@ -154,10 +109,6 @@ def main(cfg):
 
 if __name__ == '__main__':
     
-    # parser = argparse.ArgumentParser(description='Parser')    
-    # # parser.add_argument('--hsi', type=str,  default='hsi', choices=['hsi','hsi_drone'])
-    # parser.add_argument('--yaml', default='cfg_test.yaml', type=str) #, choices=['cfg_test.yaml','cfg_test_drone.yaml'])
-    # config = parser.parse_args()
     with open('cfg_train.yaml') as f:
         cfg = yaml.safe_load(f)
     
@@ -169,7 +120,6 @@ if __name__ == '__main__':
         rank = -1
         world_size = -1
 
-    # torch.cuda.set_device(args.local_rank)
     torch.cuda.set_device(int(os.environ["LOCAL_RANK"]))
     torch.distributed.init_process_group(backend='nccl', init_method='env://', world_size=world_size, rank=rank)
     torch.distributed.barrier()

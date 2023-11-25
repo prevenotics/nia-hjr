@@ -1,7 +1,7 @@
 import os
 import torch.distributed as dist
 import torch
-from data.hjr_dataset import HJRDataset, HJRDataset_for_test
+from data.hjr_dataset import HJRDataset, HJRDataset_for_test, HJRDataset_for_online
 
 
 def build_data_loader(dataset_name, mode, csv_path, imgtype, sample_point, batch_size, num_workers, local_rank, patch, band_patch, band, shuffle=True):
@@ -10,6 +10,8 @@ def build_data_loader(dataset_name, mode, csv_path, imgtype, sample_point, batch
         dataset = HJRDataset(csv_file=csv_path, imgtype=imgtype, sample_point=sample_point, patch=patch, band_patch=band_patch, band = band)
     elif dataset_name =='hjr' and mode =='test':
         dataset = HJRDataset_for_test(csv_file=csv_path, imgtype=imgtype, sample_point=sample_point, patch=patch, band_patch=band_patch, band = band)
+    elif dataset_name =='hjr' and mode =='online':
+        dataset = HJRDataset_for_online(csv_file=csv_path, imgtype=imgtype, sample_point=sample_point, patch=patch, band_patch=band_patch, band = band)
     
     
     # local_rank = os.environ['LOCAL_RANK']

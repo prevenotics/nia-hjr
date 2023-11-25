@@ -89,21 +89,7 @@ def main(cfg):
         local_rank = int(os.environ["LOCAL_RANK"])                                            
         train_data_loader = build_data_loader(cfg['dataset'], 'train', cfg['path']['train_csv'], cfg['image_param']['type'], sample_point, cfg['train_param']['train_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
         val_data_loader   = build_data_loader(cfg['dataset'], 'train', cfg['path']['val_csv'],   cfg['image_param']['type'], sample_point, cfg['train_param']['val_batch'],   cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])
-    
-    
-    elif cfg['network']['arch'] == 'DL':
-        model = network.modeling.__dict__[cfg['network']['arch']['model']](num_classes=num_class, output_stride=cfg['network']['DeepLab']['output_stride'])
-        if cfg['network']['DeepLab']['separable_conv'] and 'plus' in cfg['network']['arch']['model']:
-            network.convert_to_separable_conv(model.classifier)
-        util.set_bn_momentum(model.backbone, momentum=0.01)
-    
-    
-    
-    # train_data_loader = build_data_loader(args.dataset, train_csv_path, imgtype, sample_point, args.train_batch_size, args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)    
-    # val_data_loader   = build_data_loader(args.dataset, val_csv_path,   imgtype, sample_point, args.val_batch_size,   args.num_workers, args.local_rank, args.patch, args.band_patch, args.band)
-    # train_data_loader=Data.DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True)
-    
-
+   
 
     
     local_rank = int(os.environ["LOCAL_RANK"])
@@ -131,12 +117,8 @@ def main(cfg):
         
         scheduler.step()
 
-        # train model
-        model.train()
-        # train_acc, train_obj, tar_t, pre_t = train_epoch(model, train_data_loader, criterion, optimizer)
-              # def train_epoch(model, train_loader, criterion, optimizer, lr_scheduler, epoch, num_epochs, logger, print_freq=1000):
+        model.train()        
         train_res = train_epoch(model, tar, pre, train_data_loader, criterion, optimizer, scheduler, epoch, cfg, logger)
-        # OA1, AA_mean1, Kappa1, AA1 = output_metric(tar_t, pre_t) 
         print("Train Epoch: {:03d} train_acc: {:.2f} train_loss: {:.4f} train_OA: {:.4f} train_Kappa: {:.4f}".
               format(epoch+1, train_res[0].avg, train_res[1].avg, train_res[2].avg, train_res[3].avg))
             
@@ -159,11 +141,7 @@ def main(cfg):
             
         # evaluation
         if (epoch % cfg['train_param']['eval_freq'] == 0) or (epoch == num_epochs - 1):        
-        # if cfg['train_param']['eval_freq'] == 1:
             val_res = valid_epoch(model, val_data_loader, criterion, epoch, cfg, logger)            
-    
-            
-            
             print("Validation Epoch: {:03d} val_acc: {:.2f} val_loss: {:.4f} val_OA: {:.4f} val_Kappa: {:.4f}".
               format(epoch+1, val_res[0].avg, val_res[1].avg, val_res[2].avg, val_res[3].avg))
             
@@ -173,12 +151,10 @@ def main(cfg):
                             'VAL_2_OA': val_res[2].avg,
                             'VAL_3_Kappa': val_res[3].avg}
                 log_tensorboard(writer_tb, current_log, epoch)
-            
 
             val_acc = val_res[2].avg
             val_loss = val_res[1].avg
             
-            # val_acc_r = val_res[4].avg
             if dist.get_rank() == 0:
                 if val_loss < best_loss:
                     best_loss = val_loss
@@ -191,18 +167,6 @@ def main(cfg):
                     # save ckpt
                     util.save_checkpoint(model, optimizer, scheduler, epoch, best_OA_ckpt_file_path, best_loss=val_loss, best_acc=best_acc)
                     logger.info(f">>>>> best acc {best_OA_ckpt_file_path}_{epoch}_{best_acc} saved......")    
-            
-            
-            
-            
-            
-            
-
-        # if (epoch % args.test_freq == 0) | (epoch == args.epoches - 1):         
-        #     model.eval()
-        #     tar_v, pre_v = valid_epoch(model, label_test_loader, criterion, optimizer)
-        #     OA2, AA_mean2, Kappa2, AA2 = output_metric(tar_v, pre_v)
-        #     print("Epoch: {:03d} val_OA: {:.4f}val_Kappa: {:.4f}".format(epoch+1, OA2, Kappa2))
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
@@ -211,10 +175,6 @@ def main(cfg):
 
 if __name__ == '__main__':
     
-    # parser = argparse.ArgumentParser(description='Parser')    
-    # # parser.add_argument('--hsi', type=str,  default='hsi', choices=['hsi','hsi_drone'])
-    # parser.add_argument('--yaml', type=str,  default='cfg_train.yaml', choices=['cfg_train.yaml','cfg_train_drone.yaml'])
-    # config = parser.parse_args()
     with open('cfg_train.yaml') as f:
         cfg = yaml.safe_load(f)
     

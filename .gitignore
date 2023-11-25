@@ -13,6 +13,7 @@ __pycache__/
 .Python
 dataset/
 sample_data/
+input_data/
 test_log/
 outputs_*/
 build/
