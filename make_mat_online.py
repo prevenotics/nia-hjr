@@ -11,7 +11,8 @@ import pymysql
 
 os.chdir('/root/work/hjr/nia-hjr')
 
-image_folder = r'./input_data/temp/'
+image_folder = r'./input_data/temp/' #To설정아 : temp 폴더가 사용자가 영상 올릴때마다 변경되면 될거같아요
+
 # json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 # output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
 # output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'

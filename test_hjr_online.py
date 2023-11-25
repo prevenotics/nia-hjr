@@ -59,10 +59,10 @@ def main(cfg):
         ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam'
         band = 100
     elif prefix =='U':
-        ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam' #To설 : 다른거로 교체예정
+        ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam' #To설정아 : 다른거로 교체예정
         band = 100
     elif prefix =='D':
-        ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam' #To설 : 다른거로 교체예정
+        ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam' #To설정아 : 다른거로 교체예정
         band = 80
         
     num_class = cfg['num_class']
