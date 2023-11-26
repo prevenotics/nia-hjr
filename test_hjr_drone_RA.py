@@ -6,12 +6,11 @@ import torch.backends.cudnn as cudnn
 from torch import optim
 from torch.autograd import Variable
 import network
-from param_parser import TrainParser
+# from param_parser import TrainParser
 import argparse
 import utils.utils as util
 from utils.logger import create_logger
-from core import test_epoch_online
-from make_mat_online import create_label_mat, L_file, U_file, D_file, sampling_point, online
+from core import test_epoch
 from tensorboardX import SummaryWriter
 from data.build_data import build_data_loader
 
@@ -31,43 +30,11 @@ import yaml
 os.chdir("/root/work/hjr/nia-hjr")
 
 def main(cfg):
-
-    # # # Parameter Setting
-    # # np.random.seed(args.seed)
-    # # torch.manual_seed(args.seed)
-    # # torch.cuda.manual_seed(args.seed)
-    # # cudnn.deterministic = True
-    # # cudnn.benchmark = False
-    # start_epoch=0
-    # # num_epochs=args.epoches
-    # num_epochs=cfg['train_param']['epoch']
-    # best_loss = 9999
-    # best_acc = -9999
-    
-    
+   
     log_dir, _, _ = util.make_output_directory(cfg)
     logger = create_logger(log_dir, dist_rank=0, name='')
-    
-    prefix, imgtype =online()
-    
-    # #create tensorboard
-    # if cfg['system']['tensorboard']:
-    #     writer_tb = SummaryWriter(log_dir=tensorb_dir)
 
-    
-    if prefix =='L':
-        ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam'
-        input_size = 512
-        band = 100
-    elif prefix =='U':
-        ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam' #To설정아 : 다른거로 교체예정
-        input_size = 512
-        band = 100
-    elif prefix =='D':
-        ckpt_file_path = 'output/231122_mfA100_RE_cosinealr_nadam_p3_bp3_clip65535_mirror_sp256_lr001_adam' #To설정아 : 다른거로 교체예정
-        input_size = 256
-        band = 80
-        
+    band =cfg['image_param']['band']
     num_class = cfg['num_class']
     #-------------------------------------------------------------------------------
     # create model
@@ -85,8 +52,8 @@ def main(cfg):
             emb_dropout = 0.1,
             mode = cfg['network']['spectralformer']['mode']
         )
-        # criterion
-        criterion = nn.CrossEntropyLoss(ignore_index=30).cuda() 
+        # # criterion
+        # criterion = nn.CrossEntropyLoss(ignore_index=30).cuda() 
         # optimizer
         opt = cfg['train_param']['opt']
         logger.info(f"optimizer = {opt} ......")
@@ -105,30 +72,34 @@ def main(cfg):
         elif lrs == "steplr":
             # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
             scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=cfg['train_param']['epoch']//10, gamma=cfg['train_param']['gamma'])
-        sample_point = util.get_point(input_size, cfg['test_param']['sampling_num'])   
+        sample_point = util.get_point(cfg['image_param']['size'], cfg['test_param']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
-        # test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], band)     
-        test_data_loader = build_data_loader(cfg['dataset'], 'online', 'test_online.csv', imgtype, sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], band)     
+        test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
         
+    
+    
+    elif cfg['network']['arch'] == 'DL':
+        model = network.modeling.__dict__[cfg['network']['arch']['model']](num_classes=num_class, output_stride=cfg['network']['DeepLab']['output_stride'])
+        if cfg['network']['DeepLab']['separable_conv'] and 'plus' in cfg['network']['arch']['model']:
+            network.convert_to_separable_conv(model.classifier)
+        util.set_bn_momentum(model.backbone, momentum=0.01)
+    
     
     local_rank = int(os.environ["LOCAL_RANK"])
     model = model.cuda()
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[local_rank],
                                                               find_unused_parameters=True, broadcast_buffers=False)
     #resume
-
-    # ckpt_file_path = cfg['path']['model_path'] #os.path.join(pth_dir, "checkpoints.pth")
+    ckpt_file_path = cfg['path']['model_path'] 
     if os.path.isfile(ckpt_file_path):
         start_epoch, best_loss, best_acc = util.load_checkpoint_files(ckpt_file_path, model, scheduler, logger)
         
-
-    
     logger.info(">>>>>>>>>> Start Testing")
     start_time = time.time()
         
     
-    test_res = test_epoch_online(model, test_data_loader, band, imgtype, cfg, logger)       
+    test_res = test_epoch(model, test_data_loader, cfg, logger)       
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
@@ -138,8 +109,7 @@ def main(cfg):
 
 if __name__ == '__main__':
     
-    
-    with open('cfg_online.yaml') as f:
+    with open('cfg_test_drone_RA.yaml') as f:
         cfg = yaml.safe_load(f)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
@@ -150,7 +120,6 @@ if __name__ == '__main__':
         rank = -1
         world_size = -1
 
-    # torch.cuda.set_device(args.local_rank)
     torch.cuda.set_device(int(os.environ["LOCAL_RANK"]))
     torch.distributed.init_process_group(backend='nccl', init_method='env://', world_size=world_size, rank=rank)
     torch.distributed.barrier()

@@ -6,7 +6,7 @@ from collections import Counter
 
 min_file_num = 120000000000
 
-with open('/root/work/hjr/nia-hjr/cfg_test.yaml') as f:
+with open('/root/work/hjr/nia-hjr/cfg_test_drone.yaml') as f:
     cfg = yaml.safe_load(f)
 
 dataset_path= cfg['path']['dataset_path']

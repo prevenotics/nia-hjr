@@ -256,7 +256,12 @@ def test_epoch(model, test_loader, cfg, logger):
                 image_margin = 5
                               
                 for i in range(batch_size):
-                    res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [80, 39, 15]].cpu().numpy()
+                    basename=os.path.basename(path[i])
+                    if basename[2] =='L' or basename[2] =='U':
+                        res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [80, 39, 15]].cpu().numpy()
+                    elif basename[2] =='D':
+                        res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [58, 28, 11]].cpu().numpy()
+                        
                     res_image = (res_image * 255).astype(np.uint8)
                     
                     label_tar_i = (label_tar[i, :, :]).astype(np.uint8)

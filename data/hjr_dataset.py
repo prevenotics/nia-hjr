@@ -232,6 +232,7 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
         label_mat = label_mat[sample_point[:,1],sample_point[:,0]]
         # temp_label_after = np.array(label_mat).reshape(256,256)*8
         # temp_image = image_mat[:,:,[15,39,80]]
+        # res_image = image_mat[:, :, [80, 39, 15]]
         image_mat = image_mat[sample_point[:,1],sample_point[:,0]]
         # temp_image_after = image_mat.reshape(256,256,100)[:,:,[15,39,80]]
         
