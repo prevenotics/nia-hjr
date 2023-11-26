@@ -42,6 +42,8 @@ def make_directory(path):
 def make_output_directory(config):
     make_directory(config['path']['output_dir'])
     make_directory(config['test_param']['out_img_path'])
+    make_directory(config['test_param']['out_npy_path'])
+    
     # create log file
     log_dir = os.path.join(config['path']['output_dir'], "logs")
     make_directory(log_dir)
@@ -300,7 +302,7 @@ def output_metric(tar, pre, ignore_class=30):
     return OA, Kappa #, matrix
 #-------------------------------------------------------------------------------
 
-def output_metric_with_savefig(tar, pre, ignore_class=30):
+def output_metric_with_savefig(tar, pre, path, ignore_class=30):
     # matrix = confusion_matrix(tar, pre, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29, 30])
     # matrix = matrix[:30,:30] #ignore_class = 30
     # OA, Kappa = cal_results(matrix)
@@ -311,7 +313,7 @@ def output_metric_with_savefig(tar, pre, ignore_class=30):
     
     ####################################################################################################################################################################
     labels=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
-    plot_confusion_matrix(matrix, labels = labels)
+    plot_confusion_matrix(matrix, labels, path)
     ###################################################################################################################################################################
     plt.savefig("confusion_matrix.jpg")
     OA, Kappa = cal_results(matrix)
@@ -343,8 +345,8 @@ def cal_results(matrix):
 #-------------------------------------------------------------------------------
 
 # confusion matrix 그리는 함수 
-def plot_confusion_matrix(con_mat, labels, title='Confusion Matrix', cmap=plt.cm.get_cmap('Blues'), normalize=False):
-    plt.figure(figsize=[20,20])
+def plot_confusion_matrix(con_mat, labels, path, title='Confusion Matrix', cmap=plt.cm.get_cmap('Blues'), normalize=False):
+    plt.figure(figsize=[25,25])
     plt.imshow(con_mat, interpolation='nearest', cmap=cmap)
     plt.title(title)
     plt.colorbar()
@@ -367,7 +369,7 @@ def plot_confusion_matrix(con_mat, labels, title='Confusion Matrix', cmap=plt.cm
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.savefig('cm.png')
+    plt.savefig(os.path.join(path, 'cm.png'))
     plt.clf()
     
 

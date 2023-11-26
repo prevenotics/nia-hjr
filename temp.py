@@ -25,7 +25,7 @@
 # # 결과 출력
 # print(sampling_coords)
 
-#####################################################################################################################################################################
+# ####################################################################################################################################################################
 # import numpy as np
 # import matplotlib.pyplot as plt
 
@@ -58,7 +58,7 @@
 # plt.gca().invert_yaxis()  # 좌측 상단을 원점으로 설정
 # # plt.grid(True)
 # plt.savefig(f"sampling_coords_{y}.png", dpi=300, bbox_inches='tight')
-#####################################################################################################################################################################
+# ####################################################################################################################################################################
 
 # import numpy as np
 
@@ -101,20 +101,48 @@
 # print(Kappa)
 
 
-import numpy as np
+# import numpy as np
 
-# (256, 256, 3) 크기의 흑백 이미지(값이 동일) 생성 예시
-img = np.zeros((256, 256, 3), dtype=np.uint8)  # 흑백 이미지 생성
-img[10:20, 10:20, :] = 30  # 모든 채널에 값 30 적용
-# 특정 위치에 값 30 적용 (예시에서는 50x50 위치)
-img[50, 50, :] = 30
+# # (256, 256, 3) 크기의 흑백 이미지(값이 동일) 생성 예시
+# img = np.zeros((256, 256, 3), dtype=np.uint8)  # 흑백 이미지 생성
+# img[10:20, 10:20, :] = 30  # 모든 채널에 값 30 적용
+# # 특정 위치에 값 30 적용 (예시에서는 50x50 위치)
+# img[50, 50, :] = 30
 
-# 노란색(RGB: [255, 255, 0])으로 값이 30인 부분을 변경
-yellow_indices = np.all(img == [30, 30, 30], axis=2)  # 값이 30인 부분 찾기
-img[yellow_indices] = [255, 255, 0]  # 노란색으로 변경
+# # 노란색(RGB: [255, 255, 0])으로 값이 30인 부분을 변경
+# yellow_indices = np.all(img == [30, 30, 30], axis=2)  # 값이 30인 부분 찾기
+# img[yellow_indices] = [255, 255, 0]  # 노란색으로 변경
 
-img
+# img
 
 # 결과 확인
 # 여기서는 이미지를 시각화하여 눈으로 확인하는 대신에, 이미지가 생성되었다고 가정합니다.
 
+import os
+import numpy as np
+import utils.utils as util
+os.chdir('/root/work/hjr/nia-hjr')
+image_folder = r'./output/231123_GCP_RE_cosinealr_p3_bp3_clip4000_mirror_sp64_lr001_adam_tb256/result_npy'
+
+cnt = 0
+for root, dirs, files in os.walk(image_folder):
+    # if "02.수중 및 지상 초분광" in root:
+        for image_filename in files:
+            if image_filename.endswith('.npy'):
+                cnt +=1
+
+result = []
+cnt = 0
+for root, dirs, files in os.walk(image_folder):
+    # if "02.수중 및 지상 초분광" in root:
+        for image_filename in files:
+            if image_filename.endswith('.npy'):
+                temp = np.load(os.path.join(image_folder, image_filename))
+                result.append(temp)
+                print(cnt)
+                cnt +=1
+
+temp = np.array(result)
+temp = temp.transpose(1, 2, 0).reshape(2, -1)
+OA, kappa = util.output_metric_with_savefig(temp[0,:], temp[1,:], 'output/231123_GCP_RE_cosinealr_p3_bp3_clip4000_mirror_sp64_lr001_adam_tb256')
+print(f'Total : OA:{OA:.5f} Kappa:{kappa:.5f}')

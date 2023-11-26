@@ -194,7 +194,7 @@ def sampling_point(image_size, y):
     image_height = image_size
 
     # y 변수 설정
-    y = 512  # y 값을 변경하여 원하는 등분 수를 얻을 수 있습니다.
+    # y = 512  # y 값을 변경하여 원하는 등분 수를 얻을 수 있습니다.
 
     # 중심 좌표 계산
     center_x = image_width // 2

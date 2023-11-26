@@ -245,7 +245,8 @@ def test_epoch(model, test_loader, cfg, logger):
                 
                 OA_list.append(OA_one)
                 Kappa_list.append(Kappa_one)
-                npy_path_idx = os.path.join(npy_path, f'{formatted_time_for_filename}_{idx}.npy')
+                index = idx*batch_size+i
+                npy_path_idx = os.path.join(npy_path, f'{formatted_time_for_filename}_{index:05d}.npy')
                 np.save(npy_path_idx, np.vstack((label_tar_i.reshape(-1), label_pre_i.reshape(-1))))
             
             OA_batch = np.array(OA_list)
@@ -305,7 +306,7 @@ def test_epoch(model, test_loader, cfg, logger):
                             result_img_draw.text((text_x,text_y), text, (0,255,0), font=font)
                     
                     img_name = os.path.basename(path[i]).split('.')[0]
-                    result_img_path = os.path.join(cfg['test_param']['out_img_path'], f'{img_name}_{{formatted_time_for_filename}}.jpg')
+                    result_img_path = os.path.join(cfg['test_param']['out_img_path'], f'{img_name}_{formatted_time_for_filename}.jpg')
                     result_img.save(result_img_path)
             
             batch_time.update(time.time() - batch_end)
@@ -338,6 +339,21 @@ def test_epoch(model, test_loader, cfg, logger):
         file.write(f"End Time [{formatted_time}]\n")    
     
     epoch_time = time.time() - batch_start
+    
+    result = []
+    cnt = 0
+    for root, dirs, files in os.walk(npy_path):
+        # if "02.수중 및 지상 초분광" in root:
+            for image_filename in files:
+                if image_filename.endswith('.npy'):
+                    temp = np.load(os.path.join(npy_path, image_filename))
+                    result.append(temp)
+                    
+
+    temp = np.array(result)
+    temp = temp.transpose(1, 2, 0).reshape(2, -1)
+    OA, kappa = util.output_metric_with_savefig(temp[0,:], temp[1,:], cfg['test_param']['out_res_path'])
+    print(f'========Total : OA:{OA:.5f} Kappa:{kappa:.5f}========')
     
     # return [top1, OA_meter, Kappa_meter]
     return top1
