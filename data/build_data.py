@@ -10,8 +10,10 @@ def build_data_loader(dataset_name, mode, csv_path, imgtype, sample_point, batch
         dataset = HJRDataset(csv_file=csv_path, imgtype=imgtype, sample_point=sample_point, patch=patch, band_patch=band_patch, band = band)
     elif dataset_name =='hjr' and mode =='test':
         dataset = HJRDataset_for_test(csv_file=csv_path, imgtype=imgtype, sample_point=sample_point, patch=patch, band_patch=band_patch, band = band)
+        shuffle = False
     elif dataset_name =='hjr' and mode =='online':
         dataset = HJRDataset_for_online(csv_file=csv_path, imgtype=imgtype, sample_point=sample_point, patch=patch, band_patch=band_patch, band = band)
+        shuffle = False
     
     
     # local_rank = os.environ['LOCAL_RANK']

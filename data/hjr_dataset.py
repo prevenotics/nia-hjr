@@ -61,8 +61,8 @@ class HJRDataset(torch.utils.data.Dataset):
     def mat_open(self, path_img, imgtype, sample_point, patch, band_patch, band):
          
         mat_data = loadmat(path_img)
-        
         image_mat = mat_data['image']       
+        
         if imgtype == 'RA':
             clipping = 40000
             image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
@@ -131,8 +131,7 @@ class HJRDataset(torch.utils.data.Dataset):
         
         label_mat = loadmat(first_label_path)
         your_variable_name = 'label'  # your variable name in the .mat file
-
-        # 만약 label_mat의 크기가 512x512가 아니면 512x512로 만들어줍니다.
+        
         desired_shape = (512, 512)
 
         if your_variable_name in label_mat:
@@ -194,9 +193,16 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
     def mat_open(self, path_img, imgtype, sample_point, patch, band_patch, band):
          
         mat_data = loadmat(path_img)
-        
+        basename = os.path.basename(path_img)
         image_mat = mat_data['image']       
         
+        if basename[2]=='L' or basename[2]=='U':
+            if image_mat.shape[0] != 512:
+                return 0
+        else:
+            if image_mat.shape[0] != 256:
+                return 0
+            
         if imgtype == 'RA':
             clipping = 40000
             image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 

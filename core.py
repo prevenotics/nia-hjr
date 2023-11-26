@@ -233,28 +233,30 @@ def test_epoch(model, test_loader, cfg, logger):
             label_pre =pre_one.reshape(batch_size,image_size,image_size)
             label_tar= tar_one.reshape(batch_size,image_size,image_size)
             
-            OA_list = []
-            Kappa_list = []
             
-            for i in range(batch_size):
-                label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
-                label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
+            if not cfg['test_param']['save_img']:
+                OA_list = []
+                Kappa_list = []
+                for i in range(batch_size):
+                    label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
+                    label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
+                    
+                    label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
+                    OA_one, Kappa_one = util.output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))                
+                    
+                    OA_list.append(OA_one)
+                    Kappa_list.append(Kappa_one)
+                    # index = idx*batch_size+i
+                    img_name = os.path.basename(path[i]).split('.')[0]
+                    npy_path_final = os.path.join(npy_path, f'{formatted_time_for_filename}_{img_name}.npy')
+                    np.save(npy_path, np.vstack((label_tar_i.reshape(-1), label_pre_i.reshape(-1))))
                 
-                label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
-                OA_one, Kappa_one = util.output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))                
-                
-                OA_list.append(OA_one)
-                Kappa_list.append(Kappa_one)
-                index = idx*batch_size+i
-                npy_path_idx = os.path.join(npy_path, f'{formatted_time_for_filename}_{index:05d}.npy')
-                np.save(npy_path_idx, np.vstack((label_tar_i.reshape(-1), label_pre_i.reshape(-1))))
-            
-            OA_batch = np.array(OA_list)
-            Kappa_batch = np.array(Kappa_list)
-            
-            if cfg['test_param']['save_img']:                       
+                OA_batch = np.array(OA_list)
+                Kappa_batch = np.array(Kappa_list)            
+            else:                       
                 image_margin = 5
-                              
+                OA_list = []
+                Kappa_list = []              
                 for i in range(batch_size):
                     basename=os.path.basename(path[i])
                     if basename[2] =='L' or basename[2] =='U':
@@ -266,6 +268,14 @@ def test_epoch(model, test_loader, cfg, logger):
                     
                     label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
                     label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
+                    
+                    label_pre_i = cv2.medianBlur(label_pre_i, 9)          
+                    OA_one, Kappa_one = util.output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))                          
+                    OA_list.append(OA_one)
+                    Kappa_list.append(Kappa_one)
+                    img_name = os.path.basename(path[i]).split('.')[0]
+                    npy_path_final = os.path.join(npy_path, f'{formatted_time_for_filename}_{img_name}.npy')
+                    np.save(npy_path_final, np.vstack((label_tar_i.reshape(-1), label_pre_i.reshape(-1))))
                     
                     tar_unique, tar_cnt = np.unique(label_tar_i[label_tar_i !=30], return_counts=True)
                     sorted_indices = np.argsort(-tar_cnt)
@@ -293,8 +303,8 @@ def test_epoch(model, test_loader, cfg, logger):
                     result_img.paste(Image.fromarray(label_pre_i), (image_size*2+image_margin,0))
                     result_img_draw = ImageDraw.Draw(result_img)
                     font = ImageFont.truetype("ARIAL.TTF", 20)
-                    result_img_draw.text((10,image_size+5), f" OA   : {OA_batch[i]:.3f}", (0,255,0), font=font)
-                    result_img_draw.text((10,image_size+35), f"Kappa: {Kappa_batch[i]:.3f}", (0,255,0), font=font)
+                    result_img_draw.text((10,image_size+5), f" OA   : {OA_one:.3f}", (0,255,0), font=font)
+                    result_img_draw.text((10,image_size+35), f"Kappa: {Kappa_one:.3f}", (0,255,0), font=font)
                     font = ImageFont.truetype("MALGUN.TTF", 15)
                     
                     max_length = max(len(tar_unique), len(pre_unique))
@@ -311,9 +321,12 @@ def test_epoch(model, test_loader, cfg, logger):
                             result_img_draw.text((text_x,text_y), text, (0,255,0), font=font)
                     
                     img_name = os.path.basename(path[i]).split('.')[0]
-                    result_img_path = os.path.join(cfg['test_param']['out_img_path'], f'{img_name}_{formatted_time_for_filename}.jpg')
+                    result_img_path = os.path.join(cfg['test_param']['out_img_path'], f'{formatted_time_for_filename}_{img_name}.jpg')
                     result_img.save(result_img_path)
-            
+                
+                OA_batch = np.array(OA_list)
+                Kappa_batch = np.array(Kappa_list)  
+                
             batch_time.update(time.time() - batch_end)
             batch_end = time.time()
 
@@ -429,33 +442,47 @@ def test_epoch_online(model, test_loader, band, imgtype, cfg, logger):
             label_pre =pre_one.reshape(batch_size,image_size,image_size)
             label_tar= tar_one.reshape(batch_size,image_size,image_size)
             
-            OA_list = []
-            Kappa_list = []
-            
-            for i in range(batch_size):
-                label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
-                label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
-                
-                label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
-                OA_one, Kappa_one = util.output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))                
-                
-                OA_list.append(OA_one)
-                Kappa_list.append(Kappa_one)
-                # npy_path_idx = os.path.join(npy_path, f'{formatted_time_for_filename}_{idx}.npy')
-                # np.save(npy_path_idx, np.vstack((label_tar_i.reshape(-1), label_pre_i.reshape(-1))))
-            
-            OA_batch = np.array(OA_list)
-            Kappa_batch = np.array(Kappa_list)
-            
-            if cfg['test_param']['save_img']:                       
-                image_margin = 5
-                              
+            if not cfg['test_param']['save_img']:
+                OA_list = []
+                Kappa_list = []
                 for i in range(batch_size):
-                    res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [80, 39, 15]].cpu().numpy()
+                    label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
+                    label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
+                    
+                    label_pre_i = cv2.medianBlur(label_pre_i, 9)                    
+                    OA_one, Kappa_one = util.output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))                
+                    
+                    OA_list.append(OA_one)
+                    Kappa_list.append(Kappa_one)
+                    # index = idx*batch_size+i
+                    # img_name = os.path.basename(path[i]).split('.')[0]
+                    # npy_path_final = os.path.join(npy_path, f'{formatted_time_for_filename}_{img_name}.npy')
+                    # np.save(npy_path, np.vstack((label_tar_i.reshape(-1), label_pre_i.reshape(-1))))
+                
+                OA_batch = np.array(OA_list)
+                Kappa_batch = np.array(Kappa_list)    
+            
+            else:
+                image_margin = 5
+                OA_list = []
+                Kappa_list = []              
+                for i in range(batch_size):         
+                    basename=os.path.basename(path[i])     
+                    if basename[2] =='L' or basename[2] =='U':
+                        res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [80, 39, 15]].cpu().numpy()
+                    elif basename[2] =='D':
+                        res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [58, 28, 11]].cpu().numpy()
+                    
                     res_image = (res_image * 255).astype(np.uint8)
                     
                     label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
                     label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
+                    
+                    label_pre_i = cv2.medianBlur(label_pre_i, 9)          
+                    OA_one, Kappa_one = util.output_metric(label_tar_i.reshape(-1), label_pre_i.reshape(-1))                          
+                    OA_list.append(OA_one)
+                    Kappa_list.append(Kappa_one)
+                    
                     
                     tar_unique, tar_cnt = np.unique(label_tar_i[label_tar_i !=30], return_counts=True)
                     sorted_indices = np.argsort(-tar_cnt)
@@ -483,8 +510,8 @@ def test_epoch_online(model, test_loader, band, imgtype, cfg, logger):
                     result_img.paste(Image.fromarray(label_pre_i), (image_size*2+image_margin,0))
                     result_img_draw = ImageDraw.Draw(result_img)
                     font = ImageFont.truetype("ARIAL.TTF", 20)
-                    result_img_draw.text((10,image_size+5), f" OA   : {OA_batch[i]:.3f}", (0,255,0), font=font)
-                    result_img_draw.text((10,image_size+35), f"Kappa: {Kappa_batch[i]:.3f}", (0,255,0), font=font)
+                    result_img_draw.text((10,image_size+5), f" OA   : {OA_one:.3f}", (0,255,0), font=font)
+                    result_img_draw.text((10,image_size+35), f"Kappa: {Kappa_one:.3f}", (0,255,0), font=font)
                     font = ImageFont.truetype("MALGUN.TTF", 15)
                     
                     max_length = max(len(tar_unique), len(pre_unique))
@@ -503,7 +530,10 @@ def test_epoch_online(model, test_loader, band, imgtype, cfg, logger):
                     img_name = os.path.basename(path[i]).split('.')[0]
                     result_img_path = os.path.join(cfg['test_param']['out_img_path'], f'{img_name}_{formatted_time_for_filename}.jpg')
                     result_img.save(result_img_path)
-            
+                
+                OA_batch = np.array(OA_list)
+                Kappa_batch = np.array(Kappa_list)  
+                
             batch_time.update(time.time() - batch_end)
             batch_end = time.time()
 
@@ -519,12 +549,12 @@ def test_epoch_online(model, test_loader, band, imgtype, cfg, logger):
                     else:
                         file.write(f'{path_one}\tOA\t{OA_batch[i]:0.3f}\tkappa\t{Kappa_batch[i]:0.3f}\t \t \n')
                 
-                    memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
-                    etas = batch_time.avg * (num_steps - idx)
-                    logger.info(
-                    f'Test: [{idx}/{num_steps}]\t'
-                    f'eta {datetime.timedelta(seconds=int(etas))}\t'
-                    f'OA, kappa: {OA_batch[i]:.4f}, {Kappa_batch[i]:.4f}')
+                memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
+                etas = batch_time.avg * (num_steps - idx)
+                logger.info(
+                f'Test: [{idx}/{num_steps}]\t'
+                f'eta {datetime.timedelta(seconds=int(etas))}\t'
+                f'OA, kappa: {OA_batch[i]:.4f}, {Kappa_batch[i]:.4f}')
 
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")    

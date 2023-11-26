@@ -22,7 +22,9 @@ import time
 import datetime
 import os
 import yaml
+import warnings
 
+warnings.filterwarnings(action='ignore')
 
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 test_hjr.py
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  test_hjr.py
@@ -75,7 +77,10 @@ def main(cfg):
         sample_point = util.get_point(cfg['image_param']['size'], cfg['test_param']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
-        test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], cfg['image_param']['band'])     
+        test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], 
+                                             sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], 
+                                             local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], 
+                                             cfg['image_param']['band'])     
         
     
     

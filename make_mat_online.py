@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 from scipy import io
 import tifffile
 import datetime
-import pymysql
+# import pymysql
 
 os.chdir('/root/work/hjr/nia-hjr')
 
