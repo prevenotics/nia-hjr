@@ -263,8 +263,11 @@ def test_epoch(model, test_loader, cfg, logger):
                         res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [80, 39, 15]].cpu().numpy()
                     elif basename[2] =='D':
                         res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [58, 28, 11]].cpu().numpy()
+                        # temp_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [11, 28, 58]].cpu().numpy()
                         
                     res_image = (res_image * 255).astype(np.uint8)
+                    # temp_image = (temp_image * 255).astype(np.uint8)
+                    
                     
                     label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
                     label_pre_i = (label_pre[i, :, :]).astype(np.uint8)

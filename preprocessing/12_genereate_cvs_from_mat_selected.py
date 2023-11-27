@@ -6,14 +6,14 @@ from collections import Counter
 
 min_file_num = 120000000000
 
-with open('/root/work/hjr/nia-hjr/cfg_test_drone.yaml') as f:
+with open('/root/work/hjr/nia-hjr/cfg_test_drone_RE.yaml') as f:
     cfg = yaml.safe_load(f)
 
 dataset_path= cfg['path']['dataset_path']
 list_mat = []
 imgtype = cfg['image_param']['type']
 
-output_train_csv= f'list_{imgtype}.csv'
+output_train_csv= f'list_drone_{imgtype}.csv'
 output_val_csv= f'val_drone_{imgtype}.csv'
 output_test_csv= f'test_drone_{imgtype}.csv'
 

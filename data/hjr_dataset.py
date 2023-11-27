@@ -61,14 +61,35 @@ class HJRDataset(torch.utils.data.Dataset):
     def mat_open(self, path_img, imgtype, sample_point, patch, band_patch, band):
          
         mat_data = loadmat(path_img)
+        basename = os.path.basename(path_img)
         image_mat = mat_data['image']       
+
+        if basename[2]=='L' or basename[2]=='U':
+            if image_mat.shape[0] != 512:
+                return 0
+            if imgtype == 'RA':
+                clipping = 40000
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                   
+            elif imgtype =='RE':
+                clipping = 65535
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
+        else:
+            if image_mat.shape[0] != 256:
+                return 0
+            if imgtype == 'RA':
+                clipping = 255
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+            elif imgtype =='RE':
+                clipping = 255
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
         
-        if imgtype == 'RA':
-            clipping = 40000
-            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
-        elif imgtype =='RE':
-            clipping = 65535
-            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        # if imgtype == 'RA':
+        #     clipping = 40000
+        #     image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        # elif imgtype =='RE':
+        #     clipping = 65535
+        #     image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        
         data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
         if patch > 1:
             image_mat_mirror = mirror(image_mat, band, patch)        
@@ -199,16 +220,21 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
         if basename[2]=='L' or basename[2]=='U':
             if image_mat.shape[0] != 512:
                 return 0
+            if imgtype == 'RA':
+                clipping = 40000
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                   
+            elif imgtype =='RE':
+                clipping = 65535
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
         else:
             if image_mat.shape[0] != 256:
                 return 0
-            
-        if imgtype == 'RA':
-            clipping = 40000
-            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
-        elif imgtype =='RE':
-            clipping = 65535
-            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
+            if imgtype == 'RA':
+                clipping = 255
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+            elif imgtype =='RE':
+                clipping = 255
+                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
             
             
             
@@ -238,10 +264,12 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
         label_mat = label_mat[sample_point[:,1],sample_point[:,0]]
         # temp_label_after = np.array(label_mat).reshape(256,256)*8
         # temp_image = image_mat[:,:,[15,39,80]]
-        # res_image = image_mat[:, :, [80, 39, 15]]
+        # res_image = (image_mat[:, :, [80, 39, 15]]*255).astype(np.uint8)
+        # res_image = (image_mat[:, :, [65, 35, 18]]*65535).astype(np.uint8)
         image_mat = image_mat[sample_point[:,1],sample_point[:,0]]
-        # temp_image_after = image_mat.reshape(256,256,100)[:,:,[15,39,80]]
-        
+        # temp_image_after = (image_mat.reshape(256,256,100)[:,:,[65, 35, 18]]*255).astype(np.uint8)
+    # mat_image_old = mat_old['image']
+    # res_image5_12_old = mat_image_old[:, :, [65, 35, 18]]
         
         label = torch.from_numpy(label_mat).type(torch.LongTensor)        
         # image_mat = torch.from_numpy(image_mat.transpose(0, 2, 1)).type(torch.FloatTensor)

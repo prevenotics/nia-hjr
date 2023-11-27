@@ -95,7 +95,7 @@ def main():
                         'label': np.full((size, size), class_num)
                     }
 
-                    output_filename = os.path.join(output_folder, f'RE_class_{class_num:02d}_{file_counter[class_num]:07d}.mat')
+                    output_filename = os.path.join(output_folder, f'{imgkind}_{imgtype}_class_{class_num:02d}_{file_counter[class_num]:07d}.mat')
                     io.savemat(output_filename, new_mat_file)
                     print(f'{cnt}/{total_cnt} : save: {output_filename}')
                     file_counter[class_num] += 1
