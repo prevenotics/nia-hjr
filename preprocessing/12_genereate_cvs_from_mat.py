@@ -4,18 +4,18 @@ import yaml
 import random
 from collections import Counter
 
-min_file_num = 1200
+min_file_num = 50
 
-with open('/root/work/hjr/nia-hjr/cfg_train.yaml') as f:
+with open('/root/work/hjr/nia-hjr/cfg_train_RA.yaml') as f:
     cfg = yaml.safe_load(f)
 
 dataset_path= cfg['path']['dataset_path']
 list_mat = []
 imgtype = cfg['image_param']['type']
 
-output_train_csv= f'train_drone_{imgtype}.csv'
-output_val_csv= f'val_drone_{imgtype}.csv'
-output_test_csv= f'test_drone_{imgtype}.csv'
+output_train_csv= f'final_train_50_{imgtype}.csv'
+output_val_csv= f'final_val_50_{imgtype}.csv'
+output_test_csv= f'final_test_50_{imgtype}.csv'
 
 for root, dirs, files in os.walk(dataset_path):
     for file in files:
@@ -49,7 +49,7 @@ random.shuffle(list_mat_selected)
 ratio = 10
 index = 0
 
-with open(output_train_csv, mode='w', newline='') as train_file, open(output_val_csv, mode='w', newline='') as val_file, open(output_test_csv, mode='w', newline='') as test_file:
+with open(output_train_csv, mode='w', newline='') as train_file, open(output_val_csv, mode='w', newline='') as val_file: #, open(output_test_csv, mode='w', newline='') as test_file:
     for line in list_mat_selected:        
         mat = line.replace("\n", "")                
         index+=1

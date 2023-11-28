@@ -26,10 +26,12 @@ import warnings
 
 warnings.filterwarnings(action='ignore')
 
-#CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nproc_per_node 8 --master_port 1234 train_hjr.py --eval_freq 1
+#CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 python -m torch.distributed.launch --nproc_per_node 16 --master_port 1234 train_hjr.py
+#CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nproc_per_node 8 --master_port 1234 train_hjr.py
+#CUDA_VISIBLE_DEVICES=8,9,10,11,12,13,14,15 python -m torch.distributed.launch --nproc_per_node 8 --master_port 1234 train_hjr.py
 #CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 train_hjr.py --eval_freq 1
 #CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  train_hjr.py --eval_freq 1 --save_freq 100
-
+os.chdir('/root/work/hjr/nia-hjr')
 
 def main(cfg):
 
@@ -177,7 +179,7 @@ def main(cfg):
 
 if __name__ == '__main__':
     
-    with open('cfg_train.yaml') as f:
+    with open('cfg_train_RE.yaml') as f:
         cfg = yaml.safe_load(f)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:

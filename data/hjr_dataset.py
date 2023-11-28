@@ -64,31 +64,31 @@ class HJRDataset(torch.utils.data.Dataset):
         basename = os.path.basename(path_img)
         image_mat = mat_data['image']       
 
-        if basename[2]=='L' or basename[2]=='U':
-            if image_mat.shape[0] != 512:
-                return 0
-            if imgtype == 'RA':
-                clipping = 40000
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                   
-            elif imgtype =='RE':
-                clipping = 65535
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
-        else:
-            if image_mat.shape[0] != 256:
-                return 0
-            if imgtype == 'RA':
-                clipping = 255
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
-            elif imgtype =='RE':
-                clipping = 255
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
+        # if basename[2]=='L' or basename[2]=='U':
+        #     if image_mat.shape[0] != 512:
+        #         return 0
+        #     if imgtype == 'RA':
+        #         clipping = 40000
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                   
+        #     elif imgtype =='RE':
+        #         clipping = 65535
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
+        # else:
+        #     if image_mat.shape[0] != 256:
+        #         return 0
+        #     if imgtype == 'RA':
+        #         clipping = 255
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        #     elif imgtype =='RE':
+        #         clipping = 255
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
         
-        # if imgtype == 'RA':
-        #     clipping = 40000
-        #     image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
-        # elif imgtype =='RE':
-        #     clipping = 65535
-        #     image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        if imgtype == 'RA':
+            clipping = 40000
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        elif imgtype =='RE':
+            clipping = 65535
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
         
         data = np.zeros((sample_point.shape[0], patch, patch, band), dtype=float)
         if patch > 1:

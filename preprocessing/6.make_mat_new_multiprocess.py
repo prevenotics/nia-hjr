@@ -7,11 +7,20 @@ from PIL import Image, ImageDraw
 from scipy import io
 import tifffile
 import datetime
-import pymysql
 import multiprocessing
 import datetime
+import argparse
 
-image_folder = r'/root/work/hjr/dataset//1.원천데이터/'
+parser = argparse.ArgumentParser(description='Parser')
+
+parser.add_argument('--path', type=str, default='G:/10p(TEST)/3.TEST/1.원천데이터/')
+config = parser.parse_args()
+
+image_folder = config.path
+cls = image_folder.split('/')
+cls = cls[-2]
+
+# image_folder = r'/root/work/hjr/dataset//1.원천데이터/'
 # json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 # output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
 # output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'
@@ -33,8 +42,12 @@ def process_image(root, image_folder, output_mat_folder, prefix, file_extension,
     mat_path_RA = os.path.join(out_mat_folder, f"{prefix}_RA.mat")
     mat_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.mat")
     
+    if os.path.exists(mat_path_RA) and os.path.exists(mat_path_RE):
+        print('exist')
+        return 1
+    
 # try:
-    if prefix[2] == 'L':        
+    if prefix[2] == 'L':           
         mat_image_RA = L_file(image_path, imgtype[0], sampling_coords[0], output_size)
         mat_image_RE = L_file(image_path, imgtype[1], sampling_coords[0], output_size)
         label_path = label_path.replace(".tif", "_RE01.json")
@@ -54,6 +67,7 @@ def process_image(root, image_folder, output_mat_folder, prefix, file_extension,
     if mat_label is not None:        
         io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
         io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : mat_label})
+        print(f'saved_{mat_path_RA}, {mat_path_RE}')
         return 1
 # except FileNotFoundError as e:
     # error_cnt += 1    

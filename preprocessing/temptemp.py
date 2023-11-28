@@ -7,21 +7,20 @@ from PIL import Image, ImageDraw
 from scipy import io
 import tifffile
 import datetime
-# import pymysql
+# import pymysql	
+import argparse
 
-os.chdir('/root/work/hjr/nia-hjr')
+parser = argparse.ArgumentParser(description='Parser')
 
-image_folder = r'./input_data/temp/' #To설정아 : temp 폴더가 사용자가 영상 올릴때마다 변경되면 될거같아요
+parser.add_argument('--path', type=str, default='G:/10p(TEST)/3.TEST/1.원천데이터/')
+config = parser.parse_args()
 
-# json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
-# output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
-# output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'
-# output_mat_folder = r'D:/DATA/hjr/dataset/3.mat/'
+# image_folder = r'E:/Final_Result(1116)/1.원천데이터/01.갈파래류/'
+image_folder = config.path
+cls = image_folder.split('/')
+cls = cls[-2]
 
-# input_path= input("input path : ")
-# image_folder = input_path
-
-output_mat_folder = image_folder.replace("/temp/","/temp/mat/")
+output_mat_folder = image_folder.replace("1.원천데이터","3.mat_100p")
 
 def create_label_mat(label_path, loc, sampling_coords, output_size):
     try:    
@@ -54,30 +53,32 @@ def create_label_mat(label_path, loc, sampling_coords, output_size):
     for feature in features:        
         feat_cnt[cnt]=len(feature['geometry']['coordinates'])        
         cnt +=1
-    
-    for key, value in feat_cnt.items():
-        if value >= 2:
-            for num in range(len(features[key]['geometry']['coordinates'])):    
-                polygon = features[key]['geometry']['coordinates'][num]
+    try:
+        for key, value in feat_cnt.items():
+            if value >= 2:
+                for num in range(len(features[key]['geometry']['coordinates'])):    
+                    polygon = features[key]['geometry']['coordinates'][num]
+                    category_id = features[key]['properties']['categories_id']
+                    for sublist in polygon:
+                        for i in range(len(sublist)):
+                            sublist[i] = abs(sublist[i])
+                    polygon = [item for sublist in polygon for item in sublist]                        
+                    class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
+                    draw.polygon(polygon, outline=class_value, fill=class_value)
+                    
+        for key, value in feat_cnt.items():
+            if value < 2:
                 category_id = features[key]['properties']['categories_id']
-                for sublist in polygon:
-                    for i in range(len(sublist)):
-                        sublist[i] = abs(sublist[i])
-                polygon = [item for sublist in polygon for item in sublist]                        
-                class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
-                draw.polygon(polygon, outline=class_value, fill=class_value)
-                
-    for key, value in feat_cnt.items():
-        if value < 2:
-            category_id = features[key]['properties']['categories_id']
-            if features[key]['geometry']['coordinates']:
-                polygon = features[key]['geometry']['coordinates'][0]
-                for sublist in polygon:
-                    for i in range(len(sublist)):
-                        sublist[i] = abs(sublist[i])
-                polygon = [item for sublist in polygon for item in sublist]        
-                class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
-                draw.polygon(polygon, outline=class_value, fill=class_value)
+                if features[key]['geometry']['coordinates']:
+                    polygon = features[key]['geometry']['coordinates'][0]
+                    for sublist in polygon:
+                        for i in range(len(sublist)):
+                            sublist[i] = abs(sublist[i])
+                    polygon = [item for sublist in polygon for item in sublist]        
+                    class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
+                    draw.polygon(polygon, outline=class_value, fill=class_value)
+    except TypeError as e:
+        raise e
                 
     # if loc == "U":
     label = np.array(label)[sampling_coords[:,1], sampling_coords[:,0]].reshape(output_size,output_size)
@@ -145,8 +146,13 @@ def U_file(image_path, imgtype, sampling_coords, output_size): #under water
         try:
             os.path.exists(tif_file_path)
             img = tifffile.imread(tif_file_path)
-            concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img        
+            if img.shape[0] == 1026:
+                raise ValueError("1026size")
+            else:
+                concatenated_image[..., (i - 1) * num_channels:i * num_channels] = img        
         except FileNotFoundError as e:
+            raise e
+        except ValueError as e:
             raise e
             
 
@@ -195,9 +201,6 @@ def sampling_point(image_size, y):
     image_width = image_size
     image_height = image_size
 
-    # y 변수 설정
-    # y = 512  # y 값을 변경하여 원하는 등분 수를 얻을 수 있습니다.
-
     # 중심 좌표 계산
     center_x = image_width // 2
     center_y = image_height // 2
@@ -215,127 +218,6 @@ def sampling_point(image_size, y):
     
     return sampling_coords
 
-
-def online():
-    cnt = 0
-    file_paths_dict = {}
-    # imgtype = ["RA", "RE"]
-    band = 100
-    # band = 120
-    output_size = 512    
-    output_size_drone = 256
-    sampling_coords = [sampling_point(512, output_size), sampling_point(1024, output_size), sampling_point(256, output_size_drone)]
-    
-    current_time = datetime.datetime.now()
-    formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    # with open("log.txt", "w") as log:
-    #     log.write(f"Start Time [{formatted_time}]\n")
-    
-    for root, dirs, files in os.walk(image_folder):
-        # if "02.수중 및 지상 초분광" in root:
-            for image_filename in files:
-                if image_filename.endswith('.tif'):
-                    cnt +=1
-    
-    total_cnt = cnt
-    cnt= 0
-    error_cnt=0
-    
-    for root, dirs, files in os.walk(image_folder):
-        # if "02.수중 및 지상 초분광" in root:
-            for image_filename in files:
-                if image_filename.endswith('.json'):
-                    json_path = os.path.join(image_folder, image_filename)
-    
-    for root, dirs, files in os.walk(image_folder):
-        # if "02.수중 및 지상 초분광" in root:
-            for image_filename in files:
-                if image_filename.endswith('.tif'):
-                    base_name, file_extension = os.path.splitext(image_filename)
-                    if base_name.split('_')[-1][1] =='E':
-                        imgtype = 'RE'
-                    elif base_name.split('_')[-1][1] =='A':
-                        imgtype = 'RA'
-                    ####################################################################################                    
-                    prefix = '_'.join(image_filename.split('_')[:-1])  # Extract the common prefix
-
-                    if prefix not in file_paths_dict:
-                        file_paths_dict[prefix] = []
-                    else:
-                        continue
-                    ####################################################################################
-                                        
-                    image_path = os.path.join(root, f"{prefix}{file_extension}")
-                    # label_path = image_path.replace("1.원천데이터","2.라벨링데이터")
-                    # relative_path = os.path.relpath(root, image_folder)
-                    # out_mat_folder = os.path.join(output_mat_folder, relative_path)                   
-                    out_mat_folder = output_mat_folder
-                    os.makedirs(out_mat_folder, exist_ok=True)                    
-                    mat_path_RA = os.path.join(out_mat_folder, f"{prefix}_RA.mat")
-                    mat_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.mat")
-                    
-                    
-                    # tif_path_RA = os.path.join(out_mat_folder, f"{prefix}_RA.tif")
-                    # tif_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.tif")
-                    label_path = json_path
-                    try:
-                        if prefix[2] == 'L':
-                            # print(f"{cnt}/{int(total_cnt/40)}({total_cnt})\t{image_path}\n") 
-                            if imgtype == 'RA':
-                                mat_image_RA = L_file(image_path, imgtype, sampling_coords[0], output_size)
-                            else:
-                                mat_image_RE = L_file(image_path, imgtype, sampling_coords[0], output_size)                            
-                            # label_path = label_path.replace(".tif", "_RE01.json")                                                        
-                            mat_label = create_label_mat(label_path, prefix[2], sampling_coords[0], output_size)
-                        elif prefix[2] == 'U':                        
-                            # print(f"{cnt}/{int(total_cnt/30)}({total_cnt})\t{image_path}\n") 
-                            if imgtype == 'RA':
-                                mat_image_RA = U_file(image_path, imgtype, sampling_coords[1], output_size)
-                            else:
-                                mat_image_RE = U_file(image_path, imgtype, sampling_coords[1], output_size)
-                            # label_path = label_path.replace(".tif", "_RE21.json")
-                            mat_label = create_label_mat(label_path, prefix[2], sampling_coords[1], output_size)                            
-                        elif prefix[2] == 'D':
-                            if imgtype == 'RA':
-                                mat_image_RA = D_file(image_path, imgtype, sampling_coords[2], output_size_drone)
-                            else:
-                                mat_image_RE = D_file(image_path, imgtype, sampling_coords[2], output_size_drone)
-                            # label_path = label_path.replace(".tif", "_RE36.json")
-                            mat_label=create_label_mat(label_path, prefix[2], sampling_coords[2], output_size_drone)
-                                                  
-                        # img_RA = (np.clip(np.array(mat_image_RA)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
-                        # img_RE = (np.clip(np.array(mat_image_RE)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
-                        if imgtype == 'RA':
-                            io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
-                        else:
-                            io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : mat_label})
-                    except FileNotFoundError as e:
-                        error_cnt +=1
-                        current_time = datetime.datetime.now()
-                        formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-                        with open("log.txt", "a") as log:
-                            log.write(f"{formatted_time} : [FileNotFoundError]\t{image_path}\n")
-                            
-                        continue
-                                        
-                    # io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
-                    # io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
-                    # tifffile.imsave(tif_path_RA, np.array(mat_image_RA))
-                    # tifffile.imsave(tif_path_RE, np.array(mat_image_RE))
-
-                    cnt +=1
-    
-    current_time = datetime.datetime.now()
-    formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    # with open("log.txt", "a") as log:
-    #     log.write(f"Total count = {cnt}\n")
-    #     log.write(f"Error count = {error_cnt}\n")        
-    #     log.write(f"End Time [{formatted_time}]\n")        
-    print(f"Total count =  {cnt}\n")
-    print(f"Error count = {error_cnt}\n")
-    return prefix[2], imgtype
-
-
 def main():
     cnt = 0
     file_paths_dict = {}
@@ -348,7 +230,7 @@ def main():
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    with open("log.txt", "w") as log:
+    with open(f"log_{cls}.txt", "w") as log:
         log.write(f"Start Time [{formatted_time}]\n")
     
     for root, dirs, files in os.walk(image_folder):
@@ -383,25 +265,28 @@ def main():
                     mat_path_RA = os.path.join(out_mat_folder, f"{prefix}_RA.mat")
                     mat_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.mat")
                     
+                    if os.path.exists(mat_path_RA) and os.path.exists(mat_path_RE):
+                        cnt +=1
+                        continue
                     
                     # tif_path_RA = os.path.join(out_mat_folder, f"{prefix}_RA.tif")
                     # tif_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.tif")
                     try:
                         if prefix[2] == 'L':
                             print(f"{cnt}/{int(total_cnt/40)}({total_cnt})\t{image_path}\n") 
-                            mat_image_RA = L_file(image_path, imgtype, sampling_coords[0], output_size)
-                            mat_image_RE = L_file(image_path, imgtype, sampling_coords[0], output_size)                            
+                            mat_image_RA = L_file(image_path, imgtype[0], sampling_coords[0], output_size)
+                            mat_image_RE = L_file(image_path, imgtype[1], sampling_coords[0], output_size)                            
                             label_path = label_path.replace(".tif", "_RE01.json")                            
                             mat_label = create_label_mat(label_path, prefix[2], sampling_coords[0], output_size)
                         elif prefix[2] == 'U':                        
                             print(f"{cnt}/{int(total_cnt/30)}({total_cnt})\t{image_path}\n") 
-                            mat_image_RA = U_file(image_path, imgtype, sampling_coords[1], output_size)
-                            mat_image_RE = U_file(image_path, imgtype, sampling_coords[1], output_size)
+                            mat_image_RA = U_file(image_path, imgtype[0], sampling_coords[1], output_size)
+                            mat_image_RE = U_file(image_path, imgtype[1], sampling_coords[1], output_size)
                             label_path = label_path.replace(".tif", "_RE21.json")
                             mat_label = create_label_mat(label_path, prefix[2], sampling_coords[1], output_size)                            
                         elif prefix[2] == 'D':
-                            mat_image_RA = D_file(image_path, imgtype, sampling_coords[2], output_size_drone)
-                            mat_image_RE = D_file(image_path, imgtype, sampling_coords[2], output_size_drone)
+                            mat_image_RA = D_file(image_path, imgtype[0], sampling_coords[2], output_size_drone)
+                            mat_image_RE = D_file(image_path, imgtype[1], sampling_coords[2], output_size_drone)
                             label_path = label_path.replace(".tif", "_RE36.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords[2], output_size_drone)
                                                   
@@ -414,8 +299,24 @@ def main():
                         error_cnt +=1
                         current_time = datetime.datetime.now()
                         formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-                        with open("log.txt", "a") as log:
+                        with open(f"log_{cls}.txt", "a") as log:
                             log.write(f"{formatted_time} : [FileNotFoundError]\t{image_path}\n")
+                            
+                        continue
+                    except ValueError as e:
+                        error_cnt +=1
+                        current_time = datetime.datetime.now()
+                        formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+                        with open(f"log_{cls}.txt", "a") as log:
+                            log.write(f"{formatted_time} : [filesize 1026 error]\t{image_path}\n")
+                            
+                        continue
+                    except TypeError as e:
+                        error_cnt +=1
+                        current_time = datetime.datetime.now()
+                        formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+                        with open(f"log_{cls}.txt", "a") as log:
+                            log.write(f"{formatted_time} : [Labeling [] error]\t{image_path}\n")
                             
                         continue
                                         
@@ -428,7 +329,7 @@ def main():
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    with open("log.txt", "a") as log:
+    with open(f"log_{cls}.txt", "a") as log:
         log.write(f"Total count = {cnt}\n")
         log.write(f"Error count = {error_cnt}\n")        
         log.write(f"End Time [{formatted_time}]\n")        

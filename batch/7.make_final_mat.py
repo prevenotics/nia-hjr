@@ -7,9 +7,10 @@ from PIL import Image, ImageDraw
 from scipy import io
 import tifffile
 import datetime
-import pymysql
+
 import yaml
 import pandas as pd
+import random
 # from pytz import timezone, utc
 # KST = timezone('Asia/Seoul')
 # now = datetime.datetime.utcnow()
@@ -18,7 +19,7 @@ import pandas as pd
 
 
 image_folder = r'/root/work/hjr/dataset/3.mat'
-output_folder = image_folder.replace("3.mat","4.mat")
+output_folder = image_folder.replace("3.mat","4.mat_selected_100p") #.replace('dataset','dataset3')
 
 # image_folder = r'/root/work/hjr/dataset/3.mat_test/'
 # output_folder = image_folder.replace("3.mat_test/","4.mat_test/")
@@ -46,12 +47,12 @@ def sampling_point(image_size, y):
     return sampling_coords
 
 def main():
-    with open('/root/work/hjr/IEEE_TGRS_SpectralFormer/config.yaml') as f:
-        cfg = yaml.safe_load(f)
+    # with open('/root/work/hjr/nia-hjr/config.yaml') as f:
+    #     cfg = yaml.safe_load(f)
     cnt = 0
     
-    imgtype = cfg['image_param']['type']    
-    band = cfg['image_param']['band']
+    # imgtype = cfg['image_param']['type']    
+    band = 100  #cfg['image_param']['band']
     # csv_file = 
     #  = pd.read_csv(csv_file, encoding='UTF-8')        
         
@@ -78,74 +79,143 @@ def main():
     
     # num_classes = cfg['num_class']
     num_classes = 31
-    class_images = [[] for _ in range(num_classes)]
+    class_images_RE = [[] for _ in range(num_classes)]
+    class_images_RA = [[] for _ in range(num_classes)]
     size = 256
     images_per_file = size*size
     file_counter = [0] * num_classes
+    max_number = 200 
     
+    mat_RE_files=[]
     for root, dirs, files in os.walk(image_folder):
         # if "02.수중 및 지상 초분광" in root:
             for image_filename in files:
                 if image_filename.endswith(f'RE.mat'):
-                    print(cnt)
-                    cnt +=1
-                    image_path = os.path.join(root, image_filename)                    
-                    os.makedirs(output_folder, exist_ok=True)
+                    mat_RE_files.append(os.path.join(root, image_filename))
+    random.shuffle(mat_RE_files)
+    
+    # mat_RA_files=[]
+    # for root, dirs, files in os.walk(image_folder):
+    #     # if "02.수중 및 지상 초분광" in root:
+    #         for image_filename in files:
+    #             if image_filename.endswith(f'RA.mat'):
+    #                 mat_RA_files.append(os.path.join(root, image_filename))
+    
+    for RE_path in mat_RE_files:
+        print(cnt)
+        cnt +=1
+        
+        image_path_RE = RE_path
+        image_path_RA = image_path_RE.replace('RE.mat', 'RA.mat')
+        
+        os.makedirs(output_folder, exist_ok=True)
+        try:
+            mat_file_RE = io.loadmat(image_path_RE)
+            mat_file_RA = io.loadmat(image_path_RA)
+        except Exception as e:
+            print(f"Error loading file: {e}")
+            with open(f"log_7_{formatted_time_for_filename}.txt", "w") as log:
+                log.write(f"Exception Error  [{e}]\n")
+            continue
+        image_RE = mat_file_RE['image']
+        image_RA = mat_file_RA['image']
+        label = mat_file_RE['label']
+        
+        for class_num in range(num_classes):
+            if file_counter[class_num] <= max_number:
+                class_indices = np.where(label == class_num)
+                class_images_RE[class_num].extend(image_RE[class_indices])
+                class_images_RA[class_num].extend(image_RA[class_indices])
+                
+                while len(class_images_RE[class_num]) >= images_per_file:
+                        # 클래스별 이미지 데이터를 images_per_file 개수에 딱 맞춰서 저장
+                    class_images_array_RE = np.array(class_images_RE[class_num][:images_per_file]).reshape(size, size, band)
+                    class_images_array_RA = np.array(class_images_RA[class_num][:images_per_file]).reshape(size, size, band)
+                    class_images_RE[class_num] = class_images_RE[class_num][images_per_file:]
+                    class_images_RA[class_num] = class_images_RA[class_num][images_per_file:]
+
+                    new_mat_file_RE = {
+                        'image': class_images_array_RE,
+                        'label': np.full((size, size), class_num, dtype=np.uint8)
+                    }
+                    new_mat_file_RA = {
+                        'image': class_images_array_RA,
+                        'label': np.full((size, size), class_num, dtype=np.uint8)
+                    }
+
+                    output_filename_RE = os.path.join(output_folder, f'RE_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
+                    output_filename_RA = os.path.join(output_folder, f'RA_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
+                    io.savemat(output_filename_RE, new_mat_file_RE)
+                    io.savemat(output_filename_RA, new_mat_file_RA)
+                    print(f'{cnt}/{total_cnt} : save: {output_filename_RE},{output_filename_RA}')
+                    file_counter[class_num] += 1        
+    
+    
+    
+    
+    # for root, dirs, files in os.walk(image_folder):
+    #     # if "02.수중 및 지상 초분광" in root:
+    #         for image_filename in files:
+    #             if image_filename.endswith(f'RE.mat'):
+    #                 print(cnt)
+    #                 cnt +=1
+    #                 image_path = os.path.join(root, image_filename)                    
+    #                 os.makedirs(output_folder, exist_ok=True)
                     
-                    mat_file = io.loadmat(image_path)
-                    image = mat_file['image']
-                    label = mat_file['label']
+    #                 mat_file = io.loadmat(image_path)
+    #                 image = mat_file['image']
+    #                 label = mat_file['label']
                     
-                    for class_num in range(num_classes):
-                        class_indices = np.where(label == class_num)
-                        class_images[class_num].extend(image[class_indices])
+    #                 for class_num in range(num_classes):
+    #                     class_indices = np.where(label == class_num)
+    #                     class_images[class_num].extend(image[class_indices])
                         
-                        while len(class_images[class_num]) >= images_per_file:
-                             # 클래스별 이미지 데이터를 images_per_file 개수에 딱 맞춰서 저장
-                            class_images_array = np.array(class_images[class_num][:images_per_file]).reshape(size, size, band)
-                            class_images[class_num] = class_images[class_num][images_per_file:]
+    #                     while len(class_images[class_num]) >= images_per_file:
+    #                          # 클래스별 이미지 데이터를 images_per_file 개수에 딱 맞춰서 저장
+    #                         class_images_array = np.array(class_images[class_num][:images_per_file]).reshape(size, size, band)
+    #                         class_images[class_num] = class_images[class_num][images_per_file:]
 
-                            new_mat_file = {
-                                'image': class_images_array,
-                                'label': np.full((size, size), class_num)
-                            }
+    #                         new_mat_file = {
+    #                             'image': class_images_array,
+    #                             'label': np.full((size, size), class_num)
+    #                         }
 
-                            output_filename = os.path.join(output_folder, f'RE_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
-                            io.savemat(output_filename, new_mat_file)
-                            print(f'{cnt}/{total_cnt} : save: {output_filename}')
-                            file_counter[class_num] += 1
+    #                         output_filename = os.path.join(output_folder, f'RE_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
+    #                         io.savemat(output_filename, new_mat_file)
+    #                         print(f'{cnt}/{total_cnt} : save: {output_filename}')
+    #                         file_counter[class_num] += 1
 
-    for root, dirs, files in os.walk(image_folder):
-        # if "02.수중 및 지상 초분광" in root:
-            for image_filename in files:
-                if image_filename.endswith(f'RA.mat'):
-                    print(cnt)
-                    cnt +=1
-                    image_path = os.path.join(root, image_filename)                    
-                    os.makedirs(output_folder, exist_ok=True)
+    # for root, dirs, files in os.walk(image_folder):
+    #     # if "02.수중 및 지상 초분광" in root:
+    #         for image_filename in files:
+    #             if image_filename.endswith(f'RA.mat'):
+    #                 print(cnt)
+    #                 cnt +=1
+    #                 image_path = os.path.join(root, image_filename)                    
+    #                 os.makedirs(output_folder, exist_ok=True)
                     
-                    mat_file = io.loadmat(image_path)
-                    image = mat_file['image']
-                    label = mat_file['label']
+    #                 mat_file = io.loadmat(image_path)
+    #                 image = mat_file['image']
+    #                 label = mat_file['label']
                     
-                    for class_num in range(num_classes):
-                        class_indices = np.where(label == class_num)
-                        class_images[class_num].extend(image[class_indices])
+    #                 for class_num in range(num_classes):
+    #                     class_indices = np.where(label == class_num)
+    #                     class_images[class_num].extend(image[class_indices])
                         
-                        while len(class_images[class_num]) >= images_per_file:
-                             # 클래스별 이미지 데이터를 images_per_file 개수에 딱 맞춰서 저장
-                            class_images_array = np.array(class_images[class_num][:images_per_file]).reshape(size, size, band)
-                            class_images[class_num] = class_images[class_num][images_per_file:]
+    #                     while len(class_images[class_num]) >= images_per_file:
+    #                          # 클래스별 이미지 데이터를 images_per_file 개수에 딱 맞춰서 저장
+    #                         class_images_array = np.array(class_images[class_num][:images_per_file]).reshape(size, size, band)
+    #                         class_images[class_num] = class_images[class_num][images_per_file:]
 
-                            new_mat_file = {
-                                'image': class_images_array,
-                                'label': np.full((size, size), class_num)
-                            }
+    #                         new_mat_file = {
+    #                             'image': class_images_array,
+    #                             'label': np.full((size, size), class_num)
+    #                         }
 
-                            output_filename = os.path.join(output_folder, f'RA_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
-                            io.savemat(output_filename, new_mat_file)
-                            print(f'{cnt}/{total_cnt} : save: {output_filename}')
-                            file_counter[class_num] += 1                    
+    #                         output_filename = os.path.join(output_folder, f'RA_class_{class_num:02d}_{file_counter[class_num]:06d}.mat')
+    #                         io.savemat(output_filename, new_mat_file)
+    #                         print(f'{cnt}/{total_cnt} : save: {output_filename}')
+    #                         file_counter[class_num] += 1                    
     #######################################################################################################################
     # size x size 미만으로 남은 것들 저장하기
     # for class_num in range(num_classes):
