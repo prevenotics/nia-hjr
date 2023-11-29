@@ -5,11 +5,14 @@ from PIL import Image, ImageDraw
 from scipy import io
 import tifffile
 import datetime
+import argparse
+
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('--path', help='/workspace/dataset/1.원천데이터')
+args = parser.parse_args()
 
 
-
-image_folder = r'/root/work/hjr/dataset/1.원천데이터/'
-
+image_folder = args.path
 
 output_mat_folder = image_folder.replace("1.원천데이터","3.mat")
 

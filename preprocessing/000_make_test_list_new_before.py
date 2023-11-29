@@ -40,13 +40,20 @@ folder_counts = {
     '31.기타': 16
 }
 
+folder_counts_drone = {
+    '15.암반류': 197,
+    '16.모래류': 122
+}
+
+
+
 OA_thres = 0.6
 imgtype='RE'
-data_file = f'total_mat_{imgtype}.txt'  # 주어진 파일명
+data_file = f'total_mat_{imgtype}_drone.txt'  # 주어진 파일명
 out_file = f'total_mat_{imgtype}_selected.txt'
 
 # 각 클래스별로 선택한 파일 경로를 담을 딕셔너리 초기화
-selected_paths = {key: [] for key in folder_counts}
+selected_paths = {key: [] for key in folder_counts_drone}
 
 with open(data_file, 'r') as file:
     for line in file:
@@ -56,10 +63,10 @@ with open(data_file, 'r') as file:
         class_name = path.split('/')[6]  # 클래스 이름 추출 (경로에 따라 조정 필요)
         # value = float(parts[1])
         
-        # if value > OA_thres and class_name in folder_counts:
-        if class_name in folder_counts:
+        # if value > OA_thres and class_name in folder_counts_drone:
+        if class_name in folder_counts_drone:
             # 선택한 클래스별 개수에 맞게 파일 경로 선택
-            if len(selected_paths[class_name]) < (folder_counts[class_name])*3:
+            if len(selected_paths[class_name]) < (folder_counts_drone[class_name])*3:
                 selected_paths[class_name].append(path)
 
 # 선택된 파일 경로를 출력
@@ -69,5 +76,5 @@ for class_name, paths in selected_paths.items():
     with open(out_file, 'a') as output_file:
         for path in paths:
             output_file.write(f"{path}")    
-    shortage = folder_counts[class_name] - len(paths)
-    print(f"Class: {class_name}, Selected: {len(paths)}, Required: {folder_counts[class_name]}, Shortage: {shortage}")
+    shortage = folder_counts_drone[class_name] - len(paths)
+    print(f"Class: {class_name}, Selected: {len(paths)}, Required: {folder_counts_drone[class_name]}, Shortage: {shortage}")

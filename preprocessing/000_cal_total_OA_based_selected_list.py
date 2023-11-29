@@ -112,11 +112,19 @@ def plot_confusion_matrix2(con_mat, labels, path, title='Confusion Matrix', cmap
 # LU_RE_selected.txt 파일명과 npy 파일들이 위치한 디렉토리
 # selected_file = 'LU_RE_100p_selected.txt'
 # npy_directory = '/root/work/hjr/nia-hjr/output/231128_RE_final_50_lr003/result_npy/'
-selected_file = 'LU_RA_100p_selected.txt'
-npy_directory = '/root/work/hjr/nia-hjr/output/231128_mfDGX_RA_final_50/result_npy/'
+# selected_file = 'LU_RA_selected.txt'
+# npy_directory = '/root/work/hjr/nia-hjr/output/final_RA/result_npy/'
+selected_file = 'LU_RE_selected.txt'
+npy_directory = '/root/work/hjr/nia-hjr/output/final_RE/result_npy/'
+# selected_file = 'D_RE_selected.txt'
+# npy_directory = '/root/work/hjr/nia-hjr/output/final_RE_drone/result_npy/'
 
-# prefix='2023-11-29-01-35-50_'
-prefix='2023-11-29-03-06-47_'
+
+prefix='2023-11-29-11-10-22_'  #RE
+# prefix='2023-11-29-11-07-10_'  #RA
+# prefix = '2023-11-29-13-56-12_' #RA_drone
+# prefix = '2023-11-29-13-50-26_' #RE_drone
+
 # 선택된 파일 경로를 읽어와서 해당 npy 파일들을 로드하여 리스트에 추가
 npy_data = []
 no_file=0

@@ -1,3 +1,0 @@
-/root/work/hjr/dataset/3.mat/01.갈파래류/02.수중 및 지상 초분광/002.TIF/02U_A121_0087_20231014_1930_W02_RA.mat
-/root/work/hjr/dataset/3.mat/01.갈파래류/02.수중 및 지상 초분광/002.TIF/01L_A000_9284_20230825_1721_W01_RA.mat
-/root/work/hjr/dataset/3.mat/01.갈파래류/02.수중 및 지상 초분광/002.TIF/01L_A000_9284_2023082_RA.mat

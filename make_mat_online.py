@@ -1,25 +1,12 @@
 import os
 import json
 import numpy as np
-# import rasterio
-# from rasterio.transform import from_origin
 from PIL import Image, ImageDraw
 from scipy import io
 import tifffile
 import datetime
-# import pymysql
 
-os.chdir('/root/work/hjr/nia-hjr')
-
-image_folder = r'./input_data/temp/' #To설정아 : temp 폴더가 사용자가 영상 올릴때마다 변경되면 될거같아요
-
-# json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
-# output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
-# output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'
-# output_mat_folder = r'D:/DATA/hjr/dataset/3.mat/'
-
-# input_path= input("input path : ")
-# image_folder = input_path
+image_folder = r'./input_data/temp/' 
 
 output_mat_folder = image_folder.replace("/temp/","/temp/mat/")
 
@@ -35,17 +22,12 @@ def create_label_mat(label_path, loc, sampling_coords, output_size):
     image_height = data["image"][0]["height"]
     features = data["features"]
     
-    # image_size = (image_width, image_height) ######json 오류 없어지면 이걸로 대체하면 됌
     if os.path.basename(label_path)[2] == 'L':
         image_size = (512,512)
     elif os.path.basename(label_path)[2] == 'U':
         image_size = (1024,1024)
         
     class_mapping = {i: i for i in range(0,31)}
-    # class_mapping[31] = 0
-    # mat_image = create_mat(image_size, features, class_mapping)
-    
-    # Create an empty image with a white background
     label = Image.new("L", image_size, 255)
     draw = ImageDraw.Draw(label)
    
@@ -79,23 +61,17 @@ def create_label_mat(label_path, loc, sampling_coords, output_size):
                 class_value = class_mapping.get(category_id, 0)  # Map class to pixel value
                 draw.polygon(polygon, outline=class_value, fill=class_value)
                 
-    # if loc == "U":
     label = np.array(label)[sampling_coords[:,1], sampling_coords[:,0]].reshape(output_size,output_size)
-        # selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(512,512,120)
     
     label = np.array(label)    
-    # label[label==30] = 255
     label[label==255] = 30
-    # temp = label*8
     return label
 
 
 
 def L_file(image_path, imgtype, sampling_coords, output_size): # land
-    # imgtype = ["RA", "RE"]
     image_shape = (512,512)
     num_channels = 10
-    # total_channel = 120
     total_channel = 100    
     band = 100
     
@@ -184,25 +160,17 @@ def D_file(image_path, imgtype, sampling_coords, output_size): #drone
 
 
     selected_band_image = concatenated_image[:,:,selected_band_list]
-    ##############(256->?)##########################################
     selected_band_image = selected_band_image[sampling_coords[:,1], sampling_coords[:,0], ].reshape(output_size,output_size,band)
-    ##############(256->?)##########################################    
     
     return selected_band_image
 
 def sampling_point(image_size, y):
-    # 이미지 크기
     image_width = image_size
     image_height = image_size
 
-    # y 변수 설정
-    # y = 512  # y 값을 변경하여 원하는 등분 수를 얻을 수 있습니다.
-
-    # 중심 좌표 계산
     center_x = image_width // 2
     center_y = image_height // 2
 
-    # y에 따른 샘플링 좌표 계산
     if y == 1:
         sampling_coords = np.array([[center_x, center_y]])
     else:
@@ -219,17 +187,14 @@ def sampling_point(image_size, y):
 def online():
     cnt = 0
     file_paths_dict = {}
-    # imgtype = ["RA", "RE"]
     band = 100
-    # band = 120
     output_size = 512    
     output_size_drone = 256
     sampling_coords = [sampling_point(512, output_size), sampling_point(1024, output_size), sampling_point(256, output_size_drone)]
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    # with open("log.txt", "w") as log:
-    #     log.write(f"Start Time [{formatted_time}]\n")
+    
     
     for root, dirs, files in os.walk(image_folder):
         # if "02.수중 및 지상 초분광" in root:
@@ -293,18 +258,14 @@ def online():
                                 mat_image_RA = U_file(image_path, imgtype, sampling_coords[1], output_size)
                             else:
                                 mat_image_RE = U_file(image_path, imgtype, sampling_coords[1], output_size)
-                            # label_path = label_path.replace(".tif", "_RE21.json")
                             mat_label = create_label_mat(label_path, prefix[2], sampling_coords[1], output_size)                            
                         elif prefix[2] == 'D':
                             if imgtype == 'RA':
                                 mat_image_RA = D_file(image_path, imgtype, sampling_coords[2], output_size_drone)
                             else:
                                 mat_image_RE = D_file(image_path, imgtype, sampling_coords[2], output_size_drone)
-                            # label_path = label_path.replace(".tif", "_RE36.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords[2], output_size_drone)
                                                   
-                        # img_RA = (np.clip(np.array(mat_image_RA)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
-                        # img_RE = (np.clip(np.array(mat_image_RE)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
                         if imgtype == 'RA':
                             io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
                         else:
@@ -318,19 +279,10 @@ def online():
                             
                         continue
                                         
-                    # io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
-                    # io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
-                    # tifffile.imsave(tif_path_RA, np.array(mat_image_RA))
-                    # tifffile.imsave(tif_path_RE, np.array(mat_image_RE))
-
                     cnt +=1
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    # with open("log.txt", "a") as log:
-    #     log.write(f"Total count = {cnt}\n")
-    #     log.write(f"Error count = {error_cnt}\n")        
-    #     log.write(f"End Time [{formatted_time}]\n")        
     print(f"Total count =  {cnt}\n")
     print(f"Error count = {error_cnt}\n")
     return prefix[2], imgtype
@@ -384,8 +336,7 @@ def main():
                     mat_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.mat")
                     
                     
-                    # tif_path_RA = os.path.join(out_mat_folder, f"{prefix}_RA.tif")
-                    # tif_path_RE = os.path.join(out_mat_folder, f"{prefix}_RE.tif")
+                    
                     try:
                         if prefix[2] == 'L':
                             print(f"{cnt}/{int(total_cnt/40)}({total_cnt})\t{image_path}\n") 
@@ -405,8 +356,7 @@ def main():
                             label_path = label_path.replace(".tif", "_RE36.json")
                             mat_label=create_label_mat(label_path, prefix[2], sampling_coords[2], output_size_drone)
                                                   
-                        # img_RA = (np.clip(np.array(mat_image_RA)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
-                        # img_RE = (np.clip(np.array(mat_image_RE)[:,:,[15,39,80]].astype(np.float32)/40000, 0.0, 1.0)*255).astype(np.uint8)
+                        
 
                         io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : mat_label})
                         io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : mat_label})
@@ -419,11 +369,7 @@ def main():
                             
                         continue
                                         
-                    # io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
-                    # io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})
-                    # tifffile.imsave(tif_path_RA, np.array(mat_image_RA))
-                    # tifffile.imsave(tif_path_RE, np.array(mat_image_RE))
-
+                    
                     cnt +=1
     
     current_time = datetime.datetime.now()

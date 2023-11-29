@@ -1,0 +1,956 @@
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2092_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2204_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3202_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3510_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3267_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1051_20230911_1430_W01_RE.mat	OA	0.528	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3406_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1783_20230911_1430_W01_RE.mat	OA	0.990	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3578_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2394_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3481_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0012_20230912_1100_W01_RE.mat	OA	0.992	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1872_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2036_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2628_20230911_1430_W01_RE.mat	OA	0.991	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0004_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1315_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0017_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3396_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3140_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2828_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1774_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3025_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3565_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2180_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1942_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2924_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3285_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2143_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3389_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3582_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1846_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2909_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0285_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0335_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0213_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1064_20230911_1430_W01_RE.mat	OA	0.657	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3520_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2732_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2893_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0291_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2339_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3152_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3376_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0381_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2780_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0332_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1351_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0400_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2714_20230911_1430_W01_RE.mat	OA	0.993	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2046_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0035_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3431_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3566_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3337_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3012_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0015_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2214_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2881_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3569_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3358_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1589_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3361_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2506_20230911_1430_W01_RE.mat	OA	0.958	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3331_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1505_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3171_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0300_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0078_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3384_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1445_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2385_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1088_20230912_1100_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1759_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1550_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2614_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2070_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0388_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0149_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3186_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3057_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3588_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0345_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3473_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2251_20230911_1430_W01_RE.mat	OA	0.993	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0232_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2593_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1816_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1157_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2448_20230911_1430_W01_RE.mat	OA	0.978	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0218_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3381_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0362_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2634_20230911_1430_W01_RE.mat	OA	0.976	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3421_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3485_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3081_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0318_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2086_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3298_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3235_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3575_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3258_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2014_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1273_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2256_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1714_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0164_20230911_1430_W01_RE.mat	OA	0.980	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0215_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2960_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3420_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3501_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3232_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1927_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2361_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0089_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1240_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0402_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3154_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3289_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3545_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1424_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2850_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3179_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0338_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1800_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0324_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2715_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0295_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1630_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2093_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2700_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1249_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2156_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3276_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2481_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3112_20230911_1430_W01_RE.mat	OA	0.993	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3297_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3050_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2961_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3403_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0233_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3518_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1614_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0156_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2585_20230911_1430_W01_RE.mat	OA	0.989	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2910_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1090_20230912_1100_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3435_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0058_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2733_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1824_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2835_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0326_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2788_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3555_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0298_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0086_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1309_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2904_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2787_20230911_1430_W01_RE.mat	OA	0.989	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1869_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3348_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3594_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1457_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1068_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1813_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1525_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1870_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2645_20230911_1430_W01_RE.mat	OA	0.984	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3280_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1459_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0147_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0192_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0284_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3195_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3597_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1228_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3452_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0154_20230911_1430_W01_RE.mat	OA	0.992	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0220_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2690_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2559_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0123_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3204_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1887_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3438_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0330_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1797_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2879_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0038_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0294_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3234_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0024_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3149_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2560_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3305_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2698_20230911_1430_W01_RE.mat	OA	0.986	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1798_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3441_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2976_20230911_1430_W01_RE.mat	OA	0.993	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3577_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1886_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0055_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1919_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3505_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2124_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1989_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1389_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0121_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3491_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1619_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2973_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0219_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0169_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2236_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3037_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3157_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1950_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3410_20230911_1430_W01_RE.mat	OA	0.992	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3269_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1621_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0353_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3426_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1967_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3606_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2916_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3056_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3055_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2880_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0022_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2762_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3266_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3494_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2568_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1997_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0093_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1147_20230912_1100_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1523_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2772_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1807_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3288_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3562_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2196_20230911_1430_W01_RE.mat	OA	0.983	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3508_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3450_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2691_20230911_1430_W01_RE.mat	OA	0.985	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2296_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2692_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0127_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1563_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1139_20230912_1100_W01_RE.mat	OA	0.935	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3328_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2919_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3156_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3603_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0045_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3109_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3340_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3296_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2929_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2851_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1481_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3480_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2842_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0071_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1062_20230911_1430_W01_RE.mat	OA	0.792	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2068_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1715_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3180_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2643_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0014_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0046_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3196_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3417_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1705_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2773_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0265_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2188_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1037_20230912_1100_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1792_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1472_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2674_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1981_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0337_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3191_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0244_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1634_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0100_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0385_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3238_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3209_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1260_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1565_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2861_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0157_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0155_20230911_1430_W01_RE.mat	OA	0.991	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0395_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2874_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1976_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3432_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0005_20230912_1100_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3080_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2723_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3475_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0312_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2552_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0098_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2473_20230911_1430_W01_RE.mat	OA	0.993	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2329_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3600_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3094_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2190_20230911_1430_W01_RE.mat	OA	0.991	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2198_20230911_1430_W01_RE.mat	OA	0.988	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0171_20230911_1430_W01_RE.mat	OA	0.982	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1564_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2966_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2125_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0027_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3428_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0259_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1830_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2868_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1863_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2900_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0364_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0163_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2636_20230911_1430_W01_RE.mat	OA	0.983	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0014_20230912_1100_W01_RE.mat	OA	0.990	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3193_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0327_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2257_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0135_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3365_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0144_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0218_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1665_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2063_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3540_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2606_20230911_1430_W01_RE.mat	OA	0.981	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1814_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3557_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0008_20230911_1430_W01_RE.mat	OA	0.657	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2914_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1838_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3465_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2629_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3323_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1079_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2463_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3469_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2882_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1085_20230911_1430_W01_RE.mat	OA	0.701	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1758_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0278_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2922_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1903_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1862_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3197_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3474_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1999_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3148_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1910_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0319_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2977_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3312_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1959_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1025_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1374_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3434_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0271_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3535_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1028_20230912_1100_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0076_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3029_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2401_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2701_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3544_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3192_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0084_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0389_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0223_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0073_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0243_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2866_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0370_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0214_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3044_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0386_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3368_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3014_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3496_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2969_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3243_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2957_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3332_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2951_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0029_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2676_20230911_1430_W01_RE.mat	OA	0.984	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1365_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3185_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2037_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1744_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0354_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1008_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3394_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3560_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1996_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0165_20230911_1430_W01_RE.mat	OA	0.915	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0357_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1400_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3031_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3268_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3169_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3074_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1840_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1149_20230912_1100_W01_RE.mat	OA	0.977	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2265_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1206_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2212_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3549_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3489_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2738_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1180_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1934_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1039_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2642_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2450_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2903_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0167_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3135_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1699_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1917_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2599_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3218_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0095_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3075_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2426_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2199_20230911_1430_W01_RE.mat	OA	0.992	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2584_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3060_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0260_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2045_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0114_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1741_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0145_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3347_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2231_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0020_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2644_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1096_20230911_1430_W01_RE.mat	OA	0.666	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3256_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0009_20230911_1430_W01_RE.mat	OA	0.707	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1055_20230912_1100_W01_RE.mat	OA	0.993	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0334_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3139_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3311_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1084_20230911_1430_W01_RE.mat	OA	0.700	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0108_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0212_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3118_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1074_20230911_1430_W01_RE.mat	OA	0.688	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3175_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1893_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3111_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1425_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1146_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1949_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2834_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1597_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1805_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3522_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2740_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0151_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2305_20230911_1430_W01_RE.mat	OA	0.991	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1878_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0195_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1605_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1880_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3264_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3181_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1606_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1112_20230912_1100_W01_RE.mat	OA	0.966	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2968_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2917_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3101_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1298_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2020_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3208_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2159_20230911_1430_W01_RE.mat	OA	0.993	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2439_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2890_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0039_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2289_20230911_1430_W01_RE.mat	OA	0.990	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3115_20230911_1430_W01_RE.mat	OA	0.986	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3355_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2288_20230911_1430_W01_RE.mat	OA	0.987	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0085_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1582_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1757_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3506_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0306_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2725_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1375_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3490_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1078_20230912_1100_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1326_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2004_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0056_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2583_20230911_1430_W01_RE.mat	OA	0.988	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1968_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1958_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2504_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1007_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0174_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2183_20230911_1430_W01_RE.mat	OA	0.995	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1925_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2757_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1736_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1990_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3531_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2297_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0360_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3033_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0309_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2616_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2133_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2789_20230911_1430_W01_RE.mat	OA	0.994	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3497_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3310_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1595_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3215_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1422_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2888_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1124_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1542_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2567_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0313_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2582_20230911_1430_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1668_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2362_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2682_20230911_1430_W01_RE.mat	OA	0.984	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0224_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0371_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3124_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2023_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0057_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0301_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3040_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2392_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0116_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2941_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1598_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0200_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0048_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1108_20230911_1430_W01_RE.mat	OA	0.796	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2100_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3321_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2967_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3526_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2495_20230911_1430_W01_RE.mat	OA	0.991	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3528_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1612_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2765_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1649_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2423_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2071_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0198_20230911_1430_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1271_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3274_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3598_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1760_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3078_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3194_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3210_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1073_20230911_1430_W01_RE.mat	OA	0.598	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3199_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0018_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0021_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0240_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_0204_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3478_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2650_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2530_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1854_20230911_1430_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1784_20230911_1430_W01_RE.mat	OA	0.992	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_3507_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1345_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1050_20230911_1430_W01_RE.mat	OA	0.601	kappa	0.000	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_2551_20230911_1430_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0180_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1041_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/15.암반류/01.드론초분광/002.TIF/01D_A000_1674_20230911_1430_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2656_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1033_20230911_1430_W01_RE.mat	OA	0.984	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2162_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1474_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1695_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2398_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2742_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2042_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0044_20230912_1100_W01_RE.mat	OA	0.989	kappa	0.074	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0062_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1141_20230913_1530_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2986_20230911_1430_W01_RE.mat	OA	0.942	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0024_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1303_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2564_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0251_20230911_1430_W01_RE.mat	OA	0.955	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1152_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0187_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0140_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0130_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1443_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1116_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1378_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2120_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2067_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1450_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0155_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2816_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1196_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1931_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1561_20230913_1530_W01_RE.mat	OA	0.999	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2516_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1131_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1302_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2445_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1031_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1762_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2468_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1251_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1745_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2317_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2752_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2673_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2687_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1924_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0185_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0206_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1385_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2745_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0031_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1922_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1287_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2713_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1907_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1551_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1685_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2342_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1874_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1370_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0160_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2639_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1584_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1477_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1787_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2351_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1607_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0189_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2670_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2096_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2846_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0073_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1977_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1020_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2641_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2106_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2177_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1455_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1964_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1738_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2791_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1616_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1491_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1617_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2208_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1001_20230911_1430_W01_RE.mat	OA	0.991	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2983_20230911_1430_W01_RE.mat	OA	0.892	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0003_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1093_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2121_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1552_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1712_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0087_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1258_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1337_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1171_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1119_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2847_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1408_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1172_20230912_1100_W01_RE.mat	OA	0.997	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2997_20230911_1430_W01_RE.mat	OA	0.967	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2104_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1175_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2179_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2293_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1810_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2411_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0039_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2260_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1954_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2389_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2294_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1938_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2831_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1235_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2097_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2390_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1014_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0089_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1225_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2380_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2056_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1583_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0066_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1608_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1161_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1219_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2268_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0157_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2443_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0071_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2532_20230913_1530_W01_RE.mat	OA	0.996	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0043_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0036_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1160_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2243_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2262_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1842_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1623_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2453_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1040_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2649_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0148_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1325_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2760_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1106_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1761_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2105_20230913_1530_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1770_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2404_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2734_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0124_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1626_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0047_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1003_20230911_1430_W01_RE.mat	OA	0.990	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2554_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1129_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2248_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1529_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1418_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2113_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1226_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0158_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0165_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0122_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1164_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2226_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1034_20230911_1430_W01_RE.mat	OA	0.987	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2719_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0117_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1510_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2144_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0129_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1354_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1512_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1395_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2019_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2849_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1153_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2589_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0159_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1654_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2549_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1946_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0133_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1754_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2083_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2993_20230911_1430_W01_RE.mat	OA	0.817	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0088_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2001_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2444_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2153_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0142_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2366_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2822_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0019_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0197_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2578_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1449_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1463_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0192_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1430_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1478_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0169_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2998_20230911_1430_W01_RE.mat	OA	0.888	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1419_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2743_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2999_20230911_1430_W01_RE.mat	OA	0.975	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2075_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1255_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0193_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2640_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1502_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1420_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2242_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_3007_20230911_1430_W01_RE.mat	OA	0.998	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2570_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2025_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1562_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0191_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1828_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0078_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1244_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1905_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2588_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2664_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2332_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1953_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2270_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1264_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1184_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0027_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1655_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2292_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1210_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1162_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2074_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2200_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1679_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0209_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1601_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0119_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1437_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1231_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1176_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0199_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0103_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2430_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1995_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1346_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2131_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1648_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1130_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2422_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1817_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2058_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0013_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2024_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1390_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2680_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0033_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1637_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1357_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1256_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2540_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0207_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2003_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2040_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2758_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1777_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0069_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2388_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2420_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_3001_20230911_1430_W01_RE.mat	OA	0.987	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1029_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1104_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2357_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2018_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2413_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1737_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2379_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1223_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0099_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1527_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0045_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2799_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2697_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0020_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1866_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0029_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1914_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0134_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2510_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0170_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1520_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2295_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0110_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0079_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1294_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0176_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1786_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0205_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0032_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0107_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1647_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2767_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2597_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0042_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2492_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2681_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0004_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0035_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0097_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0082_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1932_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0182_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2750_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2848_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2663_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1421_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1554_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0074_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0017_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1664_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2604_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2311_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2785_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2485_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0067_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2051_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2088_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2557_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0095_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1189_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2235_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1489_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0015_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0186_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1729_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0030_20230913_1530_W01_RE.mat	OA	0.959	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1962_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2255_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2341_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2729_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1083_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2168_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2232_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1576_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0149_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0194_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2980_20230911_1430_W01_RE.mat	OA	0.931	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1275_20230912_1100_W01_RE.mat	OA	1.000	kappa	0.000	O	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2017_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1347_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1439_20230912_1100_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0053_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_1844_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2808_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0177_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2678_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2406_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2152_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_0104_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 
+/root/work/hjr/dataset/3.mat_drone/16.모래류/01.드론초분광/002.TIF/01D_A000_2841_20230913_1530_W01_RE.mat	OA	1.000	kappa	nan	 	 

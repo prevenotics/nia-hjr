@@ -13,7 +13,6 @@ from collections import Counter
 
 
 def train_epoch(model, tar, pre, train_loader, criterion, optimizer, lr_scheduler, epoch, cfg, logger, print_freq=1000):
-    # objs = AverageMeter() #loss
     loss_meter = AverageMeter() #loss
     top1 = AverageMeter()
     pixel_batch_time=AverageMeter()
@@ -101,7 +100,6 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
     tar = np.array([])
     pre = np.array([])        
     pixel_batch = cfg['train_param']['pixel_batch']
-    sampling_num = 2 
     num_epochs = cfg['train_param']['epoch']
     band =cfg['image_param']['band']
     num_steps = len(train_loader)
@@ -121,7 +119,6 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
             reshaped_target = target.contiguous().view(-1)
             
             
-            num_pixels = reshaped_image.size(0)            
             shuffled_image = reshaped_image
             shuffled_target = reshaped_target
 
@@ -171,19 +168,13 @@ def valid_epoch(model, train_loader, criterion, epoch, cfg, logger, print_freq=1
 def test_epoch(model, test_loader, cfg, logger):
     top1 = AverageMeter()
     pixel_batch_time=AverageMeter()
-    batch_time = AverageMeter()
-    lr_meter = AverageMeter()
-    OA_meter = AverageMeter()
-    Kappa_meter = AverageMeter()
-    AA_meter = AverageMeter()
+    batch_time = AverageMeter()    
     pixel_batch = cfg['train_param']['pixel_batch']
-    sampling_num = 2 
-    num_epochs = cfg['train_param']['epoch']
+    
     band =cfg['image_param']['band']
     npy_path=cfg['test_param']['out_npy_path']
     num_steps = len(test_loader)
     cls_name = util.class_name()
-    ignore_cls = 30
     
     batch_start = time.time()
     batch_end = time.time()
@@ -269,11 +260,8 @@ def test_epoch(model, test_loader, cfg, logger):
                         res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [80, 39, 15]].cpu().numpy()
                     elif basename[2] =='D':
                         res_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [58, 28, 11]].cpu().numpy()
-                        # temp_image = origin_image[i, :, :].reshape(image_size, image_size, band)[:, :, [11, 28, 58]].cpu().numpy()
                         
                     res_image = (res_image * 255).astype(np.uint8)
-                    # temp_image = (temp_image * 255).astype(np.uint8)
-                    
                     
                     label_tar_i = (label_tar[i, :, :]).astype(np.uint8)
                     label_pre_i = (label_pre[i, :, :]).astype(np.uint8)
@@ -370,17 +358,17 @@ def test_epoch(model, test_loader, cfg, logger):
     result = []
     cnt = 0
     for root, dirs, files in os.walk(npy_path):
-        # if "02.수중 및 지상 초분광" in root:
-            for image_filename in files:
-                if image_filename.endswith('.npy'):
-                    temp = np.load(os.path.join(npy_path, image_filename))
-                    result.append(temp)
+        for image_filename in files:
+            if image_filename.endswith('.npy'):
+                temp = np.load(os.path.join(npy_path, image_filename))
+                result.append(temp)
                     
 
     temp = np.array(result)
     temp = temp.transpose(1, 2, 0).reshape(2, -1)
     OA, kappa = util.output_metric_with_savefig(temp[0,:], temp[1,:], cfg['test_param']['out_res_path'])
     print(f'========Total : OA:{OA:.5f} Kappa:{kappa:.5f}========')
+    logger.info(f'========Total : OA:{OA:.5f} Kappa:{kappa:.5f}========')
     with open(testlogtxt, "a") as file:
         file.write(f'========Total : OA:{OA:.5f} Kappa:{kappa:.5f}========')    
     # return [top1, OA_meter, Kappa_meter]
@@ -391,18 +379,10 @@ def test_epoch(model, test_loader, cfg, logger):
 def test_epoch_online(model, test_loader, band, imgtype, cfg, logger):
     top1 = AverageMeter()
     pixel_batch_time=AverageMeter()
-    batch_time = AverageMeter()
-    lr_meter = AverageMeter()
-    OA_meter = AverageMeter()
-    Kappa_meter = AverageMeter()
-    AA_meter = AverageMeter()
+    batch_time = AverageMeter()    
     pixel_batch = cfg['train_param']['pixel_batch']
-    sampling_num = 2 
-    num_epochs = cfg['train_param']['epoch']
-    # npy_path=cfg['test_param']['out_npy_path']
     num_steps = len(test_loader)
     cls_name = util.class_name()
-    ignore_cls = 30
     
     batch_start = time.time()
     batch_end = time.time()
@@ -430,7 +410,6 @@ def test_epoch_online(model, test_loader, band, imgtype, cfg, logger):
             reshaped_image = image.contiguous().view(-1,band,image.shape[3])
             reshaped_target = target.contiguous().view(-1)
                          
-            num_pixels = reshaped_image.size(0)
             tar_one = np.array([])
             pre_one = np.array([])                
 
@@ -575,5 +554,4 @@ def test_epoch_online(model, test_loader, band, imgtype, cfg, logger):
     
     epoch_time = time.time() - batch_start
     
-    # return [top1, OA_meter, Kappa_meter]
     return top1

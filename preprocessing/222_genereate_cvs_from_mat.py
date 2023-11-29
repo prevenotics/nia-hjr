@@ -3,6 +3,15 @@ import csv
 import json
 import random
 from collections import Counter
+import argparse
+
+
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('--path', default='', type=str, help='each path of train/val/test')
+args = parser.parse_args()
+
+
+image_folder = args.path
 
 min_file_num = 10000000 #for class balance 
 

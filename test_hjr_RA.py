@@ -77,7 +77,7 @@ def main(cfg):
         sample_point = util.get_point(cfg['image_param']['size'], cfg['test_param']['sampling_num'])   
     
         local_rank = int(os.environ["LOCAL_RANK"])                                            
-        test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], 
+        test_data_loader = build_data_loader(cfg['dataset'], 'test', cfg['path']['test_csv'], cfg['image_param']['type'], cfg['image_param']['isdrone'], 
                                              sample_point, cfg['test_param']['test_batch'], cfg['system']['num_workers'], 
                                              local_rank, cfg['network']['spectralformer']['patch'], cfg['network']['spectralformer']['band_patch'], 
                                              cfg['image_param']['band'])     
@@ -108,7 +108,7 @@ def main(cfg):
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
-    logger.info('ALL Training time {}'.format(total_time_str))
+    logger.info('ALL Test time {}'.format(total_time_str))
 
 
 

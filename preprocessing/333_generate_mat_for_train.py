@@ -7,9 +7,18 @@ import tifffile
 import datetime
 import yaml
 import pandas as pd
+import argparse
 
-image_folder = r'../../dataset/3.mat'
-csv_path = ['train_mat_LU_RA.csv', 'train_mat_LU_RE.csv', 'train_mat_D_RA.csv', 'train_mat_D_RE.csv']
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('--path', help='each mat path of train/val/test')
+parser.add_argument('--train_val', help='train or val')
+args = parser.parse_args()
+
+
+# image_folder = r'../../dataset/3.mat'
+image_folder = args.path
+train_val = args.train_val
+csv_path = ['{train_val}_RA_for_class_mat.csv', '{train_val}_RE_for_class_mat.csv', '{train_val}_drone_RA_for_class_mat.csv', '{train_val}_drone_RE_for_class_mat.csv']
 output_folder = image_folder.replace("3.mat","4.mat_for_train")
 
 def sampling_point(image_size, y):
@@ -35,10 +44,9 @@ def main():
     
     
     os.makedirs(output_folder, exist_ok=True)
-    # for i in range(len(csv_path)):
-        # csv = pd.read_csv(csv_path[i], encoding='UTF-8')
+    
     for csv in csv_path:
-        if 'LU' in csv:
+        if 'drone' not in csv:
             if 'RA' in csv:
                 imgkind = 'LU'
                 imgtype = 'RA'
@@ -64,8 +72,7 @@ def main():
         current_time = datetime.datetime.now()
         formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
         formatted_time_for_filename = current_time.strftime("%Y-%m-%d-%H-%M-%S")
-        # with open(f"log_{formatted_time_for_filename}.txt", "w") as log:
-        #     log.write(f"Start Time [{formatted_time}]\n")
+        
         print(f"Start Time [{formatted_time}]\n")
     
         num_classes = 31
@@ -99,50 +106,14 @@ def main():
                     io.savemat(output_filename, new_mat_file)
                     print(f'{cnt}/{total_cnt} : save: {output_filename}')
                     file_counter[class_num] += 1
-        ########################################################################################################################
-        # RA_class_counts = {f'{i:02d}': 0 for i in range(num_classes)}
-        # RE_class_counts = {f'{i:02d}': 0 for i in range(num_classes)}
-
-        # # RA_class_xx_xx.mat 파일용
-        # for root, dirs, files in os.walk(output_folder):
-        #     for file_name in files:
-        #         if file_name.endswith('.mat'):
-        #             file_name_only, _ = os.path.splitext(file_name)
-        #             parts = file_name_only.split('_')
-        #             class_prefix = parts[0]
-        #             class_num = parts[2]                
-        #             if class_prefix == 'RA':
-        #                 RA_class_counts[class_num] += 1
-        #             elif class_prefix == 'RE':
-        #                 RE_class_counts[class_num] += 1
         
-
-        # all_class_nums = list(RA_class_counts.keys() | RE_class_counts.keys())
-
-        # for class_num in sorted(all_class_nums):
-        #     count_RA = RA_class_counts.get(class_num, 0)
-        #     count_RE = RE_class_counts.get(class_num, 0)
-            
-        #     special_mark = '*' if count_RA != count_RE else '' 
-            
-        #     print(f'Class {class_num}:  RA = {count_RA:06d}, RE = {count_RE:06d}  {special_mark}')
                            
         print(f"Total count =  {cnt}\n")
         current_time = datetime.datetime.now()
         formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")    
         print(f"End Time [{formatted_time}]\n")
                 
-        # with open(f"log_7_{formatted_time_for_filename}.txt", "a") as log:
-        #     for class_num in sorted(all_class_nums):
-        #         count_RA = RA_class_counts.get(class_num, 0)
-        #         count_RE = RE_class_counts.get(class_num, 0)            
-        #         special_mark = '*' if count_RA != count_RE else ' '             
-        #         # log.write(f'Class {class_num}:  RA = {count_RA:06d}, RE = {count_RE:06d}  {special_mark}\n')
-        #         log.write(f'Class {class_num}: {special_mark} RA = {count_RA}, RE = {count_RE}  \n')
-            
-        #     log.write(f"Total count = {total_cnt}\n")        
-        #     log.write(f"Saved count = {cnt}\n")        
-        #     log.write(f"End Time [{formatted_time}]\n")        
+    
     
 if __name__ == "__main__":
     main()

@@ -40,26 +40,40 @@ folder_counts = {
     '31.기타': 16
 }
 
+folder_counts_drone = {
+    '15.암반류': 197,
+    '16.모래류': 122
+}
 OA_thres = 0.2
 imgtype='RE'
-data_file = f'LU_{imgtype}_100p.txt'  # 주어진 파일명
-out_file = f'LU_{imgtype}_100p_selected.txt'
+data_file = f'LU_{imgtype}.txt'  # 주어진 파일명
+out_file = f'LU_{imgtype}_selected.txt'
+# data_file = f'D_{imgtype}.txt'  # 주어진 파일명
+# out_file = f'D_{imgtype}_selected.txt'
+
 
 # 각 클래스별로 선택한 파일 경로를 담을 딕셔너리 초기화
 selected_paths = {key: [] for key in folder_counts}
 
+
 with open(data_file, 'r') as file:
-    for line in file:
-        # 주어진 파일의 각 줄에서 첫 번째 숫자 값이 0.7을 넘는지 확인하여 선택
-        parts = line.split('\t')
-        path = parts[0]
-        class_name = path.split('/')[6]  # 클래스 이름 추출 (경로에 따라 조정 필요)
-        value = float(parts[2])
-        
-        if value > OA_thres and class_name in folder_counts:
-            # 선택한 클래스별 개수에 맞게 파일 경로 선택
-            if len(selected_paths[class_name]) < folder_counts[class_name]:
-                selected_paths[class_name].append(path)
+    lines = file.readlines()
+
+random.shuffle(lines)
+
+# with open(data_file, 'r') as file:
+for line in lines:
+
+    # 주어진 파일의 각 줄에서 첫 번째 숫자 값이 0.7을 넘는지 확인하여 선택
+    parts = line.split('\t')
+    path = parts[0]
+    class_name = path.split('/')[6]  # 클래스 이름 추출 (경로에 따라 조정 필요)
+    value = float(parts[2])
+    
+    if value > OA_thres and class_name in folder_counts:
+        # 선택한 클래스별 개수에 맞게 파일 경로 선택
+        if len(selected_paths[class_name]) < folder_counts[class_name]:
+            selected_paths[class_name].append(path)
 
 # 선택된 파일 경로를 출력
 with open(out_file, 'w') as output_file:
