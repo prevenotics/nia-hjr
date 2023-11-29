@@ -196,7 +196,13 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
         _, ext = os.path.splitext(path_img)
         
         if ext =='.mat':
-            image, label, origin_image = self.mat_open(path_img, self.imgtype, self.sample_point, self.patch, self.band_patch, self.band)
+            try : 
+                image, label, origin_image = self.mat_open(path_img, self.imgtype, self.sample_point, self.patch, self.band_patch, self.band)
+            except Exception as e:            
+                with open('error.txt','a') as file:
+                    file.write(path_img+'\n')
+                print(path_img)
+                raise e
         
         else:                    
             path_label = os.path.join(DATA_PATH, self.annotations.iloc[index, 1])       
@@ -213,29 +219,39 @@ class HJRDataset_for_test(torch.utils.data.Dataset):
 
     def mat_open(self, path_img, imgtype, sample_point, patch, band_patch, band):
          
-        mat_data = loadmat(path_img)
-        basename = os.path.basename(path_img)
+        try:
+            mat_data = loadmat(path_img)
+        except Exception as e:
+            print(f'mat open error : {e}')
+            raise e
+            
+        # basename = os.path.basename(path_img)
         image_mat = mat_data['image']       
         
-        if basename[2]=='L' or basename[2]=='U':
-            if image_mat.shape[0] != 512:
-                return 0
-            if imgtype == 'RA':
-                clipping = 40000
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                   
-            elif imgtype =='RE':
-                clipping = 65535
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
-        else:
-            if image_mat.shape[0] != 256:
-                return 0
-            if imgtype == 'RA':
-                clipping = 255
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
-            elif imgtype =='RE':
-                clipping = 255
-                image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
-            
+        # if basename[2]=='L' or basename[2]=='U':
+        #     if image_mat.shape[0] != 512:
+        #         return 0
+        #     if imgtype == 'RA':
+        #         clipping = 40000
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                   
+        #     elif imgtype =='RE':
+        #         clipping = 65535
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
+        # else:
+        #     if image_mat.shape[0] != 256:
+        #         return 0
+        #     if imgtype == 'RA':
+        #         clipping = 255
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        #     elif imgtype =='RE':
+        #         clipping = 255
+        #         image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)      
+        if imgtype == 'RA':
+            clipping = 40000
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)                 
+        elif imgtype =='RE':
+            clipping = 65535
+            image_mat = np.clip(image_mat.astype(np.float32)/clipping, 0.0, 1.0)         
             
             
         

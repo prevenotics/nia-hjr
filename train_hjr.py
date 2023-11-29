@@ -179,7 +179,7 @@ def main(cfg):
 
 if __name__ == '__main__':
     
-    with open('cfg_train_RE.yaml') as f:
+    with open('cfg_train_RE_lr003.yaml') as f:
         cfg = yaml.safe_load(f)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:

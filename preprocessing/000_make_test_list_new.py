@@ -40,10 +40,10 @@ folder_counts = {
     '31.기타': 16
 }
 
-OA_thres = 0.6
+OA_thres = 0.2
 imgtype='RE'
-data_file = f'LU_{imgtype}.txt'  # 주어진 파일명
-out_file = f'LU_{imgtype}_selected.txt'
+data_file = f'LU_{imgtype}_100p.txt'  # 주어진 파일명
+out_file = f'LU_{imgtype}_100p_selected.txt'
 
 # 각 클래스별로 선택한 파일 경로를 담을 딕셔너리 초기화
 selected_paths = {key: [] for key in folder_counts}
@@ -54,7 +54,7 @@ with open(data_file, 'r') as file:
         parts = line.split('\t')
         path = parts[0]
         class_name = path.split('/')[6]  # 클래스 이름 추출 (경로에 따라 조정 필요)
-        value = float(parts[1])
+        value = float(parts[2])
         
         if value > OA_thres and class_name in folder_counts:
             # 선택한 클래스별 개수에 맞게 파일 경로 선택

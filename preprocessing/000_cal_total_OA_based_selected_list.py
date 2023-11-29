@@ -110,12 +110,16 @@ def plot_confusion_matrix2(con_mat, labels, path, title='Confusion Matrix', cmap
 
 
 # LU_RE_selected.txt 파일명과 npy 파일들이 위치한 디렉토리
-selected_file = 'LU_RE_selected.txt'
-npy_directory = '/root/work/hjr/nia-hjr/output/231123_GCP_RE_cosinealr_p3_bp3_clip4000_mirror_sp64_lr001_adam_tb256/result_npy/'
-prefix='2023-11-26-09-54-47_'
+# selected_file = 'LU_RE_100p_selected.txt'
+# npy_directory = '/root/work/hjr/nia-hjr/output/231128_RE_final_50_lr003/result_npy/'
+selected_file = 'LU_RA_100p_selected.txt'
+npy_directory = '/root/work/hjr/nia-hjr/output/231128_mfDGX_RA_final_50/result_npy/'
+
+# prefix='2023-11-29-01-35-50_'
+prefix='2023-11-29-03-06-47_'
 # 선택된 파일 경로를 읽어와서 해당 npy 파일들을 로드하여 리스트에 추가
 npy_data = []
-
+no_file=0
 with open(selected_file, 'r') as file:
     for line in file:
         path = line.strip()  # 개행 문자 제거
@@ -126,9 +130,12 @@ with open(selected_file, 'r') as file:
         if os.path.exists(npy_file_path):
             npy_content = np.load(npy_file_path)
             npy_data.append(npy_content)
+        else:
+            no_file +=1
 
 # 모든 데이터를 NumPy 배열로 변환
 final_array = np.array(npy_data)
 final_array = final_array.transpose(1, 2, 0).reshape(2, -1)
 OA, kappa = output_metric_with_savefig(final_array[0,:], final_array[1,:], './')
 print(f'========Total : OA:{OA:.5f} Kappa:{kappa:.5f}========')
+print(no_file)

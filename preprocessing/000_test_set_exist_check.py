@@ -3,8 +3,8 @@ import os
 os.chdir('/root/work/hjr/nia-hjr/preprocessing')
 
 
-input_csv = '../../dataset/test_final_RE.csv'  # 여러 파일 경로가 있는 CSV 파일명을 넣어주세요
-output_csv = '../../dataset/test_final_RE_filtered.csv' 
+input_csv = '../../dataset/test_RA_geolabs.csv'  # 여러 파일 경로가 있는 CSV 파일명을 넣어주세요
+output_csv = '../../dataset/test_RA__geolabs_filtered.csv' 
 
 existing_files = []
 with open(input_csv, 'r', newline='') as infile:

@@ -6,7 +6,7 @@ from collections import Counter
 
 min_file_num = 50
 
-with open('/root/work/hjr/nia-hjr/cfg_train_RA.yaml') as f:
+with open('/root/work/hjr/nia-hjr/cfg_train_RE.yaml') as f:
     cfg = yaml.safe_load(f)
 
 dataset_path= cfg['path']['dataset_path']

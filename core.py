@@ -200,10 +200,16 @@ def test_epoch(model, test_loader, cfg, logger):
     model.eval()
     with torch.no_grad():
         for idx, batch in enumerate(test_loader):
-            image = batch["image"].cuda(non_blocking=True)            
-            origin_image = batch["origin_image"].cuda(non_blocking=True)
-            target = batch["label"].cuda(non_blocking=True)
-            path = batch["path"]
+            try:
+                image = batch["image"].cuda(non_blocking=True)            
+                origin_image = batch["origin_image"].cuda(non_blocking=True)
+                target = batch["label"].cuda(non_blocking=True)
+                path = batch["path"]
+            except Exception as e:
+                print(f'data load error: {e}')
+                with open('error.txt','a') as file:
+                    file.write(f'[error] : {e}\n')
+                continue
             
             # B 470nm = 15 // G 540nm = 39 // R 660nm = 80            
             image_size = int(image.shape[1] **(1/2))
@@ -375,7 +381,8 @@ def test_epoch(model, test_loader, cfg, logger):
     temp = temp.transpose(1, 2, 0).reshape(2, -1)
     OA, kappa = util.output_metric_with_savefig(temp[0,:], temp[1,:], cfg['test_param']['out_res_path'])
     print(f'========Total : OA:{OA:.5f} Kappa:{kappa:.5f}========')
-    
+    with open(testlogtxt, "a") as file:
+        file.write(f'========Total : OA:{OA:.5f} Kappa:{kappa:.5f}========')    
     # return [top1, OA_meter, Kappa_meter]
     return top1
 
