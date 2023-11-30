@@ -37,13 +37,13 @@ folder_counts = {
     '28.연성_경성산호류': 72,
     '29.해양쓰레기류': 113,
     '30.폐어구류': 46,
-    '31.기타': 16
+    '31.기타': 12
 }
 
 OA_thres = 0.2
 imgtype='RE'
-data_file = f'LU_{imgtype}_100p.txt'  # 주어진 파일명
-out_file = f'LU_{imgtype}_100p_selected.txt'
+data_file = f'LU_{imgtype}_removed.txt'  # 주어진 파일명
+out_file = f'LU_{imgtype}_removed_selected.txt'
 
 # 각 클래스별로 선택한 파일 경로를 담을 딕셔너리 초기화
 selected_paths = {key: [] for key in folder_counts}
