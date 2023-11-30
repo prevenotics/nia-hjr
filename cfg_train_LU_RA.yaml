@@ -1,0 +1,53 @@
+system:
+  num_workers : 96
+  seed : 0
+  tensorboard : True
+
+
+image_param:
+  size: 256
+  band : 100
+  type : 'RA'
+  isdrone : False
+
+path:
+  dataset_path : '/workspace/dataset/5.mat_for_train'
+  train_csv: '/workspace/dataset/train_LU_RA.csv'
+  val_csv: '/workspace/dataset/val_LU_RA.csv'
+  test_csv: '/workspace/dataset/test_LU_RA.csv'
+  output_dir : 'output/train_LU_RA'
+  model_path : 'output/train_LU_RA/pths/final_checkpoint_OA.pth'
+
+dataset: 'hjr'
+num_class : 31
+
+network:
+  arch : 'SF'
+  spectralformer:
+    patch : 3
+    band_patch : 3
+    sampling_num : 64
+    mode : 'CAF' #choice ['ViT', 'CAF']
+
+train_param:
+  epoch : 300000
+  train_batch: 128
+  val_batch : 64
+  pixel_batch : 8192 #8192 # 4096 #1024
+  eval_freq : 5
+  test_freq : 2
+  save_freq : 100
+  learning_rate : 0.003
+  gamma : 0.9
+  weight_decay : 0
+  opt : 'nadam' #choide ['adam','nadam']
+  lrs : 'cosinealr' #choice ['steplr', 'cosinealr']
+  resume : True
+
+test_param: 
+  test_batch : 2
+  sampling_num : 256
+  save_img : True
+  out_img_path : 'output/train_LU_RA/result_img'
+  out_npy_path : 'output/train_LU_RA/result_npy'
+  out_res_path : 'output/train_LU_RA'

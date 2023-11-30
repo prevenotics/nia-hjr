@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 #서버마다 다른 설정으로 인하여
-*.yaml
+# *.yaml
 
 # Distribution / packaging
 .Python
