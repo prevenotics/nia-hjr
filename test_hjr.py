@@ -26,10 +26,6 @@ import warnings
 
 warnings.filterwarnings(action='ignore')
 
-#CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 1234 test_hjr.py
-#CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node 2 --master_port 1234  test_hjr.py
-#CUDA_VISIBLE_DEVICES=1 python -m torch.distributed.launch --nproc_per_node 1 --master_port 1234  test_hjr.py
-os.chdir("/root/work/hjr/nia-hjr")
 
 def main(cfg):
    
@@ -116,6 +112,7 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--cfg', help='cgf_test_RE.yaml')
+    parser.add_argument("--local_rank", type=int, help="Local rank. Necessary for using the torch.distributed.launch utility.")
     args = parser.parse_args()
 
     with open(args.cfg) as f:

@@ -1,1 +1,0 @@
-python preprocessing/1_generate_mat.py --path '/workspace/dataset/1.원천데이터'

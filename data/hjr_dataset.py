@@ -10,7 +10,7 @@ import numpy as np
 import sys, os
 import tifffile as tiff
 from scipy.io import loadmat
-from utils.utils import make_output_directory, load_checkpoint_files, save_checkpoint, chooose_train_and_test_point, mirror, gain_neighborhood_pixel, gain_neighborhood_band, train_and_test_data, train_and_test_label, accuracy, output_metric, cal_results, get_point
+from utils.utils import mirror, gain_neighborhood_pixel, gain_neighborhood_band
 import utils.utils as util
 import matplotlib.pyplot as plt
 

@@ -20,6 +20,8 @@ def create_label_mat(label_path, loc, sampling_coords, output_size):
         image_size = (512,512)
     elif os.path.basename(label_path)[2] == 'U':
         image_size = (1024,1024)
+    elif os.path.basename(label_path)[2] == 'D':
+        image_size = (256,256)
         
     class_mapping = {i: i for i in range(0,31)}
     
@@ -176,7 +178,7 @@ def main():
     parser.add_argument('--path', default='/workspace/dataset/1.원천데이터')
     args = parser.parse_args()
     image_folder = args.path
-    output_mat_folder = image_folder.replace("1.원천데이터","3.mat")
+    output_mat_folder = image_folder.replace("1.원천데이터","4.mat")
     
     
     cnt = 0
@@ -188,7 +190,8 @@ def main():
     
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    with open("log.txt", "w") as log:
+    log_file = './log/log_1_generate_mat.txt'
+    with open(log_file, "w") as log:
         log.write(f"Start Time [{formatted_time}]\n")
     
     for root, _, files in os.walk(image_folder):
@@ -224,18 +227,19 @@ def main():
                 
                 try:
                     if prefix[2] == 'L':
-                        print(f"{cnt}/{int(total_cnt/40)}({total_cnt})\t{image_path}\n") 
+                        print(f"{cnt}/{int(total_cnt/40)} L ({total_cnt})\t{image_path}\n") 
                         mat_image_RA = L_file(image_path, imgtype[0], sampling_coords[0], output_size)
                         mat_image_RE = L_file(image_path, imgtype[1], sampling_coords[0], output_size)                            
                         label_path = label_path.replace(".tif", "_RE01.json")                            
                         mat_label = create_label_mat(label_path, prefix[2], sampling_coords[0], output_size)
                     elif prefix[2] == 'U':                        
-                        print(f"{cnt}/{int(total_cnt/30)}({total_cnt})\t{image_path}\n") 
+                        print(f"{cnt}/{int(total_cnt/30)} U ({total_cnt})\t{image_path}\n") 
                         mat_image_RA = U_file(image_path, imgtype[0], sampling_coords[1], output_size)
                         mat_image_RE = U_file(image_path, imgtype[1], sampling_coords[1], output_size)
                         label_path = label_path.replace(".tif", "_RE21.json")
                         mat_label = create_label_mat(label_path, prefix[2], sampling_coords[1], output_size)                            
                     elif prefix[2] == 'D':
+                        print(f"{cnt}/{int(total_cnt/8)} D ({total_cnt})\t{image_path}\n") 
                         mat_image_RA = D_file(image_path, imgtype[0], sampling_coords[2], output_size_drone)
                         mat_image_RE = D_file(image_path, imgtype[1], sampling_coords[2], output_size_drone)
                         label_path = label_path.replace(".tif", "_RE36.json")
@@ -247,7 +251,7 @@ def main():
                     error_cnt +=1
                     current_time = datetime.datetime.now()
                     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-                    with open("log.txt", "a") as log:
+                    with open(log_file, "a") as log:
                         log.write(f"{formatted_time} : [FileNotFoundError]\t{image_path}\n")
                         
                     continue
@@ -255,7 +259,7 @@ def main():
 
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    with open("log.txt", "a") as log:
+    with open(log_file, "a") as log:
         log.write(f"Total count = {cnt}\n")
         log.write(f"Error count = {error_cnt}\n")        
         log.write(f"End Time [{formatted_time}]\n")        

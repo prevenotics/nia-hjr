@@ -179,6 +179,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--cfg', help='cgf_train_RE.yaml')
+    parser.add_argument("--local_rank", type=int, help="Local rank. Necessary for using the torch.distributed.launch utility.")
     args = parser.parse_args()
 
     with open(args.cfg) as f:

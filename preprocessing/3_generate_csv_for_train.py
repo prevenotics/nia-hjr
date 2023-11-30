@@ -4,9 +4,9 @@ import json
 import random
 from collections import Counter
 
-min_file_num = 10000000 #for class balance 
+min_file_num = 1000 #for class balance 
 
-dataset_path= '../../dataset/4.mat_for_train'
+dataset_path= '/workspace/dataset/5.mat_for_train'
 list_mat = []
 imgkinds = ['LU','D']
 imgtypes = ['RA','RE']
@@ -14,8 +14,8 @@ imgtypes = ['RA','RE']
 for imgkind in imgkinds:
     for imgtype in imgtypes:
         list_mat = []
-        output_train_csv= f'../../dataset/train_mat_selected_{imgkind}_{imgtype}.csv'        
-        output_val_csv= f'../../dataset/val_mat_selected_{imgkind}_{imgtype}.csv'
+        output_train_csv= f'/workspace/dataset/train_{imgkind}_{imgtype}.csv'        
+        output_val_csv= f'/workspace/dataset/val_{imgkind}_{imgtype}.csv'
         key_counter = []
         for root, dirs, files in os.walk(dataset_path):
             for file in files:
