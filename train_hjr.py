@@ -23,6 +23,8 @@ import datetime
 import os
 import yaml
 import warnings
+import argparse
+
 
 warnings.filterwarnings(action='ignore')
 
@@ -174,8 +176,12 @@ def main(cfg):
 
 
 if __name__ == '__main__':
-    
-    with open('cfg_train_RE_lr003.yaml') as f:
+
+    parser = argparse.ArgumentParser(description='')
+    parser.add_argument('--cfg', help='cgf_train_RE.yaml')
+    args = parser.parse_args()
+
+    with open(args.cfg) as f:
         cfg = yaml.safe_load(f)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:

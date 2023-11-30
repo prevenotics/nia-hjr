@@ -30,7 +30,7 @@ with open(fail_file, 'w') as fail_txt:
     
 for filename in file_list:
     
-    root_dir = '/root/work/hjr/dataset/3.mat'
+    root_dir = '/workspace/dataset/3.mat'
     
     # 파일을 찾음
     for root, dirs, files in os.walk(root_dir):

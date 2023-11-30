@@ -8,7 +8,7 @@ file_list_path = 'temp_list.txt'
 # 파일을 복사할 폴더와 복사된 파일을 저장할 폴더
 source_folder = '4.mat_selected_100p'
 destination_folder = '4.mat_selected_100p_50'
-os.makedirs('/root/work/hjr/dataset/4.mat_selected_100p_50/', exist_ok=True)
+os.makedirs('/workspace/dataset/4.mat_selected_100p_50/', exist_ok=True)
 
 # 텍스트 파일에서 파일 경로를 읽어와 복사
 with open(file_list_path, 'r') as file:

@@ -1,4 +1,0 @@
-/root/work/hjr/dataset/3.mat/06.나래미역류/02.수중 및 지상 초분광/002.TIF/02L_A000_0012_20231110_1205_W01_RE.mat
-/root/work/hjr/dataset/3.mat/03.대마디말류/02.수중 및 지상 초분광/002.TIF/02L_A000_0038_20231108_1432_W01_RE.mat
-/root/work/hjr/dataset/3.mat/28.연성_경성산호류/02.수중 및 지상 초분광/002.TIF/01U_A071_0062_20231025_1130_W01_RA.mat
-/root/work/hjr/dataset/3.mat/28.연성_경성산호류/02.수중 및 지상 초분광/002.TIF/01U_A071_0058_20231025_1130_W01_RA.mat

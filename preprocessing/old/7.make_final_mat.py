@@ -17,10 +17,10 @@ import pandas as pd
 
 
 
-image_folder = r'/root/work/hjr/dataset/3.mat'
+image_folder = r'/workspace/dataset/3.mat'
 output_folder = image_folder.replace("3.mat","4.mat")
 
-# image_folder = r'/root/work/hjr/dataset/3.mat_test/'
+# image_folder = r'/workspace/dataset/3.mat_test/'
 # output_folder = image_folder.replace("3.mat_test/","4.mat_test/")
 
 def sampling_point(image_size, y):

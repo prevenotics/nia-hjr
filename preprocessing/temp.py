@@ -2,7 +2,7 @@
 # from scipy import io
 # import numpy as np
 
-# image_folder = r'/root/work/hjr/dataset/3.mat_mult_OutSize256_error_cnt'
+# image_folder = r'/workspace/dataset/3.mat_mult_OutSize256_error_cnt'
 # output_folder = image_folder.replace("3.mat_mult_OutSize256_error_cnt/","4.mat_mult_OutSize256_error_cnt/")
 
 
@@ -35,7 +35,7 @@ import datetime
 import pymysql
 
 
-image_folder = r'/root/work/hjr/dataset//1.원천데이터/'
+image_folder = r'/workspace/dataset//1.원천데이터/'
 # json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 # output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
 # output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'
@@ -241,7 +241,7 @@ def main():
                     #     continue
                     # ####################################################################################
                     
-    image_path ='/root/work/hjr/dataset/2.라벨링데이터/11.도박류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0045_20230922_1527_W01_RE01.json'
+    image_path ='/workspace/dataset/2.라벨링데이터/11.도박류/02.수중 및 지상 초분광/002.TIFF/01L_A000_0045_20230922_1527_W01_RE01.json'
                         
     # image_path = os.path.join(root, f"{prefix}{file_extension}")
     label_path = image_path.replace("1.원천데이터","2.라벨링데이터")
@@ -250,7 +250,7 @@ def main():
     
     mat_label=create_label_mat(label_path, 'L', sampling_coords)
 
-    io.savemat('/root/work/hjr/dataset/01L_A000_0045_20230922_1527_W01_RE_label.mat', {'label':np.array(mat_label)})
+    io.savemat('/workspace/dataset/01L_A000_0045_20230922_1527_W01_RE_label.mat', {'label':np.array(mat_label)})
 
     # io.savemat(mat_path_RA, {'image': np.array(mat_image_RA), 'label' : np.array(mat_label)})
     # io.savemat(mat_path_RE, {'image': np.array(mat_image_RE), 'label' : np.array(mat_label)})

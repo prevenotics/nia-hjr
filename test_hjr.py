@@ -108,13 +108,17 @@ def main(cfg):
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
-    logger.info('ALL Training time {}'.format(total_time_str))
+    logger.info('ALL Test time {}'.format(total_time_str))
 
 
 
 if __name__ == '__main__':
     
-    with open('cfg_test.yaml') as f:
+    parser = argparse.ArgumentParser(description='')
+    parser.add_argument('--cfg', help='cgf_test_RE.yaml')
+    args = parser.parse_args()
+
+    with open(args.cfg) as f:
         cfg = yaml.safe_load(f)
     
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:

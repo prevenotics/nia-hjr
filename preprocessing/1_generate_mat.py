@@ -7,15 +7,6 @@ import tifffile
 import datetime
 import argparse
 
-parser = argparse.ArgumentParser(description='')
-parser.add_argument('--path', help='/workspace/dataset/1.원천데이터')
-args = parser.parse_args()
-
-
-image_folder = args.path
-
-output_mat_folder = image_folder.replace("1.원천데이터","3.mat")
-
 def create_label_mat(label_path, loc, sampling_coords, output_size):
     try:    
         with open(label_path, "r") as json_file:
@@ -181,6 +172,13 @@ def sampling_point(image_size, y):
     return sampling_coords
 
 def main():
+    parser = argparse.ArgumentParser(description='')
+    parser.add_argument('--path', default='/workspace/dataset/1.원천데이터')
+    args = parser.parse_args()
+    image_folder = args.path
+    output_mat_folder = image_folder.replace("1.원천데이터","3.mat")
+    
+    
     cnt = 0
     file_paths_dict = {}
     imgtype = ["RA", "RE"]

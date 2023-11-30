@@ -10,7 +10,7 @@ import datetime
 import pymysql
 
 
-image_folder = r'/root/work/hjr/dataset/1.원천데이터_temp/'
+image_folder = r'/workspace/dataset/1.원천데이터_temp/'
 # json_folder = r'D:/DATA/hjr/dataset/2.라벨링데이터/'
 # output_image_folder = r'D:/DATA/hjr/dataset/1.image_mat/'
 # output_json_folder = r'D:/DATA/hjr/dataset/2.label_mat/'
